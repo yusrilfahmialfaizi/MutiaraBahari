@@ -51,12 +51,13 @@
 		{
 			$post = $this->input->post();
 			// $this->id_barang->uniqid();
-			$this->id_barang = $post["kode_barang"];
+			$this->id_barang = $post["id_barang"];
 			$this->nama_barang = $post["nama_barang"];
 			$this->harga = $post["harga"];
 			$this->hrg_grosir1 = $post["grosir1"];
 			$this->hrg_grosir2 = $post["grosir2"];
 			$this->hrg_grosir3 = $post["grosir3"];
+			$this->id_merek = $post["id_merek"];
 			// $this->stok = $post["stok"];
 
 			$this->db->insert("barang", $this);

@@ -66,9 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			function buatkode()
 			{
-				$id_merek = $this->input->post('ab');
-				$kode_merek = $this->input->post('abc');
-				$data = $this->Barangmodel->id_barang($id_merek,$kode_merek);
+				// $id_merek = $this->input->post('ab');
+				$kode = $this->input->post('merek');
+				$data = $this->Barangmodel->get_data_barang_bynama($kode);
 				echo json_encode($data);
 				// echo "<script>window.alert('$data')</script>";
 			}

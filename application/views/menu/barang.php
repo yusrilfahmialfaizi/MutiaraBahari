@@ -57,7 +57,7 @@
 																<div class="form-group">
 																	<label>ID Barang</label>
 																	<input id="id_barang" name="id_barang" value="<?php //echo $kode; ?>" type="text" class="form-control" readonly="readonly">
-																	<input id="kode_barang" name="kode_barang" value="<?php //echo $kode; ?>" type="hidden" class="form-control">
+																	<input id="id_merek" name="id_merek" type="hidden" value="<?php //echo $kode; ?>" class="form-control">
 																</div>
 															</div>
 															<div class="col-sm-12">
@@ -487,23 +487,23 @@
 		           });
 		        });
 		    </script>
-		    <!-- <script type="text/javascript">
+		    <script type="text/javascript">
 		    	$(document).ready(function(){
-		            $('#ab').on('change',function(){
+		            $('#merek').on('change',function(){
 		                 
-		                var id_merek = $('#ab').val();
-		                var kode_merek = $('#abc').val();
-		                window.alert(id_merek);
+		                // var merek = $('#ab').val();
+		                var kode = $('#merek').val();
+		                // window.alert(kode);
 		                $.ajax({
-		                    url  : "<?php //echo base_url('admin/barang/buatkode')?>",
+		                    url  : "<?php echo base_url('admin/barang/buatkode')?>",
 		                    type : "POST",
 		                    dataType : "JSON",
-		                    data : {id_merek: id_merek, kode_merek : kode_merek },
+		                    data : {merek: kode},
 		                    cache:false,
 		                    success: function(data){
-		                        $.each(data,function(id_barang){
-		                            $('[name="id_barang"]').val(data.id_barang);
-		                    	window.alert('success');
+		                        $.each(data,function(id_merek){
+		                            $('[name="id_merek"]').val(data.id_merek);
+		                    	// window.alert('success');
 		                        //     $('[name="ab"]').val(data.id_merek);
 		                            // $('[name="nama_barang"]').val(data.nama_barang);
 		                            // $('[name="harga"]').val(data.harga);
@@ -516,7 +516,7 @@
 		           });
 
 		    	});
-		    </script> -->
+		    </script>
 		</body>
 		</html>
 
