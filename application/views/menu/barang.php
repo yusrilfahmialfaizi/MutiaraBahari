@@ -465,7 +465,7 @@
 		            $('#merek').on('change',function(){
 		                 
 		                var kode = $('#merek').val();
-		                window.alert(kode);
+		                // window.alert(kode);
 		                $.ajax({
 		                    url  : "<?php echo base_url('admin/barang/get_merek')?>",
 		                    type : "POST",

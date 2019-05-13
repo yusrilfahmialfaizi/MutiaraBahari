@@ -109,8 +109,8 @@
 		  else{      
 			   $kode = 1;  //cek jika kode belum terdapat pada table
 		  }
-			  $tgl=date('ym'); 
-			  $batas = str_pad($kode, 5, "0", STR_PAD_LEFT);    
+			  $tgl=date('ym'); //1905 
+			  $batas = str_pad($kode, 5, "0", STR_PAD_LEFT);     
 			  $kodetampil = "JL".$tgl."-04".$batas;  //format kode
 			  return $kodetampil;  
 		 }

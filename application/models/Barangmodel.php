@@ -92,7 +92,8 @@
 			$this->db->order_by('id_barang','Desc');
 			$this->db->limit(1);
 			$query = $this->db->get('barang');
-			$que = $this->db->query("call tampilkode('".$kode."')");
+			// $que = $this->db->query("call tampilkode('".$kode."')");
+			$kode_merek = $this->db->query("select kode_merek from merek where merek = '". $kode ."'")->result_array();
 			if ($query->num_rows() <> 0) {
 				# code...
 				$data = $query->row();
@@ -104,10 +105,11 @@
 			// $this->db->where('merek = "'.$kode.'"');
 			// $code = $que->result();
 			$batas = str_pad($id, 4,"0", STR_PAD_LEFT);
-			foreach ($que as $key) {
-				# code...
-			$id_barang_tampil = '"'.$key['kode_merek'].'"'.$batas;
-			}
+			// foreach ($que as $key) {
+			// 	# code...
+			// 	$id_barang_tampil = $batas;
+			// }
+			$id_barang_tampil = $kode_merek[0]['kode_merek'].$batas;
 			return $id_barang_tampil;
 		}
 		

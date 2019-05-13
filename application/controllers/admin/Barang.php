@@ -76,9 +76,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			{
 				$kode=$this->input->post('merek');
 				// echo "<script>window.alert('$kode')</script>";
-				$data=$this->Barangmodel->id_barang($kode);
+				$data = $this->Barangmodel->id_barang($kode);
 				// return $data;
 				echo json_encode($data);
+				// print_r($data);
 			// echo $data;
 			}
 				// function get_merek()
