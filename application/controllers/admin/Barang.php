@@ -1,0 +1,94 @@
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
+	/**
+	 * 
+	 */
+	class Barang extends CI_Controller
+	{
+		
+		function __construct()
+		{
+			# code...
+			parent::__construct();
+			$this->load->model('Usermodel');
+			$this->load->model('Barangmodel');
+			$this->load->library('form_validation');
+			$this->load->helper('url');
+		}
+		public function index()
+			{
+				if($this->session->userdata('status') != "login"){
+					redirect(base_url("admin"));
+				}
+				// $barang['kode'] = $this->Barangmodel->id_barang();
+				$barang['merek'] = $this->Barangmodel->getmerek();
+				$barang['barang'] = $this->Barangmodel->getBarang();
+				$barang['detail_barang'] = $this->Barangmodel->getDetailBarang();
+				$this->load->view('_partial/header');
+				$this->load->view('menu/barang',$barang);
+				// $this->load->view('_partial/footertable');
+			}
+			public function add()
+			{
+				$product = $this->Barangmodel;
+				$product->tambahBarang();
+				redirect('admin/barang');
+			}
+			public function addmerek()
+			{
+				$product = $this->Barangmodel;
+				$product->tambahmerek();
+				redirect('admin/barang');
+			}
+			public function editModal()
+			{
+				$id_barang=$this->input->post('id_barang');
+				$nama_barang=$this->input->post('nama_barang');
+				$stok=$this->input->post('stok');
+				$harga=$this->input->post('harga');
+				$harga1=$this->input->post('grosir1');
+				$harga2=$this->input->post('grosir2');
+				$harga3=$this->input->post('grosir3');
+				$this->Barangmodel->edit_barang($id_barang,$nama_barang,$stok,$harga,$harga1,$harga2,$harga3);
+				redirect('admin/barang');
+	    
+			}
+			public function hapusBarang($id)
+			{
+				if ($this->Barangmodel->deleteBarang($id)) {
+					# code...
+					redirect(site_url("admin/barang"));
+				}
+			}
+			function load()
+			{
+				$this->load->view('menu/untiled');
+			}
+			function buatkode()
+			{
+				$id_merek = $this->input->post('ab');
+				$kode_merek = $this->input->post('abc');
+				$data = $this->Barangmodel->id_barang($id_merek,$kode_merek);
+				echo json_encode($data);
+				// echo "<script>window.alert('$data')</script>";
+			}
+			function get_merek()
+			{
+				$kode=$this->input->post('merek');
+				// echo "<script>window.alert('$kode')</script>";
+				$data=$this->Barangmodel->id_barang($kode);
+				// return $data;
+				echo json_encode($data);
+			// echo $data;
+			}
+				// function get_merek()
+			// {
+			// 	$kode=$this->input->post('merek');
+			// 	// echo "<script>window.alert('$kode')</script>";
+			// 	$data=$this->Barangmodel->get_data_barang_bynama($kode);
+			// 	// return $data;
+			// 	echo json_encode($data);
+			// // echo $data;
+			// }
+	}
+?>
