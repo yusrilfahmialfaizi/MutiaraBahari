@@ -106,7 +106,7 @@
 			$batas = str_pad($id, 4,"0", STR_PAD_LEFT);
 			foreach ($que as $key) {
 				# code...
-			$id_barang_tampil = '"'.$key->kode_merek.'"'.$batas;
+			$id_barang_tampil = '"'.$key['kode_merek'].'"'.$batas;
 			}
 			return $id_barang_tampil;
 		}

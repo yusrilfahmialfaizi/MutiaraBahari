@@ -95,7 +95,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="">
+										<a href="<?php echo base_url("admin/hutang") ?>">
 											<span class="sub-item">Hutang</span>
 										</a>
 									</li>
