@@ -82,14 +82,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				// print_r($data);
 			// echo $data;
 			}
-				// function get_merek()
-			// {
-			// 	$kode=$this->input->post('merek');
-			// 	// echo "<script>window.alert('$kode')</script>";
-			// 	$data=$this->Barangmodel->get_data_barang_bynama($kode);
-			// 	// return $data;
-			// 	echo json_encode($data);
-			// // echo $data;
-			// }
+			
 	}
 ?>

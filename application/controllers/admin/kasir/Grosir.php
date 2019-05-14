@@ -63,7 +63,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		                    <td>'.$items['name'].'</td>
 		                    <td>'.$items['qty'].'</td>
 		                    <td>'.number_format($items['price']).'</td>
-		                    <td>'.number_format($items['subtotal']).'</td>
+		                    <td>
+			                    <div class="col-md-8">
+		                			<div class="form-group">
+		                				<input type="text" id="subtotal" name="subtotal" value="'.number_format($items['subtotal']).'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
+		                			</div>
+		                		</div>
+		                	</td>
 		                    <td><button type="button" id="'.$items['rowid'].'" class="hapus_cart btn btn-danger btn-xs">Batal</button></td>
 		                </tr>
 		            ';
@@ -141,6 +147,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$kode=$this->input->post('nama_barang');
 			$data=$this->Kasirmodel->get_dataharga($qty,$kode);
 			echo json_encode($data);
+		}
+		// // // // // // // proses  // // // // // // // 
+		function proses_jual()
+		{
+			// -------- No. Invoice-------------//
+			$no_invoice = $this->input->post('no_invoice');
+			$nama_pelanggan = $this->input->post('nama_pelanggan');
+			$tanggal = $this->input->post('tanggal');
+			$jtp = $this->input->post('jatuh_tempo');
+			$total = $this->input->post('total2');
+			$bayar = $this->input->post('bayar');
+			$kembali = $this->input->post('kembali');
+			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
+			if ($kembali >= 0) {
+			 	# code...
+			 	$status_pembayaran = 'Lunas';
+			 }else{
+			 	$status_pembayaran = 'Tidak Lunas';
+			 }
+			// ---------------data jual---------------//
+			$subtotal = $this->input->post('subtotal');
+			if ($cart = $this->cart->contents())
+            {
+                foreach ($cart as $item)
+                    {
+                        $data_detail = array('id_transaksi' =>$no_invoice,
+                                        'id_barang' => $item['id'],
+                                        'qty' => $item['qty'],
+                                        'harga' => $item['price'],
+                                        'subtotal' =>$subtotal);
+                        $proses = $this->Kasirmodel->tambah_detail_jual($data_detail);
+                    }
+            }
+            $this->cart->destroy();
+            redirect('admin/kasir/grosir');
 		}
 	}
 ?>

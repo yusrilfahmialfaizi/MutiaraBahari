@@ -82,7 +82,7 @@
 									</div>
 
 									<div class="table-responsive">
-										<form>
+										<form action="<?php echo base_url('admin/kasir/grosir/proses_jual') ?>" method="post">
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
@@ -140,7 +140,21 @@
 												</thead>
 												<tbody id="detail_keranjang"></tbody>
 											</table>
-											<!-- <button id="add_keranjang" class="add_keranjang btn btn-primary ml-auto">Simpan</button> -->
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Jenis Pembayaran</label>
+													<select class="form-control" id="jenis_pembayaran">
+														<option value="Cash">Cash</option>
+														<option value="Transfer">Transfer</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">	
+													<button id="simpan" name="simpan" class=" btn btn-primary ml-auto">Simpan</button>
+													<button id="reset" name="reset" class="btn btn-danger ml-auto">Reset</button>
+												</div>
+											</div>
 										</form>
 									</div>
 								</div>
