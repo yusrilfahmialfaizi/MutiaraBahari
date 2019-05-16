@@ -29,11 +29,11 @@ public class GridViewAdapter extends ArrayAdapter<Product> {
         Product product = getItem(position);
         ImageView img = (ImageView) v.findViewById(R.id.imageView);
         TextView txtTitle = (TextView) v.findViewById(R.id.textTitle);
-        TextView txtDescription = (TextView) v.findViewById(R.id.textDeskripsi);
+        //TextView txtDescription = (TextView) v.findViewById(R.id.textDeskripsi);
 
         img.setImageResource(product.getImageId());
         txtTitle.setText(product.getTitle());
-        txtDescription.setText(product.getDescription());
+        //txtDescription.setText(product.getDescription());
 
         return v;
     }
