@@ -45,7 +45,7 @@
 																	<input id="id_barang" name="id_barang" type="text" class="form-control" placeholder="Id Barang .." readonly>
 																</div>
 															</div>
-															<div class="col-md-12">
+															<div class="col-md-6">
 																<div class="form-group">
 																	<label>Nama Barang</label><br>
 																	<select class="form-control form-control-md-12" id="nama_barang" name="nama_barang">
@@ -58,6 +58,12 @@
 																}
 															?>
 														</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label>Sisa Stok</label>
+																	<input id="stok" name="stok" type="text" class="form-control" placeholder="Stok Barang .." readonly>
 																</div>
 															</div>
 															<div class="col-md-6 pr-0">
@@ -220,6 +226,23 @@
 					$('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/grosir/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
+						swal({
+						title: 'Apakah Kamu Yakin?',
+						text: "Kamu Tidak Dapat Mengembalikannya !",
+						type: 'warning',
+						buttons:{
+							cancel: {
+								visible: true,
+								text : 'Tidak, BATALKAN !',
+								className: 'btn btn-danger'
+							},        			
+							confirm: {
+								text : 'Ya, Hapus saja !',
+								className : 'btn btn-success'
+							}
+						}
+					}).then((willDelete) => {
+						if (willDelete) {
 						$.ajax({
 							url		: "<?php echo base_url(); ?>admin/kasir/grosir/hapus_keranjang",
 							method 	:"POST",
@@ -229,6 +252,16 @@
 								location.reload();
 							}
 						});
+						} else {
+							swal("Data Kamu Aman!", {
+								buttons : {
+									confirm : {
+										className: 'btn btn-success'
+									}
+								}
+							});
+						}
+					});
 					});
 				});
 			</script>
@@ -260,9 +293,9 @@
 		                    data : {nama_barang: kode,qty : qty },
 		                    cache:false,
 		                    success: function(data){
-		                        $.each(data,function(id_barang, nama_barang, harga){
+		                        $.each(data,function(id_barang, nama_barang, harga,stok){
 		                            $('[name="id_barang"]').val(data.id_barang);
-		                            // $('[name="nama_barang"]').val(data.nama_barang);
+		                            $('[name="stok"]').val(data.stok);
 		                            $('[name="harga"]').val(data.harga);
 		                             
 		                        });
@@ -276,12 +309,25 @@
 		    <script type="text/javascript">
 		    	$(document).ready(function(){
 		    		$('#qty').on('input', function(){
-		 				// var qty = $('#qty').val();
-		 				// var kode = $('#nama_barang').val();
+		 				var qty = $('#qty').val();
+		 				var stok = $('#stok').val();
+		 				if (Number(stok) < Number(qty)) {
+		 					swal("Warning", "STOK YANG DIMINTA TIDAK TERSEDIA!", {
+								icon : "error",
+								buttons: {        			
+									confirm: {
+										className : 'btn btn-danger'
+									}
+								},
+							});
+		 					$('#add_keranjang').prop('disabled',true);
+		 				}else if (Number(stok) >= Number(qty)){
+		 					$('#add_keranjang').prop('disabled',false);
+		 				}
 		 				$.ajax({
 		 					type : "POST",
 		 					url : "<?php echo base_url('admin/kasir/grosir/get_harga')?>",
-		 					data :{qty : $('#qty').val(), nama_barang : $('#nama_barang').val()},
+		 					data :{qty : qty, nama_barang : $('#nama_barang').val()},
 		 					dataType : "JSON",
 		 					cache : false,
 		 					success : function(data){

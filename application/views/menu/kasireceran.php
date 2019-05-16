@@ -34,7 +34,7 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form method="post" action="<?php echo base_url(); ?>admin/kasir/eceran/tambah">
+													<form method="post" >
 														<div class="row">
 															<div class="col-md-12">
 																<div class="form-group ">
@@ -42,10 +42,9 @@
 																	<input id="id_barang" name="id_barang" type="text" class="form-control" placeholder="fill name" readonly>
 																</div>
 															</div>
-															<div class="col-md-12">
+															<div class="col-md-6">
 																<div class="form-group">
 																	<label>Nama Barang</label><br>
-																	<!-- input id="nama_barang" name="nama_barang" type="text" class="form-control" placeholder="fill name"> -->
 																	<select class="form-control form-control-md-12" id="nama_barang" name="nama_barang">
 															<option value="0">&nbsp;</option>
 															<?php 
@@ -56,6 +55,12 @@
 																}
 															?>
 														</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label>Sisa Stok</label>
+																	<input id="stok" name="stok" type="text" class="form-control" placeholder="fill name" readonly>
 																</div>
 															</div>
 															<div class="col-md-6 pr-0">
@@ -82,7 +87,7 @@
 									</div>
 
 									<div class="table-responsive">
-										<form>
+										<form method="post" action="<?php echo base_url() ?>admin/kasir/eceran/proses_jual">
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
@@ -93,16 +98,7 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label for="nama_pelanggan">Nama Pelanggan</label>
-														<select class="form-control form-control-xl" id="nama_pelanggan" name="nama_pelanggan">
-															<option value="0">&nbsp;</option>
-															<?php 
-																foreach ($user as $key) {
-															?>
-															<option><?php echo $key->nama; ?>   <?php echo $key->alamat ?></option>
-															<?php 	
-																}
-															?>
-														</select>
+														<input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control form-control-sm">
 													</div>
 												</div>
 												<div class="col-md-2">
@@ -140,7 +136,39 @@
 												</thead>
 												<tbody id="detail_keranjang"></tbody>
 											</table>
-											<button id="simpan" class="simpan btn btn-primary ml-auto">Simpan</button>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
+													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly>
+												</div>
+											</div>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Bayar Rp. </label>
+													<input type="number" class="form-control" id="bayar" name="bayar">
+												</div>
+											</div>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Kembali Rp. </label>
+													<input type="number" class="form-control" id="kembali" name="kembali" readonly>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Jenis Pembayaran</label>
+													<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
+														<option value="Cash">Cash</option>
+														<option value="Transfer">Transfer</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">	
+													<button id="simpan" name="simpan" class=" btn btn-primary ml-auto">Simpan</button>
+													<button id="reset" name="reset" class="btn btn-danger ml-auto">Reset</button>
+												</div>
+											</div>
 										</form>
 									</div>
 								</div>
@@ -157,51 +185,80 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					// $(".add_keranjang").click(function(){
-					// 	// var id = $("#id_barang").val();
+					$(".add_keranjang").click(function(){
+						var id = $("#id_barang").val();
 					// 	// // var id = $(this).data("id_barang");
-					// 	// var name = $("#nama_barang").val();
+						var name = $("#nama_barang").val();
 					// 	// // var name = $(this).data("nama_barang");
-					// 	// var qty = $("#qty").val();
+						var qty = $("#qty").val();
 					// 	// // var qty = $(this).data("qty");
-					// 	// var price = $("#harga").val();
+						var price = $("#harga").val();
 					// 	// // var price = $(this).data("harga");
 					// 	var id = $(this).attr("id_barang");
 					// 	var name = $(this).attr("nama_barang");
 					// 	var qty = $(this).attr("qty");
 					// 	var price = $(this).attr("harga");
 
-					// 	$.ajax({
-					// 		url : "<?php //echo base_url(); ?>admin/kasir/eceran/keranjang_kasir",
-					// 		method : "POST",
-					// 		data : {id : id, name : name, qty : qty, price : price },
-					// 		success: function(data){
-					// 			$("#detail_keranjang").html(data);
-					// 		}
-					// 	});
-					// });
+						$.ajax({
+							url : "<?php echo base_url(); ?>admin/kasir/eceran/tambah",
+							method : "POST",
+							data : {id : id, name : name, qty : qty, price : price },
+							success: function(data){
+								$("#detail_keranjang").html(data);
+							}
+						});
+					});
 					$('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/eceran/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
+						swal({
+						title: 'Apakah Kamu Yakin?',
+						text: "Kamu Tidak Dapat Mengembalikannya !",
+						type: 'warning',
+						buttons:{
+							cancel: {
+								visible: true,
+								text : 'Tidak, BATALKAN !',
+								className: 'btn btn-danger'
+							},        			
+							confirm: {
+								text : 'Ya, Hapus saja !',
+								className : 'btn btn-success'
+							}
+						}
+					}).then((willDelete) => {
+						if (willDelete) {
 						$.ajax({
 							url		: "<?php echo base_url(); ?>admin/kasir/eceran/hapus_keranjang",
 							method 	:"POST",
 							data 	: {row_id : row_id},
 							success	: function(data){
 								$('#detail_keranjang').html(data);
+								location.reload();
 							}
 						});
+						} else {
+							swal("Data Kamu Aman!", {
+								buttons : {
+									confirm : {
+										className: 'btn btn-success'
+									}
+								}
+							});
+						}
+					});
 					});
 				});
 			</script>
 			<script src="<?php echo base_url("assets/") ?>js/select2.min.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					$("#nama_pelanggan").select2({
-						placeholder: "Pilih Pelanggan",
-    					allowClear: true,
-    					minimumInputLength : 2
-					});
+					setInterval(function(){auto_refresh_function();}, 500);
+					// $("#nama_pelanggan").select2({
+					// 	placeholder: "Pilih Pelanggan",
+    	// 				allowClear: true,
+    	// 				minimumInputLength : 2
+					// });
 					$("#nama_barang").select2({
 						placeholder: "Pilih Barang",
     					allowClear: true,
@@ -221,9 +278,9 @@
 		                    data : {nama_barang: kode},
 		                    cache:false,
 		                    success: function(data){
-		                        $.each(data,function(id_barangeceran, hargaeceran){
+		                        $.each(data,function(id_barangeceran, hargaeceran, stok){
 		                            $('[name="id_barang"]').val(data.id_barangeceran);
-		                            // $('[name="nama_barang"]').val(data.nama_barang);
+		                            $('[name="stok"]').val(data.stok);
 		                            $('[name="harga"]').val(data.hargaeceran);
 		                             
 		                        });
@@ -234,25 +291,36 @@
 		           });
 		        });
 		    </script>
-		    <!-- <script type="text/javascript">
+		    <script type="text/javascript">
 		    	$(document).ready(function(){
 		    		$('#qty').on('input', function(){
-		 				// var qty = $('#qty').val();
-		 				// var kode = $('#nama_barang').val();
-		 				$.ajax({
-		 					type : "POST",
-		 					url : "<?php //echo base_url('admin/kasir/eceran/get_harga')?>",
-		 					data :{qty : $('#qty').val(), nama_barang : $('#nama_barang').val()},
-		 					dataType : "JSON",
-		 					cache : false,
-		 					success : function(data){
-		 						$.each(data,function(harga){
-		                            $('[name="harga"]').val(data.harga);
-		                        });
-		 					}
-		 				});
-		 			});
+		    			var qty = $('#qty').val();
+		    			var stok = $('#stok').val();
+		    			if (Number(stok) < Number(qty)) {
+		 					swal("Warning", "STOK YANG DIMINTA TIDAK TERSEDIA!", {
+								icon : "error",
+								buttons: {        			
+									confirm: {
+										className : 'btn btn-danger'
+									}
+								},
+							});
+		 					$('#add_keranjang').prop('disabled',true);
+		 				}else if (Number(stok) >= Number(qty)){
+		 					$('#add_keranjang').prop('disabled',false);
+		 				}
+		    		})
+		    	})
+		    </script>
+		    <script type="text/javascript">
+		    	$(document).ready(function(){
+		    		$('#bayar').on('keyup', function(){
+		    			var total = $('#total').val()
+		    			var bayar = $('#bayar').val();
+		    			var hasil = bayar - total;
+		    			$('#kembali').val(hasil);
+		    		});
 		    	});
-		    </script> -->
+		    </script>
 		</body>
 		</html>

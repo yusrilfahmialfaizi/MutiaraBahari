@@ -1,4 +1,5 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- <meta http-equiv="refresh" content="10" /> -->
 	<title><?php echo SITE_NAME; ?></title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="<?php echo base_url('assets/img/icon.ico')?>" type="image/x-icon"/>

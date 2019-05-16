@@ -29,6 +29,7 @@
 						'id_barang' => $data->id_barang,
 						'nama_barang' => $data->nama_barang,
 						'harga' => $data->hrg_grosir1,
+						'stok' =>$data->jumlah_stok
 						);
 					}elseif ($qty>750 && $qty<1000) {
 						# code...
@@ -36,6 +37,7 @@
 						'id_barang' => $data->id_barang,
 						'nama_barang' => $data->nama_barang,
 						'harga' => $data->hrg_grosir2,
+						'stok' =>$data->jumlah_stok
 						);
 					}else{
 						# code...
@@ -43,6 +45,7 @@
 						'id_barang' => $data->id_barang,
 						'nama_barang' => $data->nama_barang,
 						'harga' => $data->hrg_grosir3,
+						'stok' =>$data->jumlah_stok
 						);
 					}
 					// $hasil=array(
@@ -90,6 +93,7 @@
 				$eceran=array(
 					'id_barangeceran' => $data->id_barang,
 					'hargaeceran' => $data->harga,
+					'stok' =>$data->jumlah_stok
 					);
 				}
 			return $eceran;
