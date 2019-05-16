@@ -1,5 +1,6 @@
 package com.example.android.mutiarabahari;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -101,16 +102,25 @@ public class Homepage extends AppCompatActivity
     private List<Product> getProductList() {
         //pseudo code to get product, replace your codeto get real product here
         productList = new ArrayList<>();
-        productList.add(new Product(R.drawable.belfoods, "Title 1", "This is description 1"));
-        productList.add(new Product(R.drawable.belfoods, "Title 2", "This is description 2"));
-        productList.add(new Product(R.drawable.belfoods, "Title 3", "This is description 3"));
-        productList.add(new Product(R.drawable.belfoods, "Title 4", "This is description 4"));
-        productList.add(new Product(R.drawable.belfoods, "Title 5", "This is description 5"));
-        productList.add(new Product(R.drawable.belfoods, "Title 6", "This is description 6"));
-        productList.add(new Product(R.drawable.belfoods, "Title 7", "This is description 7"));
-        productList.add(new Product(R.drawable.belfoods, "Title 8", "This is description 8"));
-        productList.add(new Product(R.drawable.belfoods, "Title 9", "This is description 9"));
-        productList.add(new Product(R.drawable.belfoods, "Title 10", "This is description 10"));
+        productList.add(new Product(R.drawable.ayoma, "Ayoma", ""));
+        productList.add(new Product(R.drawable.belfoods, "Bahri", ""));
+        productList.add(new Product(R.drawable.belfoods, "Belfoods", ""));
+        productList.add(new Product(R.drawable.belfoods, "Bima", ""));
+        productList.add(new Product(R.drawable.cikiwiki, "Cikiwiki", ""));
+        productList.add(new Product(R.drawable.belfoods, "Crispy", ""));
+        productList.add(new Product(R.drawable.belfoods, "Geboy", ""));
+        productList.add(new Product(R.drawable.goldstar, "Goldstar", ""));
+        productList.add(new Product(R.drawable.belfoods, "Loligo", ""));
+        productList.add(new Product(R.drawable.nidia, "Nidia", ""));
+        productList.add(new Product(R.drawable.okey, "Okey", ""));
+        productList.add(new Product(R.drawable.belfoods, "Sera Oye", ""));
+        productList.add(new Product(R.drawable.belfoods, "SJM", ""));
+        productList.add(new Product(R.drawable.belfoods, "Sonice", ""));
+        productList.add(new Product(R.drawable.belfoods, "Sufir", ""));
+        productList.add(new Product(R.drawable.belfoods, "Sukanda", ""));
+        productList.add(new Product(R.drawable.belfoods, "Top", ""));
+        productList.add(new Product(R.drawable.tora, "Tora", ""));
+        productList.add(new Product(R.drawable.vigo, "Vigo", ""));
         return productList;
     }
 
@@ -118,8 +128,7 @@ public class Homepage extends AppCompatActivity
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //do any thing when user click to item
-            Toast.makeText(getApplicationContext(), productList.get(position).getTitle() + " - " +
-                    productList.get(position).getDescription(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), productList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -169,9 +178,8 @@ public class Homepage extends AppCompatActivity
 
         if (id == R.id.nav_beranda) {
         } else if (id == R.id.nav_profil) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_profil, new Profil());
-            ft.commit();
+            Intent intent = new Intent(Homepage.this, Profil.class);
+            startActivity(intent);
         } else if (id == R.id.nav_order) {
         } else if (id == R.id.nav_notifikasi) {
         } else if (id == R.id.nav_bantuan) {
@@ -184,3 +192,4 @@ public class Homepage extends AppCompatActivity
         return true;
     }
 }
+

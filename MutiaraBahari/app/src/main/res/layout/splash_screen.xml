@@ -5,17 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/LightBlue"
+    android:background="@android:color/white"
     tools:context=".SplashScreen">
 
-    <TextView
+    <ImageView
         android:id="@+id/logo_splash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mutiara Bahari"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:textColor="@android:color/black"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logo"
         android:layout_gravity="center"/>
 
 </RelativeLayout>

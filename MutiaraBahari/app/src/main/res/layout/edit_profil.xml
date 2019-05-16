@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/edit_profil"
+    android:orientation="vertical"
+    android:background="@drawable/latar">
+
+    <ImageView
+        android:id="@+id/iconprofile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/avatar"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="80dp"
+        android:background="@color/LightBlue" >
+
+        <EditText
+            android:id="@+id/edit_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Lengkap"
+            android:textSize="20sp"
+            android:paddingTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/edit_notelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_nama"
+            android:hint="No. Telepon"
+            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/edit_toko"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_notelp"
+            android:hint="Nama Toko"
+            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/edit_alamat"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_toko"
+            android:layout_marginTop="1dp"
+            android:hint="Alamat"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_editprofil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Simpan"
+        android:textSize="15sp"
+        android:background="@color/CornBlue"/>
+
+
+</LinearLayout>
