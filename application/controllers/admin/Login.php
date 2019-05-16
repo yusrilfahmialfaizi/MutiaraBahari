@@ -38,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					# code...
 				$data_session = array(
 					'nama' => $key->nama,
+					'id_admin' => $key->id_pegawai,
 					'status' => "login"
 				);
 				}

@@ -114,6 +114,10 @@
 			  $kodetampil = "JL".$tgl."-04".$batas;  //format kode
 			  return $kodetampil;  
 		 }
+		 function tambah($transaksi)
+		 {
+		 	$this->db->insert('transaksi', $transaksi);
+		 }
 		 function tambah_detail_jual($data_detail)
 		 {
 		 	$this->db->insert('detail_transaksi', $data_detail);

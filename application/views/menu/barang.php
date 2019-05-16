@@ -433,33 +433,19 @@
 					});
 				});
 			</script>
-			<!-- <script type="text/javascript">
+			<script type="text/javascript">
 		        $(document).ready(function(){
-		            $('#merek').on('change',function(){
-		                 
-		                var kode = $('#merek').val();
-		                window.alert(kode);
-		                $.ajax({
-		                    url  : "<?php //echo base_url('admin/barang/get_merek')?>",
-		                    type : "POST",
-		                    dataType : "JSON",
-		                    data : {merek: kode },
-		                    cache:false,
-		                    success: function(data){
-		                        $.each(data,function(id_merek, merek, kode_merek){
-		                            $('[name="abc"]').val(data.kode_merek);
-		                            $('[name="ab"]').val(data.id_merek);
-		                            // $('[name="nama_barang"]').val(data.nama_barang);
-		                            // $('[name="harga"]').val(data.harga);
-		                             
-		                        });
-		                         
-		                    }
-		                });
-		                return false;
+		            $('#bayar').on('keyup',function(){
+		                 $.ajax({
+		                 	url : <?php echo base_url('admin/barang/show_keranjang'); ?>
+			                var kode = $('#bayar').val();
+			                window.alert(kode);
+
+			            });
+		                
 		           });
 		        });
-		    </script> -->
+		    </script>
 		    <script type="text/javascript">
 		        $(document).ready(function(){
 		            $('#merek').on('change',function(){

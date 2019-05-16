@@ -27,29 +27,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->view('menu/kasirgrosir',$user);
 			// $this->load->view('_partial/footertable');
 		}
-		// public function grosir()
-		// {
-		// 	if($this->session->userdata('status') != "login"){
-		// 		redirect(base_url("admin"));
-		// 	}
-		// 	$user['barang'] = $this->Kasirmodel->getBarang();
-		// 	$user['kode'] = $this->Kasirmodel->kode();
-		// 	$user['user'] = $this->Usermodel->getUser();
-		// 	$this->load->view('_partial/header');
-		// 	$this->load->view('menu/kasirgrosir',$user);
-		// 	// $this->load->view('_partial/footertable');
-		// }
 		function keranjang_kasir()
 		{	
+			$id = $this->input->post('id');
+			$qty = $this->input->post('qty');
+			$price = $this->input->post('price');
+			$name = $this->input->post('name');
 			$grosir = array(
-		        'id'     => $this->input->post('id_barang'),
-		        'qty'    => $this->input->post('qty'),
-		        'price'   => $this->input->post('harga'),
-		        'name'      => $this->input->post('nama_barang')
+		        'id'     => $id,
+		        'qty'    => $qty,
+		        'price'   => $price,
+		        'name'      => $name
 			);
 			
 			$this->cart->insert($grosir);	
-			redirect('admin/kasir/grosir');
+			// redirect('admin/kasir/grosir');
 			echo $this->show_keranjang();
 		}
 		function show_keranjang()
@@ -66,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		                    <td>
 			                    <div class="col-md-8">
 		                			<div class="form-group">
-		                				<input type="text" id="subtotal" name="subtotal" value="'.number_format($items['subtotal']).'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
+		                				<input type="text" id="subtotal" name="subtotal" value="'.$items['subtotal'].'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
 		                			</div>
 		                		</div>
 		                	</td>
@@ -74,41 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		                </tr>
 		            ';
 			}
-			$output .= '
-	            <tr>
-	            	<th colspan="3"></th>
-	                <th>Total Rp.</th>
-	                <th>
-	                	<div class="col-md-8">
-	                		<div class="form-group">
-	                			<input type="text" name="total2" value="'.number_format($this->cart->total()).'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
-	                		</div>
-	                	</div>
-	                </th>
-	            </tr>
-	            <tr>
-	            	<th colspan="3"></th>
-	                <th>Bayar Rp.</th>
-	                <th>
-	                	<div class="col-md-8">
-							<div class="form-group ">
-	                			<input type="number" class="form-control" id="bayar" name="bayar">'.'
-	                		</div>
-	                	</div>
-	                </th>
-	            </tr>
-	            <tr>
-	            	<th colspan="3"></th>
-	                <th>Kembali Rp.</th>
-	                <th>
-	                	<div class="col-md-8">
-							<div class="form-group ">
-	                			<input type="number" class="form-control" id="kembali" name="kembali">'.'
-	                		</div>
-	                	</div>
-	                </th>
-	            </tr>
-	        ';
 	        return $output;
 		}
 		function load(){
@@ -131,8 +88,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'rowid' => $this->input->post('row_id'),
 				'qty'	=>0,
 			);
+			$total = $this->cart->total();
 			$this->cart->update($data);
 			echo $this->show_keranjang();
+			// redirect('admin/kasir/grosir');
 		}
 		function get_barang()
 		{
@@ -151,12 +110,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		// // // // // // // proses  // // // // // // // 
 		function proses_jual()
 		{
+			date_default_timezone_set('Asia/Jakarta');
+			
 			// -------- No. Invoice-------------//
 			$no_invoice = $this->input->post('no_invoice');
 			$nama_pelanggan = $this->input->post('nama_pelanggan');
-			$tanggal = $this->input->post('tanggal');
-			$jtp = $this->input->post('jatuh_tempo');
-			$total = $this->input->post('total2');
+			$id_admin = $this->session->userdata("id_admin");
+			$id_pegawai =  $id_admin;
+			$tgl=date('Y-m-d');
+			$tanggal = $tgl;
+			$jtp=date('Y-m-d');
+			$tujuh_hari        = mktime(0,0,0,date("m"),date("d")+7,date("Y"));
+			$kembali        = date("Y-m-d", $tujuh_hari);
+			$jtp = $kembali;
+			$total = $this->input->post('total');
 			$bayar = $this->input->post('bayar');
 			$kembali = $this->input->post('kembali');
 			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
@@ -166,6 +133,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }else{
 			 	$status_pembayaran = 'Tidak Lunas';
 			 }
+			 $transaksi = array(
+			 	'id_transaksi' => $no_invoice,
+			 	'nama' => $nama_pelanggan,
+			 	'id_pegawai' => $id_pegawai,
+			 	'tanggal' => $tanggal,
+			 	'jatuh_tempo' => $jtp,
+			 	'total_harga' => $total,
+			 	'bayar' => $bayar,
+			 	'kembalian' => $kembali,
+			 	'jenis_pembayaran' => $jenis_pembayaran,
+			 	'status_pembayaran' => $status_pembayaran,
+			 	'bukti_pembayaran' => '');
+			 $jual = $this->Kasirmodel->tambah($transaksi);
 			// ---------------data jual---------------//
 			$subtotal = $this->input->post('subtotal');
 			if ($cart = $this->cart->contents())
