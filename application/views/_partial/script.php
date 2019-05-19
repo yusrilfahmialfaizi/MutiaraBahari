@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('assets/js/core/jquery.3.2.1.min.js')?>"></script>
+	<script src="<?php echo base_url('assets/js/core/jquery.3.2.1.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/core/popper.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/core/bootstrap.min.js')?>"></script>
 
@@ -133,4 +133,10 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
+	</script>
+	<script type="text/javascript">
+		$(function() {
+	$('#nav-primary a[href~="' + location.href + '"]').parents('li').addClass('active');
+});
+
 	</script>

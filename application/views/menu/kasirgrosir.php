@@ -131,7 +131,7 @@
 															$kembali        = date("d-m-Y", $tujuh_hari);
 														?>
 														<label for="jatuh_tempo">Jatuh Tempo</label>
-														<input type="text" class="form-control form-control-sm" id="jatuh_tempo" name="jatuh_tempo" value="<?php echo $kembali ?>" readonly="readonly">
+														<input type="text" class="form-control form-control-sm" id="jatuh_tempo" name="jatuh_tempo" value="<?php echo $kembali ?>" readonly>
 													</div>
 												</div>
 											</div>

@@ -192,7 +192,7 @@
  															<button class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#EditModal<?php echo $key->id_barang;?>">
  																<i class="fas fa-edit"></i>
  															</button>
-															<a href="<?php echo site_url("admin/barang/hapusBarang/".$key->id_barang) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+															<a href="<?php echo base_url("admin/barang/hapusBarang/".$key->id_barang) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
 																<i class="fa fa-times"></i>
 															</a>
 														</div>

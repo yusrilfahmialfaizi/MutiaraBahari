@@ -40,9 +40,9 @@
 							</div>
 						</div>
 					</div>
-					<ul class="nav nav-primary">
-						<li class="nav-item active">
-							<a href="<?php echo base_url('admin/dashboard') ?>">
+					<ul class="nav nav-primary" id="nav-primary">
+						<li class="nav-item <?php if($this->uri->segment(2)=="dashboard"){echo "active";}?>">
+							<a class="" href="<?php echo base_url('admin/dashboard') ?>">
 								<i class="fas fa-home"></i>
 								<p>Home</p>
 							</a>
@@ -53,25 +53,25 @@
 							</span>
 							<h4 class="text-section">Fitur</h4>
 						</li>
-						<li class="nav-item">
-							<a href="<?php echo base_url('admin/user') ?>">
+						<li class="nav-item <?php if($this->uri->segment(2)=="user"){echo "active";}?>">
+							<a class=""  href="<?php echo base_url('admin/user') ?>">
 								<i class="fas fa-user"></i>
 								<p>User</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="<?php echo base_url('admin/barang') ?>">
+						<li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
+							<a class="" href="<?php echo base_url('admin/barang') ?>">
 								<i class="fas fa-dolly"></i>
 								<p>Barang</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="<?php echo base_url('admin/barang') ?>">
+						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
+							<a  href="<?php echo base_url('admin/barang') ?>">
 								<i class="fas fa-bell"></i>
 								<p>Notifikasi</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
 							<a data-toggle="collapse" href="#transaksi">
 								<i class="fas fa-cart-plus"></i>
 								<p>Pemesanan</p>
@@ -95,12 +95,12 @@
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("admin/hutang") ?>">
+										<a href="<?php echo base_url("admin/kasir/hutang") ?>">
 											<span class="sub-item">Hutang</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url().'admin/transaksi/riwayat_trans' ?>">
+										<a href="<?php echo base_url().'admin/kasir/transaksi/riwayat_trans' ?>">
 											<span class="sub-item">Riwayat Pesanan</span>
 										</a>
 									</li>
