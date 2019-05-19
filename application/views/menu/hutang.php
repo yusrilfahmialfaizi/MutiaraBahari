@@ -126,13 +126,13 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="largeInput">Bayar</label>
-																	<input type="number" class="form-control form-control" id="bayar" name="bayar" >
+																	<input type="number" class="form-control form-control" id="bayar" name="bayar" min="0">
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="largeInput">Sisa Hutang</label>
-																	<input type="number" class="form-control form-control" id="sisa" name="sisa" readonly>
+																	<input type="number" class="form-control form-control" id="sisa" name="sisa" max="0" readonly>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -194,9 +194,9 @@
  															<button class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#ModalEdit<?php echo $k->id_hutang;?>">
  																<i class="fas fa-edit"></i>
  															</button>
-															<a href="<?php echo site_url("admin/barang/hapusBarang/".$k->id_hutang) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+															<!-- <a href="<?php //echo site_url("admin/kasir/grosir/hapusHutang/".$k->id_hutang) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
 																<i class="fa fa-times"></i>
-															</a>
+															</a> -->
 														</div>
 													</td>
 												</tr>
@@ -253,8 +253,14 @@
 		             	var hutang = $('#hutang').val();
 		             	var bayar = $('#bayar').val();
 		             	var sisa = hutang - bayar;
-		             	$('#sisa').val(sisa); 
-		             })
+		             	var a = 0;
+		             	// window.alert(a);
+		             	if (sisa >= 0) {
+		             		$('#sisa').val(sisa);           		
+		             	}else{
+		             		$('#sisa').val(a);
+		             	}
+		             });
 		        });
 		    </script>
 		</body>
