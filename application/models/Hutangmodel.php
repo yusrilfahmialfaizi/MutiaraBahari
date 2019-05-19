@@ -39,8 +39,7 @@
 		function tambah()
 		{
 			$id_hutang = $this->input->post('idhutang');
-			$nama = $this->input->post('nama_pelanggan');
-			$id_user = $this->db->get('user', array('nama' => $nama ))->result();
+			$id_user = $this->input->post('user');
 			$total_hutang = $this->input->post('jumlah_hutang');
 			$jatuh_tempo = $this->input->post('jatuh_tempo');
 			$data = array(
@@ -51,9 +50,30 @@
 			);
 			$this->db->insert('hutang',$data);
 		}
-		function getid($nama)
+		function update()
 		{
-			return $this->db->get('user', array('nama' => $nama ))->result();
+			$id_hutang = $this->input->post('id_htg');
+			$id_user = $this->input->post('id_user');
+			$total_hutang = $this->input->post('sisa');
+			$jatuh_tempo = $this->input->post('jatuh_tempo');
+			
+			$hasil = $this->db->query("UPDATE hutang SET total_hutang = '$total_hutang', jatuh_tempo = '$jatuh_tempo' WHERE id_hutang =  '$id_hutang'");
+			return $hasil;
+			// $this->db->update('hutang',$data);
+		}
+		function getid($kode)
+		{
+			$hsl=$this->db->query("SELECT * FROM user WHERE nama='$kode'");
+			if($hsl->num_rows()>0){
+				foreach ($hsl->result() as $data) {
+						# code...
+						$hasil=array(
+						'id_user' => $data->id_user,
+						'nama' => $data->nama
+						);
+				}
+			}
+			return $hasil;
 		}
 	}
 ?>

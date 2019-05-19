@@ -190,10 +190,6 @@
 				</div>
 			<?php $this->load->view('_partial/foot.php') ?>
 			</div>
-			window.alert(id);
-						window.alert(name);
-						window.alert(qty);
-						window.alert(price);
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
@@ -205,15 +201,6 @@
 						var qty = $("#qty").val();
 						// // var qty = $(this).data("qty");
 						var price = $("#harga").val();
-						// // var price = $(this).data("harga");
-						// var id = $(this).attr("id_barang");
-						// var name = $(this).attr("nama_barang");
-						// var qty = $(this).attr("qty");
-						// var price = $(this).attr("harga");
-							// window.alert(id);
-							// window.alert(name);
-							// window.alert(qty);
-							// window.alert(price);
 						$.ajax({
 							url : "<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir",
 							method : "POST",

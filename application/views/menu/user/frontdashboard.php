@@ -28,7 +28,7 @@
 								</div>
 								<div class="card-footer">
 									<div class="col-md-6 ml-auto mr-auto">
-										<a href="<?php echo base_url() ?>user/agen/dashboard/<?php echo $key->merek ?>" class="btn btn-primary btn-border btn-round btn-md">Lihat</a>
+										<a href="<?php echo base_url() ?>user/agen/dashboard/produk" class="btn btn-primary btn-border btn-round btn-md">Lihat</a>
 									</div>
 								</div>
 							</div>

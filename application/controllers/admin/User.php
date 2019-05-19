@@ -37,11 +37,12 @@
 		}
 		function editPass()
 		{
-			$echo = $this->input->post('password');
-			$pass = password_hash($echo, PASSWORD_DEFAULT);
-			$password = array(
-				'password' => $pass);
-			$this->Usermodel->editPass($password);
+			// $echo = $this->input->post('password');
+			// $userid = $this->input->post('userid');			
+			// $pass = password_hash($echo, PASSWORD_DEFAULT);
+			// $password = array(
+				// 'password' => $pass);
+			$this->Usermodel->editPassword();
 			redirect('admin/user');
 		}
 		function hapusAgen($id)

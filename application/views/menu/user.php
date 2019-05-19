@@ -152,7 +152,7 @@
 									<?php endforeach ?>
 									<?php foreach ($user as $a): ?>	
 									<!-- Modal -->
-									<div class="modal fade" id="ModalPass<?php echo $i->id_user ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="ModalPass<?php echo $a->id_user ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -173,7 +173,8 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="largeInput">Password </label>
-																	<input type="password" class="form-control form-control" id="password" name="password">
+																	<input type="text" class="form-control form-control" id="userid" name="userid" value="<?php echo $a->id_user ?>" hidden>
+																	<input type="password" class="form-control form-control" id="pass" name="pass">
 																</div>
 															</div>
 														</div>

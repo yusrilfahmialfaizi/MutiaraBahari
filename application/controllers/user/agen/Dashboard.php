@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->view('menu/user/frontdashboard',$data);
 			$this->load->view('_partial/footer');
 		}
-		function ilm()
+		function produk()
 		{
 			if($this->session->userdata('stat') != "login"){
 				redirect(base_url("user/login"));

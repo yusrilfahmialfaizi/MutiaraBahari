@@ -97,24 +97,20 @@
 			// $pass = $this->input->post('password');
 			// $password = password_hash($pass, PASSWORD_DEFAULT);
 			$status = "agen";
-			$data = array(
-				'id_user' => $id_user,
-				'nama' => $nama,
-				'alamat' =>$alamat,
-				'no_telepon' => $no_telepon,
-				'username' => $username,
-				// 'password' => $password,
-				'status' => $status);
-			$this->db->update('user',$data);
+			
+			$hasil = $this->db->query("UPDATE user SET nama = '$nama', alamat = '$alamat', no_telepon = '$no_telepon', username = '$username' WHERE id_user =  '$id_user'");
+			return $hasil;
 		}
-		function editPass($password)
+		function editPassword()
 		{
-			// $pass = $this->input->post('password');
-			// $password = password_hash($pass, PASSWORD_DEFAULT);
+			$pass = $this->input->post('pass');
+			$password = password_hash($pass, PASSWORD_DEFAULT);
+			$userid = $this->input->post('userid');
 			// $data = array(
 			// 	'password' => $password,
 			// );
-			$this->db->update('user',$password);
+			$hasilpass = $this->db->query("UPDATE user SET password = '$password' where id_user = '$userid'");
+			return $hasilpass;
 		}
 		function hapusAgen($id)
 		{

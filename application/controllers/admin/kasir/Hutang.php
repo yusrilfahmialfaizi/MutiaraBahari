@@ -25,14 +25,20 @@ class Hutang extends CI_Controller
 		$this->load->view('_partial/header');
 		$this->load->view('menu/hutang', $data);
 	}
-	function tambah()
+	function tambahHutang()
 	{
-		$this->Hutangmodel->tambah();	
+		$this->Hutangmodel->tambah();
+		redirect('admin/kasir/hutang');	
+	}
+	function updateHutang()
+	{
+		$this->Hutangmodel->update();
+		redirect('admin/kasir/hutang');
 	}
 	function get_id()
 	{
-		$nama = $this->input->post('nama');
-		$data = $this->Hutangmodel->getid($nama);
+		$kode = $this->input->post('nama');
+		$data = $this->Hutangmodel->getid($kode);
 		echo json_encode($data);
 	}
 }
