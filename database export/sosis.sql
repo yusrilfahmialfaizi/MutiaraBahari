@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Bulan Mei 2019 pada 16.55
+-- Waktu pembuatan: 20 Bulan Mei 2019 pada 17.42
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.10
 
@@ -81,10 +81,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `jumlah_stok`, `hrg_grosir1`, `hrg_grosir2`, `hrg_grosir3`, `id_merek`) VALUES
-('B0001', 'BELFOOD BS AYAM MINI', 14000, 1900, 13000, 13000, 13000, 'A2'),
-('L0001', 'ILM Tempura', 10800, 0, 9750, 9665, 9545, 'A1'),
-('L0002', 'ILM Burger', 11300, 0, 10250, 10215, 9985, 'A1'),
-('S0001', 'SONICE NUGET 250', 11000, 0, 10500, 10500, 10500, 'A3');
+('B0001', 'BELFOOD BS AYAM MINI', 14000, 1900, 13000, 13000, 13000, 'A002'),
+('L0001', 'ILM Tempura', 10800, 0, 9750, 9665, 9545, 'A001'),
+('L0002', 'ILM Burger', 11300, 0, 10250, 10215, 9985, 'A001'),
+('S0001', 'SONICE NUGET 250', 11000, 0, 10500, 10500, 10500, 'A003');
 
 -- --------------------------------------------------------
 
@@ -169,9 +169,28 @@ CREATE TABLE `merek` (
 --
 
 INSERT INTO `merek` (`id_merek`, `merek`, `kode_merek`) VALUES
-('A1', 'ILM', 'L'),
-('A2', 'Belfood', 'B'),
-('A3', 'SONICE', 'S');
+('A001', 'ILM', 'L'),
+('A002', 'Belfood', 'B'),
+('A003', 'SONICE', 'S'),
+('A004', 'TORA', 'T'),
+('A005', 'AYOMA', 'AY'),
+('A006', 'OKEY', 'K'),
+('A007', 'SUFIR', 'SF'),
+('A008', 'SJM', 'JM'),
+('A009', 'BAHRI', 'BR'),
+('A010', 'CRISPY', 'CR'),
+('A011', 'GOLDSTAR', 'GS'),
+('A012', 'GEBOY', 'GB'),
+('A013', 'LOLIGO', 'LL'),
+('A014', 'SERA OYE', 'SR'),
+('A015', 'TOP', 'TP'),
+('A016', 'VIGO', 'V'),
+('A017', 'NIDIA', 'ND'),
+('A018', 'SUKANDA', 'SK'),
+('A019', 'BWI', 'BW'),
+('A020', 'BIMA', 'BM'),
+('A021', 'CIKIWIKI', 'CW'),
+('A022', 'LAIN - LAIN', 'N');
 
 -- --------------------------------------------------------
 
@@ -259,7 +278,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_telepon`, `username`, `password`, `status`) VALUES
-('001', 'Burhan', 'Kejayan - Mayang - Jember', '01234', 'burhan', '$2y$10$Ehjmi.6D.wWdk0NomBb3oO/hH./DBcNX.eOAHOBz6DTV7Sw3PiJ7y', 'agen'),
+('001', 'Burhan', 'Kejayan - Mayang - Jember', '01234', 'burhan', '$2y$10$KneunJ80eQGwHNUoGmqzFupQgH/GVI/MtAj3rBuctG5LNj5oZ5Pdq', 'agen'),
 ('002', 'Hadi', 'jember', '01234', 'hadi', '$2y$10$qLWhZOamue5QuTZzHSfsBuIuIAgFhc650esOSIXbf7Jqw.i139a5a', 'agen');
 
 -- --------------------------------------------------------
