@@ -113,7 +113,27 @@
 			$id_barang_tampil = $kode_merek[0]['kode_merek'].$batas;
 			return $id_barang_tampil;
 		}
-		
+		function id_merek()
+		{
+			$this->db->select('MAX(RIGHT(merek.id_merek,3)) AS id_merek', FALSE);
+			$this->db->order_by('id_merek','Desc');
+			$this->db->limit(1);
+			$query = $this->db->get('merek');
+			if ($query->num_rows() <> 0) {
+				# code...
+				$data = $query->row();
+				$id = intVal($data->id_merek) + 1;
+			}else{
+				$id = 1;
+			}
+			$batas = str_pad($id, 3,"0", STR_PAD_LEFT);
+			// foreach ($que as $key) {
+			// 	# code...
+			// 	$id_barang_tampil = $batas;
+			// }
+			$id_barang_tampil ="A".$batas;
+			return $id_barang_tampil;
+		}
 		public function edit($id,$data)
 		{
 			$this->db->where('id_barang', $id);

@@ -10,11 +10,11 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Tambah Data Barang</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal2">
+										<button class="btn btn-primary btn-round btn-md ml-auto" data-toggle="modal" data-target="#addRowModal2">
 											<i class="fa fa-plus"></i>
 											Tambah merek
 										</button>
-										<button class="btn btn-primary btn-round" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-md btn-round" data-toggle="modal" data-target="#addRowModal">
 											<i class="fa fa-plus"></i>
 											Tambah jenis
 										</button>
@@ -123,7 +123,7 @@
 															<div class="col-sm-12">
 																<div class="form-group  ">
 																	<label>ID merek</label>
-																	<input id="id_merek" name="id_merek" value="" type="text" class="form-control">
+																	<input id="id_merek" name="id_merek" type="text" class="form-control" value="<?php echo $kode ?>" readonly>
 																</div>
 															</div>
 															<div class="col-sm-12">
@@ -135,7 +135,7 @@
 															<div class="col-md-6 ">
 																<div class="form-group  ">
 																	<label>Kode</label>
-																	<input id="kode" name="kode" type="text" min="0" class="form-control" placeholder="Harga ..." required="required">
+																	<input id="kode" name="kode" type="text" min="0" class="form-control" placeholder="Kode ..." required="required">
 																</div>
 															</div>
 														</div>

@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if($this->session->userdata('status') != "login"){
 					redirect(base_url("admin"));
 				}
-				// $barang['kode'] = $this->Barangmodel->id_barang();
+				$barang['kode'] = $this->Barangmodel->id_merek();
 				$barang['merek'] = $this->Barangmodel->getmerek();
 				$barang['barang'] = $this->Barangmodel->getBarang();
 				$barang['detail_barang'] = $this->Barangmodel->getDetailBarang();

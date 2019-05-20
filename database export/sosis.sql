@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Bulan Mei 2019 pada 20.04
+-- Waktu pembuatan: 20 Bulan Mei 2019 pada 16.55
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.10
 
@@ -26,6 +26,11 @@ DELIMITER $$
 --
 -- Prosedur
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `generateCode` (OUT `id_hutang` VARCHAR(3))  NO SQL
+BEGIN
+	SELECT MAX(RIGHT(hutang.id_hutang,4)) AS id_hutang FROM hutang;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getbarang` (OUT `jumlah_barang` INT(11))  NO SQL
 BEGIN 
 	SELECT COUNT(id_barang) INTO jumlah_barang FROM barang;
@@ -76,7 +81,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `jumlah_stok`, `hrg_grosir1`, `hrg_grosir2`, `hrg_grosir3`, `id_merek`) VALUES
-('B0001', 'BELFOOD BS AYAM MINI', 14000, 2000, 13000, 13000, 13000, 'A2'),
+('B0001', 'BELFOOD BS AYAM MINI', 14000, 1900, 13000, 13000, 13000, 'A2'),
 ('L0001', 'ILM Tempura', 10800, 0, 9750, 9665, 9545, 'A1'),
 ('L0002', 'ILM Burger', 11300, 0, 10250, 10215, 9985, 'A1'),
 ('S0001', 'SONICE NUGET 250', 11000, 0, 10500, 10500, 10500, 'A3');
@@ -110,6 +115,23 @@ CREATE TABLE `detail_transaksi` (
   `subtotal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id_detail`, `id_transaksi`, `id_barang`, `qty`, `harga`, `subtotal`) VALUES
+(1, 'JL1905-0400001', 'B0001', 100, 13000, 1300000);
+
+--
+-- Trigger `detail_transaksi`
+--
+DELIMITER $$
+CREATE TRIGGER `penjualan` AFTER INSERT ON `detail_transaksi` FOR EACH ROW BEGIN
+	UPDATE barang SET jumlah_stok = jumlah_stok - NEW.qty WHERE barang.id_barang = NEW.id_barang;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +144,13 @@ CREATE TABLE `hutang` (
   `total_hutang` int(11) DEFAULT NULL,
   `jatuh_tempo` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `hutang`
+--
+
+INSERT INTO `hutang` (`id_hutang`, `id_user`, `total_hutang`, `jatuh_tempo`) VALUES
+('001', '001', 0, '2019-05-27');
 
 -- --------------------------------------------------------
 
@@ -171,6 +200,20 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jabatan`, `alamat`, `no_telepon`, 
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `tampilhutang`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `tampilhutang` (
+`id_hutang` varchar(5)
+,`id_user` varchar(5)
+,`nama` varchar(30)
+,`total_hutang` int(11)
+,`jatuh_tempo` date
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `transaksi`
 --
 
@@ -188,6 +231,13 @@ CREATE TABLE `transaksi` (
   `bukti_pembayaran` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `nama`, `id_pegawai`, `tanggal`, `jatuh_tempo`, `total_harga`, `bayar`, `kembalian`, `jenis_pembayaran`, `status_pembayaran`, `bukti_pembayaran`) VALUES
+('JL1905-0400001', 'Hadi', 'CA002', '2019-05-20', '2019-05-27', 1300000, 2000000, 700000, 'Cash', 'Lunas', '');
+
 -- --------------------------------------------------------
 
 --
@@ -198,15 +248,28 @@ CREATE TABLE `user` (
   `id_user` varchar(4) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `alamat` tinytext NOT NULL,
-  `no_telepon` varchar(12) NOT NULL
+  `no_telepon` varchar(12) NOT NULL,
+  `username` varchar(30) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `status` enum('agen','pelanggan biasa') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_telepon`) VALUES
-('001', 'Burhan', 'Jember', '012345679810');
+INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_telepon`, `username`, `password`, `status`) VALUES
+('001', 'Burhan', 'Kejayan - Mayang - Jember', '01234', 'burhan', '$2y$10$Ehjmi.6D.wWdk0NomBb3oO/hH./DBcNX.eOAHOBz6DTV7Sw3PiJ7y', 'agen'),
+('002', 'Hadi', 'jember', '01234', 'hadi', '$2y$10$qLWhZOamue5QuTZzHSfsBuIuIAgFhc650esOSIXbf7Jqw.i139a5a', 'agen');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `tampilhutang`
+--
+DROP TABLE IF EXISTS `tampilhutang`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tampilhutang`  AS  select `hutang`.`id_hutang` AS `id_hutang`,`hutang`.`id_user` AS `id_user`,`user`.`nama` AS `nama`,`hutang`.`total_hutang` AS `total_hutang`,`hutang`.`jatuh_tempo` AS `jatuh_tempo` from (`hutang` join `user`) where (`hutang`.`id_user` = `user`.`id_user`) ;
 
 --
 -- Indexes for dumped tables
@@ -275,7 +338,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
