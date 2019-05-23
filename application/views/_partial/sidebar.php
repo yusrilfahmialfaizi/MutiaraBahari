@@ -60,10 +60,25 @@
 							</a>
 						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
-							<a class="" href="<?php echo base_url('admin/barang') ?>">
+							<a data-toggle="collapse" href="#barang">
 								<i class="fas fa-dolly"></i>
 								<p>Barang</p>
+								<span class="caret"></span>
 							</a>
+							<div class="collapse" id="barang">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="<?php echo base_url("admin/barang") ?>">
+											<span class="sub-item">Data Barang</span>
+										</a>
+									</li>
+									<li>
+										<a href="<?php echo base_url("admin/barang/merek") ?>">
+											<span class="sub-item">Data Merek Barang</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
 							<a  href="<?php echo base_url('admin/barang') ?>">

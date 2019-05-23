@@ -19,7 +19,7 @@ class Hutang extends CI_Controller
 		if($this->session->userdata('status') != "login"){
 					redirect(base_url("admin"));
 		}
-		$data['id'] = $this->Hutangmodel->id_hutang();
+		// $data['id'] = $this->Hutangmodel->id_hutang();
 		$data['hutang'] = $this->Hutangmodel->get_hutang();
 		$data['user'] = $this->Usermodel->getUser();
 		$this->load->view('_partial/header');

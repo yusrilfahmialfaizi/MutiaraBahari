@@ -27,7 +27,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if($this->session->userdata('stat') != "login"){
 				redirect(base_url("user/login"));
 			}
-			$data['barang'] = $this->Barangmodel->getBarang();
+
+			if(!$this->uri->segment(5)){
+					$data['barang'] = $this->Barangmodel->getBarang();
+			} else {
+				$data['barang'] = $this->Barangmodel->get_barangagen($this->uri->segment(5));
+
+			}
 			$this->load->view('_partial/headeragen');
 			$this->load->view('menu/user/produk',$data);
 			$this->load->view('_partial/footer');

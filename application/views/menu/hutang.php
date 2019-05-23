@@ -36,12 +36,12 @@
 												<div class="modal-body">
 													<form method="post" action="<?php echo base_url('admin/kasir/hutang/tambahHutang') ?>"enctype="multipart/form-data">
 														<div class="row">
-															<div class="col-sm-12">
+															<!-- <div class="col-sm-12">
 																<div class="form-group">
 																	<label for="largeInput">Id Hutang</label>
-																	<input type="text" class="form-control form-control" id="idhutang " name="idhutang" value="<?php echo $id ?>" readonly>
+																	<input type="text" class="form-control form-control" id="idhutang " name="idhutang" value="<?php //echo $id ?>" readonly>
 																</div>
-															</div>
+															</div> -->
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="nama_pelanggan">Nama Pelanggan</label><br>

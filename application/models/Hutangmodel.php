@@ -15,27 +15,27 @@
 		{
 			return $this->db->get('tampilhutang')->result();
 		}
-		function id_hutang()
-		{
-			$this->db->select('MAX(RIGHT(hutang.id_hutang,3)) AS id_hutang', FALSE);
-			$this->db->order_by('id_hutang','Desc');
-			$this->db->limit(1);
-			$query = $this->db->get('hutang');
-			if ($query->num_rows() <> 0) {
-				# code...
-				$data = $query->row();
-				$id = intVal($data->id_hutang) + 1;
-			}else{
-				$id = 1;
-			}
-			$batas = str_pad($id, 3,"0", STR_PAD_LEFT);
-			// foreach ($que as $key) {
-			// 	# code...
-			// 	$id_barang_tampil = $batas;
-			// }
-			$id_barang_tampil =$batas;
-			return $id_barang_tampil;
-		}
+		// function id_hutang()
+		// {
+		// 	$this->db->select('MAX(RIGHT(hutang.id_hutang,3)) AS id_hutang', FALSE);
+		// 	$this->db->order_by('id_hutang','Desc');
+		// 	$this->db->limit(1);
+		// 	$query = $this->db->get('hutang');
+		// 	if ($query->num_rows() <> 0) {
+		// 		# code...
+		// 		$data = $query->row();
+		// 		$id = intVal($data->id_hutang) + 1;
+		// 	}else{
+		// 		$id = 1;
+		// 	}
+		// 	$batas = str_pad($id, 3,"0", STR_PAD_LEFT);
+		// 	// foreach ($que as $key) {
+		// 	// 	# code...
+		// 	// 	$id_barang_tampil = $batas;
+		// 	// }
+		// 	$id_barang_tampil =$batas;
+		// 	return $id_barang_tampil;
+		// }
 		function tambah()
 		{
 			$id_hutang = $this->input->post('idhutang');

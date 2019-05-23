@@ -15,8 +15,8 @@
 								<div class="card-body ">
 									<div class="row">
 										<div class="col-5">
-											<div class="icon-big text-center">
-												<i class="flaticon-chart-pie text-warning"></i>
+											<div class="avatar avatar-xl">
+												<img src="<?php echo base_url('upload/'.$key->gambar) ?>" alt="..." class="avatar-img rounded">
 											</div>
 										</div>
 										<div class="col-7 col-stats">
@@ -28,7 +28,7 @@
 								</div>
 								<div class="card-footer">
 									<div class="col-md-6 ml-auto mr-auto">
-										<a href="<?php echo base_url() ?>user/agen/dashboard/produk" class="btn btn-primary btn-border btn-round btn-md">Lihat</a>
+										<a href="<?php echo base_url("user/agen/dashboard/produk/".$key->id_merek) ?>" class="btn btn-primary btn-border btn-round btn-md">Lihat</a>
 									</div>
 								</div>
 							</div>
