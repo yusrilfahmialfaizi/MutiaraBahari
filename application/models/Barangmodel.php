@@ -65,7 +65,6 @@
 		public function tambahMerek()
 		{
 			$post = $this->input->post();
-			// $this->id_barang->uniqid();
 			$this->id_merek = $post["id_merek"];
 			$this->merek = $post["nama_merek"];
 			$this->kode_merek = $post["kode"];
@@ -76,45 +75,16 @@
 		public function updateMerek()
 		{
 			$post = $this->input->post();
-			// $this->id_barang->uniqid();
 			$this->id_merek = $post["id_merek"];
 			$this->merek = $post["nama_merek"];
 			$this->kode_merek = $post["kode_merek"];
-			// $this->gambar='';
-			 // 1MB
-		    // $config['max_width']            = 1024;
-		    // $config['max_height']           = 768;
 			if (!empty($_FILES['gambar']['tmp_name'])) {
 				# code...
 				$this->gambar = $this->upload_image();
 			}else{
 				$this->gambar = $post['old_image'];
 			}
-		    
-			// if (isset($_FILES['gambar']) && is_uploaded_file($_FILES['gambar']['tmp_name'])) {
-			//     $config['upload_path']          = APPPATH.'../upload/';
-   //  		    $config['file_name']            = $this->id_merek;
-			//     $config['allowed_types']        = 'gif|jpg|png';
-			//     $config['overwrite']			= true;
-			//     $config['max_size']             = 1024;
-			// 	$this->load->library('upload', $config);
-
-			// 	if($this->upload->do_upload('gambar')){
-			// 		$this->gambar = $this->upload->data("file_name");
-			// 		$update = $this->db->update("merek",$this ,array('id_merek'=>$post["id_merek"]));
-			// 		if($update){
-			// 			if(file_exists(APPPATH.'../upload/'.$post['old_image'])){
-			// 			unlink(APPPATH.'../upload/'.$post['old_image']);
-			// 			}
-			// 		}
-			// 	} else {
-			// 		$this->gambar = $post['old_image'];
-			// 		$update = $this->db->update("merek",$this ,array('id_merek'=>$post["id_merek"]));
-			// 	}
-			// }else {
-			// 	$this->gambar = $post['old_image'];
 				$update = $this->db->update("merek",$this ,array('id_merek'=>$post["id_merek"]));
-			// }
 		}
 
 
