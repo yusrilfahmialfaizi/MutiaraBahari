@@ -128,7 +128,45 @@
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
-												<tbody id="detail_keranjang"></tbody>
+												<!-- <tbody id="detail_keranjang"></tbody> -->
+												<tbody>
+													<?php foreach ($this->cart->contents() as $items): ?>
+														
+													<tr>
+									                    <td>
+									                    	<?php echo $items['id']?>
+								                    	</td>
+									                    <td>
+									                    	<div class="col-md-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td>
+									                    	<div class="col-sm-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
+									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td><?php echo number_format($items['price'])?></td>
+									                    <td>
+										                    <div class="col-md-12">
+									                			<div class="form-group">
+									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
+									                			</div>
+									                		</div>
+									                	</td>
+									                    <td>
+									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
+ 																<i class="fas fa-edit"></i>
+ 															</a>
+ 														</td>
+									                </tr>
+													<?php endforeach ?>
+												</tbody>
 											</table>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">

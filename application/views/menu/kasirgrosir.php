@@ -37,7 +37,7 @@
 												</div>
 												<!--action="<?php //echo base_url(); ?>admin/kasir/grosir/keranjang_kasir"-->
 												<div class="modal-body">
-													<form method="post" >
+													<form method="post" action="<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir">
 														<div class="row">
 															<div class="col-md-12">
 																<div class="form-group ">
@@ -88,6 +88,68 @@
 											</div>
 										</div>
 									</div>
+									<!-- Modal -->
+									<?php foreach ($this->cart->contents() as $key) {?>
+										
+									<div class="modal fade" id="update<?php echo $key['rowid']?>" role="dialog" aria-hidden="true">
+
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														Tambah</span> 
+														<span class="fw-light">
+															Barang
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<!--action="<?php //echo base_url(); ?>admin/kasir/grosir/keranjang_kasir"-->
+												<div class="modal-body">
+													<form method="post" action="<?php echo base_url() ?>admin/kasir/grosir/updatekeranjang">
+														<?php //foreach ($this->cart->get_item($key['rowid']) as $k): ?>
+															<?php $k = $this->cart->get_item($key['rowid']) ?>
+														<div class="row">
+															<!-- <div class="col-md-12">
+																<div class="form-group ">
+																	<label>ID Barang</label>
+																	<input type="text" name="rowid" id="rowid" value="<?php //echo $k['rowid'] ?>">
+																	<input id="id" name="id" type="text" class="form-control" value="<?php //echo $k["id"] ?>" placeholder="Id Barang .." readonly>
+																</div>
+															</div> -->
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>Nama Barang</label>
+																	<input id="name" name="name" type="text" class="form-control" value="<?php echo $k['name'] ?>" placeholder="Stok Barang .." readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label>Sisa Stok</label>
+																	<input id="stok" name="stok" type="text" class="form-control" placeholder="Stok Barang .." readonly>
+																</div>
+															</div>
+															<div class="col-md-6 pr-0">
+																<div class="form-group ">
+																	<label>Qty</label>
+																	<input id="qty" name="qty" type="number" value="<?php echo $k['qty'] ?>" class="form-control" placeholder="Qty ..." min="0">
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer no-bd">
+															<button id="add_keranjang" class="add_keranjang btn btn-primary">Simpan</button>
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+														</div>
+														<?php //endforeach ?>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<?php } ?>
 
 									<div class="table-responsive">
 										<form action="<?php echo base_url('admin/kasir/grosir/proses_jual') ?>" method="post">
@@ -146,24 +208,67 @@
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
-												<tbody id="detail_keranjang"></tbody>
+												<!-- <tbody id="detail_keranjang"></tbody> -->
+												<tbody>
+													<?php foreach ($this->cart->contents() as $items): ?>
+														
+													<tr>
+									                    <td>
+									                    	<?php echo $items['id']?>
+								                    	</td>
+									                    <td>
+									                    	<div class="col-md-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td>
+									                    	<div class="col-sm-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
+									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td><?php echo number_format($items['price'])?></td>
+									                    <td>
+										                    <div class="col-md-12">
+									                			<div class="form-group">
+									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
+									                			</div>
+									                		</div>
+									                	</td>
+ 														<!-- <td>
+									                    	<button type="button" id="<?php //echo $items['rowid']?>" class="hapus_cart btn btn-danger btn-xs">Batal</button>
+									                    </td> -->
+									                    <td>
+									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
+ 																<i class="fas fa-edit"></i>
+ 															</a>
+ 														</td>
+									                </tr>
+													<?php endforeach ?>
+												</tbody>
 											</table>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly>
+													<h3><?php echo number_format($this->cart->total()) ?></h3>
+													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Bayar Rp. </label>
-													<input type="number" class="form-control" id="bayar" name="bayar">
+													<input type="number" value="" class="form-control" id="bayar" name="bayar">
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Kembali Rp. </label>
-													<input type="number" class="form-control" id="kembali" name="kembali" readonly>
+													<h3 id="sisasisa"></h3>
+													<input type="number" class="form-control" id="kembali" name="kembali" readonly hidden="hidden">
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -193,24 +298,24 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					$(".add_keranjang").click(function(){
-						var id = $("#id_barang").val();
-						// // var id = $(this).data("id_barang");
-						var name = $("#nama_barang").val();
-						// // var name = $(this).data("nama_barang");
-						var qty = $("#qty").val();
-						// // var qty = $(this).data("qty");
-						var price = $("#harga").val();
-						$.ajax({
-							url : "<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir",
-							method : "POST",
-							data : {id : id, name : name, qty : qty, price : price },
-							success: function(data){
-								$("#detail_keranjang").html(data);
-							}
-						});
-					});
-					$('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/grosir/load_cart");
+					// $(".add_keranjang").click(function(){
+					// 	var id = $("#id_barang").val();
+					// 	// // var id = $(this).data("id_barang");
+					// 	var name = $("#nama_barang").val();
+					// 	// // var name = $(this).data("nama_barang");
+					// 	var qty = $("#qty").val();
+					// 	// // var qty = $(this).data("qty");
+					// 	var price = $("#harga").val();
+					// 	$.ajax({
+					// 		url : "<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir",
+					// 		method : "POST",
+					// 		data : {id : id, name : name, qty : qty, price : price },
+					// 		success: function(data){
+					// 			$("#detail_keranjang").html(data);
+					// 		}
+					// 	});
+					// });
+					// $('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/grosir/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -236,7 +341,7 @@
 							data 	: {row_id : row_id},
 							success	: function(data){
 								$('#detail_keranjang').html(data);
-								location.reload();
+								//location.reload();
 							}
 						});
 						} else {
@@ -252,6 +357,28 @@
 					});
 				});
 			</script>
+			<!-- <script type="text/javascript">
+				$(document).ready(function(){
+					$("#qtykeranjang").on("change", function(){
+						var qty = $("#qtykeranjang").val();
+						var rowid = $("#rowid").val();
+						var name = $("#name").val();
+						// window.alert(qty);
+						$.ajax({
+							url : "<?php echo base_url() ?>admin/kasir/grosir/updatekeranjang",
+							type :"POST",
+							data : {qty : qty,rowid : rowid,name : name},
+							dataType : "JSON",
+							complete: function(){
+							  // window.location.reload();
+							}
+						})
+					});
+					// $(document).ajaxStop(function(){
+					//     window.location.reload();
+					// });
+				});
+			</script> -->
 			<script src="<?php echo base_url("assets/") ?>js/select2.min.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function(){
@@ -277,7 +404,7 @@
 		                    type : "POST",
 		                    url  : "<?php echo base_url('admin/kasir/grosir/get_barang')?>",
 		                    dataType : "JSON",
-		                    data : {nama_barang: kode,qty : qty },
+		                    data : {nama_barang: kode, qty : qty },
 		                    cache:false,
 		                    success: function(data){
 		                        $.each(data,function(id_barang, nama_barang, harga,stok){
@@ -328,11 +455,14 @@
 		    </script>
 		    <script type="text/javascript">
 		    	$(document).ready(function(){
-		    		$('#bayar').on('keyup', function(){
+		    		$('#bayar').on('input', function(){
 		    			var total = $('#total').val()
 		    			var bayar = $('#bayar').val();
-		    			var hasil = bayar - total;
+		    			var bayar_default = 0;
+		    			var hasil = (bayar_default + bayar) - total;
 		    			$('#kembali').val(hasil);
+		    			$('#sisasisa').text(hasil.toLocaleString());
+
 		    		});
 		    	});
 		    </script>

@@ -29,10 +29,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		function keranjang_kasir()
 		{	
-			$id = $this->input->post('id');
+			$id = $this->input->post('id_barang');
 			$qty = $this->input->post('qty');
-			$price = $this->input->post('price');
-			$name = $this->input->post('name');
+			$price = $this->input->post('harga');
+			$name = $this->input->post('nama_barang');
 			$grosir = array(
 		        'id'     => $id,
 		        'qty'    => $qty,
@@ -41,41 +41,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			);
 			
 			$this->cart->insert($grosir);	
-			// redirect('admin/kasir/grosir');
-			echo $this->show_keranjang();
+			redirect('admin/kasir/grosir');
+			// echo $this->show_keranjang();
 		}
-		function show_keranjang()
+		function updatekeranjang()
 		{
-			$output='';
-			foreach ($this->cart->contents() as $items) {
+			$qty = $this->input->post('qty');
+			$name = $this->input->post('name');
+			$harga = $this->Kasirmodel->get_Barang($name);
+			foreach ($harga as $key) {
 				# code...
-				$output .='
-		                <tr>
-		                    <td>'.$items['id'].'</td>
-		                    <td>'.$items['name'].'</td>
-		                    <td>'.$items['qty'].'</td>
-		                    <td>'.number_format($items['price']).'</td>
-		                    <td>
-			                    <div class="col-md-8">
-		                			<div class="form-group">
-		                				<input type="text" id="subtotal" name="subtotal" value="'.$items['subtotal'].'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
-		                			</div>
-		                		</div>
-		                	</td>
-		                    <td><button type="button" id="'.$items['rowid'].'" class="hapus_cart btn btn-danger btn-xs">Batal</button></td>
-		                </tr>
-		            ';
+				if ($qty<= 750 && $qty<= $key->jumlah_stok) {
+					# code...
+					$data = array(
+						'rowid'=> $this->input->post('rowid'),
+						'qty'=>$qty,
+						'price' => $key->hrg_grosir1,
+					);
+					$code = $this->cart->update($data); 
+					$pesan = "success";
+					redirect('admin/kasir/grosir');
+
+				}elseif ($qty>750 && $qty<1000 && $qty<= $key->jumlah_stok) {
+					# code...
+					$data = array(
+						'rowid'=> $this->input->post('rowid'),
+						'qty'=>$qty,
+						'price' => $key->hrg_grosir2,
+					);
+					$code = $this->cart->update($data); 
+					redirect('admin/kasir/grosir');
+
+				}else if ($qty > 1000 && $qty<= $key->jumlah_stok){
+					$data = array(
+						'rowid'=> $this->input->post('rowid'),
+						'qty'=>$qty,
+						'price' => $key->hrg_grosir3,
+					);
+					$code = $this->cart->update($data);
+					redirect('admin/kasir/grosir');
+
+				}else{
+					
+				redirect('admin/kasir/grosir');
+
+				}
 			}
-	        return $output;
+			// return json_encode($pesan);
+			// redirect('admin/kasir/grosir');
 		}
 		function load(){
 			// $this->cart->destroy();
-			$items = $this->cart->contents();
+			$item = $this->cart->contents();
+			// $items = $this->cart->get_item('cc315a8538112da1fb365dbd15079d54');
 			// $item = $this->session->all_userdata();
 			echo "<pre>";
-			print_r($items);
-			echo "</pre>";
 			print_r($item);
+			echo "</pre>";
+			print_r($items);
 		}
 		function load_cart()
 		{

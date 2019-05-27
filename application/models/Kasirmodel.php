@@ -17,6 +17,10 @@
 		{
 			return $this->db->get('barang')->result();
 		}
+		public function get_Barang($name)
+		{
+			return $this->db->get_where('barang',array('nama_barang' => $name))->result();
+		}
 		//////////////Grosir//////////////////////
 		function get_data_barang_bynama($kode,$qty)
 		{

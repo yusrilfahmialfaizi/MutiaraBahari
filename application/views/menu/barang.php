@@ -86,6 +86,12 @@
 																	<input id="grosir3" name="grosir3" type="number" min="0" class="form-control" placeholder="Harga ..." required="required">
 																</div>
 															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="gambar">Gambar</label>
+																	<input type="file" class="form-control-file" id="gambar" name="gambar">
+																</div>
+															</div>
 														</div>
 														<div class="modal-footer no-bd">
 															<button class="btn btn-primary">Simpan</button>
@@ -108,6 +114,7 @@
 													<th>Harga Grosir 2</th>
 													<th>Harga Grosir 3</th>
 													<th>Jumlah Stok</th>
+													<th>Gambar</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
@@ -120,6 +127,7 @@
 													<th>Harga Grosir 2</th>
 													<th>Harga Grosir 3</th>
 													<th>Jumlah Stok</th>
+													<th>Gambar</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</tfoot>
@@ -135,6 +143,15 @@
 													<td><?php echo $key->hrg_grosir2 ?></td>
 													<td><?php echo $key->hrg_grosir3 ?></td>
 													<td><?php echo $key->jumlah_stok ?></td>
+													<td>
+															<?php if ($key->gambar == null){ ?>
+																<img width="50px" src="<?php echo base_url('upload/default/default.jpg') ?>">
+															<?php }else if ($key->gambar == 'default.jpg') {?>
+																<img width="50px" src="<?php echo base_url('upload/default/default.jpg') ?>">
+															<?php }else{?>
+																<img width="50px" src="<?php echo base_url('upload/barang/'.$key->gambar) ?>">	
+															<?php } ?>
+													</td>
 													<td>
 														<div class="form-button-action">
  															<button class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#EditModal<?php echo $key->id_barang;?>">
@@ -160,6 +177,7 @@
 							            $harga1=$i->hrg_grosir1;
 							            $harga2=$i->hrg_grosir2;
 							            $harga3=$i->hrg_grosir3;
+							            $gambar = $i->gambar;
 							        ?>
 									<div class="modal fade" id="EditModal<?php echo $id_barang ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
@@ -180,9 +198,9 @@
 													<form action="<?php echo base_url().'admin/barang/editModal'?>" method="post">
 														<div class="row">
 															<div class="col-sm-12">
-																<div class="form-group  ">
-																	<label>ID Barang</label>
-																	<input id="id_barang" name="id_barang" type="text" class="form-control" readonly="readonly" value="<?php echo $id_barang; ?>">
+																<div class="form-group ">
+																	<!-- <label>ID Barang</label> -->
+																	<input id="id_barang" name="id_barang" type="text" class="form-control" readonly="readonly" value="<?php echo $id_barang; ?>" hidden>
 																</div>
 															</div>
 															<div class="col-sm-12">
@@ -217,6 +235,13 @@
 																<div class="form-group  ">
 																	<label>Stok</label>
 																	<input id="stok" name="stok" type="number" min="0" class="form-control" placeholder="Jumlah Stok" required="required" value="<?php echo $stok; ?>">
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="gambar">Gambar</label>
+																	<input type="file" class="form-control-file" id="gambar" name="gambar">
+																	<input type="text" name="gambar_lama" id="gambar_lama" value="<?php echo $gambar ?>" hidden>
 																</div>
 															</div>
 														</div>

@@ -171,7 +171,7 @@
 																<div class="form-group  ">
 																	<label>Gambar</label>
 																	<input type="file" name="gambar" id="gambar" class="form-control-file">
-																	<input id="old_image" name="old_image" type="text" class="form-control" placeholder="Gambar ..." value="<?php echo $gambar; ?>">
+																	<input id="old_image" name="old_image" type="text" class="form-control" placeholder="Gambar ..." value="<?php echo $gambar; ?>"hidden>
 																</div>
 															</div>
 														</div>

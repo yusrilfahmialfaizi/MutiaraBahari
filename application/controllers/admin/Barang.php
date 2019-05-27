@@ -63,14 +63,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function editModal()
 		{
-			$id_barang=$this->input->post('id_barang');
-			$nama_barang=$this->input->post('nama_barang');
-			$stok=$this->input->post('stok');
-			$harga=$this->input->post('harga');
-			$harga1=$this->input->post('grosir1');
-			$harga2=$this->input->post('grosir2');
-			$harga3=$this->input->post('grosir3');
-			$this->Barangmodel->edit_barang($id_barang,$nama_barang,$stok,$harga,$harga1,$harga2,$harga3);
+			$product = $this->Barangmodel;
+			$product->edit_barang();
+			// $id_barang=$this->input->post('id_barang');
+			// $nama_barang=$this->input->post('nama_barang');
+			// $stok=$this->input->post('stok');
+			// $harga=$this->input->post('harga');
+			// $harga1=$this->input->post('grosir1');
+			// $harga2=$this->input->post('grosir2');
+			// $harga3=$this->input->post('grosir3');
+			// $this->Barangmodel->edit_barang($id_barang,$nama_barang,$stok,$harga,$harga1,$harga2,$harga3);
 			redirect('admin/barang');
     
 		}
