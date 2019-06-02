@@ -178,6 +178,7 @@
 							            $harga2=$i->hrg_grosir2;
 							            $harga3=$i->hrg_grosir3;
 							            $gambar = $i->gambar;
+							            $id_merek = $i->id_merek
 							        ?>
 									<div class="modal fade" id="EditModal<?php echo $id_barang ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
@@ -201,6 +202,7 @@
 																<div class="form-group ">
 																	<!-- <label>ID Barang</label> -->
 																	<input id="id_barang" name="id_barang" type="text" class="form-control" readonly="readonly" value="<?php echo $id_barang; ?>" hidden>
+																	<input id="id_merek" name="id_merek" type="text" class="form-control" readonly="readonly" value="<?php echo $id_merek; ?>" hidden>
 																</div>
 															</div>
 															<div class="col-sm-12">

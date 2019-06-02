@@ -11,11 +11,18 @@
  			# code...
  			parent::__construct();
  			$this->load->model("Merekandroid");
+ 			$this->load->model("Barangmodel");
  		}
  		function getMerek()
  		{
  			$data = $this->Merekandroid->merektampil();
  			return $data;
+ 		}
+ 		function getNamaBarang()
+ 		{
+ 			$data = $this->Barangmodel->getBarang();
+ 			echo json_encode($data);
+ 			print_r($data);
  		}
  	}
 ?>

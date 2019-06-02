@@ -9,26 +9,30 @@
 					<!-- Card With Icon States Color -->
 					<div class="row">
 						<?php foreach ($barang as $key): ?>
-							
 						<div class="col-sm-6 col-md-3">
-							<form method="post" action="<?php echo base_url() ?>user/agen/dashboard/tambahkeranjang" >
+							<form method="post" action="<?php echo base_url() ?>user/agen/pemesanan/tambahkeranjang" >
 							<div class="card card-stats card-round">
 								<div class="card-body ">
 									<div class="row">
-										<div class="col-7">
-											<div class="icon-big text-center">
-												<i class="flaticon-chart-pie text-warning"></i>
+										<div class="col-md-6">
+											<div class="avatar avatar-xxl">
+												<?php if ($key->gambar == null) { ?>
+													<img src="<?php echo base_url('upload/default/default.jpg') ?>" alt="..." class="avatar-img rounded">
+												<?php }else{ ?>
+													<img src="<?php echo base_url('upload/'.$key->gambar) ?>" alt="..." class="avatar-img rounded">
+												<?php } ?>
 											</div>
 										</div>
-										<div class="col-5 col-stats">
+										<!-- </div> -->
+										<div class="col-md-5 col-stats">
 											<div class="numbers">
 												<h4 class="card-title"><?php echo $key->nama_barang?></h4>
 												<input type="text" name="id_barang" id="id_barang" readonly="readonly" value="<?php echo $key->id_barang ?>" hidden="hidden">
 												<input type="text" name="nama_barang" id="nama_barang" readonly="readonly" value="<?php echo $key->nama_barang ?>" hidden="hidden">
 											</div>
 										</div>
-									<!-- </div> -->
-									<!-- <div class="row"> -->
+									</div>
+									<div class="row">
 		                                <div class="col-md-7">
 		                                	<input type="text" name="harga" id="harga" value="<?php echo 'Rp '.number_format($key->hrg_grosir1);?>" class="qty form-control" readonly>
 		                                </div>

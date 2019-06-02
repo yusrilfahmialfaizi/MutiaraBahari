@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$code = $this->cart->update($data); 
 					redirect('admin/kasir/grosir');
 
-				}else if ($qty > 1000 && $qty<= $key->jumlah_stok){
+				}else if ($qty >= 1000 && $qty<= $key->jumlah_stok){
 					$data = array(
 						'rowid'=> $this->input->post('rowid'),
 						'qty'=>$qty,
@@ -90,13 +90,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// return json_encode($pesan);
 			// redirect('admin/kasir/grosir');
 		}
-		function load(){
+		function load($nama){
 			// $this->cart->destroy();
-			$item = $this->cart->contents();
+			// $item = $this->cart->contents();
 			// $items = $this->cart->get_item('cc315a8538112da1fb365dbd15079d54');
 			// $item = $this->session->all_userdata();
+			$item = $this->Usermodel->getPelanggan($nama);
 			echo "<pre>";
-			print_r($item);
+			print_r($item['id_user']);
 			echo "</pre>";
 			print_r($items);
 		}
@@ -113,7 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			);
 			$total = $this->cart->total();
 			$this->cart->update($data);
-			echo $this->show_keranjang();
+			// echo $this->show_keranjang();
 			// redirect('admin/kasir/grosir');
 		}
 		function get_barang()
@@ -137,7 +138,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			// -------- No. Invoice-------------//
 			$no_invoice = $this->input->post('no_invoice');
-			$nama_pelanggan = $this->input->post('nama_pelanggan');
+			$nama = $this->input->post('nama_pelanggan');
+			$id_user = $this->Usermodel->getPelanggan($nama);
 			$id_admin = $this->session->userdata("id_admin");
 			$id_pegawai =  $id_admin;
 			$tgl=date('Y-m-d');
@@ -158,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'nama' => $nama_pelanggan,
+			 	'id_user' => $id_user['id_user'],
 			 	'id_pegawai' => $id_pegawai,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,

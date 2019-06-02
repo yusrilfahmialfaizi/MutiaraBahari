@@ -105,7 +105,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="">
+										<a href="<?php echo base_url("admin/kasir/pesanan") ?>">
 											<span class="sub-item">Pesanan</span>
 										</a>
 									</li>

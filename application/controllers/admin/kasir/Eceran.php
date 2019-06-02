@@ -30,39 +30,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function tambah()
 		{	
 			$data = array(
-		        'id'     => $this->input->post('id'),
+		        'id'     => $this->input->post('id_barang'),
 		        'qty'    => $this->input->post('qty'),
-		        'price'   => $this->input->post('price'),
-		        'name'      => $this->input->post('name')
+		        'price'   => $this->input->post('harga'),
+		        'name'      => $this->input->post('nama_barang')
 			);
 			
 			$this->cart->insert($data);	
 			redirect('admin/kasir/eceran');
-			echo $this->show_keranjang();
+			// echo $this->show_keranjang();
 		}
-		function show_keranjang()
+		function updatekeranjang()
 		{
-			$output='';
-			foreach ($this->cart->contents() as $items) {
-				# code...
-				$output .='
-		                <tr>
-		                    <td>'.$items['id'].'</td>
-		                    <td>'.$items['name'].'</td>
-		                    <td>'.$items['qty'].'</td>
-		                    <td>'.number_format($items['price']).'</td>
-		                    <td>
-			                    <div class="col-md-8">
-		                			<div class="form-group">
-		                				<input type="text" id="subtotal" name="subtotal" value="'.$items['subtotal'].'" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
-		                			</div>
-		                		</div>
-		                	</td>
-		                    <td><button type="button" id="'.$items['rowid'].'" class="hapus_cart btn btn-danger btn-xs">Batal</button></td>
-		                </tr>
-		            ';
-			}
-	        return $output;
+			$qty = $this->input->post('qty');
+			// $name = $this->input->post('name');
+			// $harga = $this->Kasirmodel->get_Barang($name);
+			$data = array(
+				'rowid'=> $this->input->post('rowid'),
+				'qty'=>$qty
+			);
+			$code = $this->cart->update($data); 
+			redirect('admin/kasir/eceran');
 		}
 		function load(){
 			// $this->cart->destroy();
@@ -85,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'qty'	=>0,
 			);
 			$this->cart->update($data);
-			echo $this->show_keranjang();
+			// echo $this->show_keranjang();
 		}
 		function get_barangeceran()
 		{
@@ -100,7 +88,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			// -------- No. Invoice-------------//
 			$no_invoice = $this->input->post('no_invoice');
-			$nama_pelanggan = $this->input->post('nama_pelanggan');
+			$nama = $this->input->post('nama_pelanggan');
+			$id_user = $this->Usermodel->getPelanggan($nama);
 			$id_admin = $this->session->userdata("id_admin");
 			$id_pegawai =  $id_admin;
 			$tgl=date('Y-m-d');
@@ -121,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'nama' => $nama_pelanggan,
+			 	'id_user' => $id_user['id_user'],
 			 	'id_pegawai' => $id_pegawai,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,

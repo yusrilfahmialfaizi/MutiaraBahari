@@ -48,10 +48,11 @@
 						<?php foreach ($barang as $key): ?>
 							
 						<div class="col-sm-6 col-md-3">
+							<form method="post" action="<?php echo base_url() ?>user/agen/pemesanan/tambahkeranjang" >
 							<div class="card card-stats card-round">
 								<div class="card-body ">
 									<div class="row">
-										<div class="col-7">
+										<div class="col-md-6">
 											<div class="avatar avatar-xxl">
 												<?php if ($key->gambar == null) { ?>
 													<img src="<?php echo base_url('upload/default/default.jpg') ?>" alt="..." class="avatar-img rounded">
@@ -60,23 +61,41 @@
 												<?php } ?>
 											</div>
 										</div>
-										<div class="col-5 col-stats">
+										<div class="col-md-6 col-stats">
 											<div class="numbers">
-												<h4 class="card-title"><?php echo $key->nama_barang?></h4>
+												<div class="form-group">
+													<h4><?php echo $key->nama_barang?></h4>
+													<h5 style="text-align : center"><strong><?php echo 'Rp '.number_format($key->hrg_grosir1);?></strong></h5>
+													<h7 style="text-align : center"><strong> Sisa : <?php echo $key->jumlah_stok?></strong></h7>
+													<input type="text" name="harga" id="harga" value="<?php echo 'Rp '.number_format($key->hrg_grosir1);?>" class="qty form-control" readonly hidden>
+													<input type="text" name="id_barang" id="id_barang" readonly="readonly" value="<?php echo $key->id_barang ?>" hidden="hidden">
+													<input type="text" name="nama_barang" id="nama_barang" readonly="readonly" value="<?php echo $key->nama_barang ?>" hidden="hidden">
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="col-md-6 ml-auto mr-auto">
-										<a href="<?php //echo base_url("user/agen/dashboard/produk/".$key->merek) ?>" class="btn btn-primary btn-border btn-round btn-md">Lihat</a>
-									</div>
+		                                <div class="col-md-6">
+		                                	<div class="form-group">
+		                                    	<input type="number" name="qty" id="qty" value="1" class="qty form-control form-control-md input-border-bottom">
+		                                	</div>
+		                                </div>
+		                                <div class="col-md-6">
+		                                	<div class="form-group">
+			                                	<button class="add_cart btn btn-primary btn-md btn-round">Add To Cart</button>
+			                                </div>
+		                                </div>
+		                            </div>
 								</div>
 							</div>
+							</form>
 						</div>
 						<?php endforeach ?>
 					</div>
 				</div>
 			</div>
+				<?php $this->load->view('_partial/foot')	 ?>
+		</div>
+			<?php 	$this->load->view('_partial/script') ?>
+		</body>
+		</html>
 
 					

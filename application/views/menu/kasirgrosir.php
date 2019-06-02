@@ -35,7 +35,6 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<!--action="<?php //echo base_url(); ?>admin/kasir/grosir/keranjang_kasir"-->
 												<div class="modal-body">
 													<form method="post" action="<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir">
 														<div class="row">
@@ -113,14 +112,12 @@
 														<?php //foreach ($this->cart->get_item($key['rowid']) as $k): ?>
 															<?php $k = $this->cart->get_item($key['rowid']) ?>
 														<div class="row">
-															<!-- <div class="col-md-12">
-																<div class="form-group ">
-																	<label>ID Barang</label>
-																	<input type="text" name="rowid" id="rowid" value="<?php //echo $k['rowid'] ?>">
-																	<input id="id" name="id" type="text" class="form-control" value="<?php //echo $k["id"] ?>" placeholder="Id Barang .." readonly>
+															<!-- <div class="col-md-12"> -->
+																<div class="form-group">
+																	<input type="text" name="rowid" id="rowid" value="<?php echo $k['rowid'] ?>" hidden>
 																</div>
-															</div> -->
-															<div class="col-md-6">
+															<!-- </div> -->
+															<div class="col-md-12">
 																<div class="form-group">
 																	<label>Nama Barang</label>
 																	<input id="name" name="name" type="text" class="form-control" value="<?php echo $k['name'] ?>" placeholder="Stok Barang .." readonly>
@@ -239,14 +236,14 @@
 									                			</div>
 									                		</div>
 									                	</td>
- 														<!-- <td>
-									                    	<button type="button" id="<?php //echo $items['rowid']?>" class="hapus_cart btn btn-danger btn-xs">Batal</button>
-									                    </td> -->
 									                    <td>
 									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
  																<i class="fas fa-edit"></i>
  															</a>
  														</td>
+ 														<td>
+									                    	<button type="button" id="<?php echo $items['rowid']?>" class="hapus_cart btn btn-danger btn-xs">Batal</button>
+									                    </td>
 									                </tr>
 													<?php endforeach ?>
 												</tbody>
@@ -298,24 +295,6 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					// $(".add_keranjang").click(function(){
-					// 	var id = $("#id_barang").val();
-					// 	// // var id = $(this).data("id_barang");
-					// 	var name = $("#nama_barang").val();
-					// 	// // var name = $(this).data("nama_barang");
-					// 	var qty = $("#qty").val();
-					// 	// // var qty = $(this).data("qty");
-					// 	var price = $("#harga").val();
-					// 	$.ajax({
-					// 		url : "<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir",
-					// 		method : "POST",
-					// 		data : {id : id, name : name, qty : qty, price : price },
-					// 		success: function(data){
-					// 			$("#detail_keranjang").html(data);
-					// 		}
-					// 	});
-					// });
-					// $('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/grosir/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -340,8 +319,8 @@
 							method 	:"POST",
 							data 	: {row_id : row_id},
 							success	: function(data){
-								$('#detail_keranjang').html(data);
-								//location.reload();
+								// $('#detail_keranjang').html(data);
+								location.reload();
 							}
 						});
 						} else {
@@ -357,28 +336,6 @@
 					});
 				});
 			</script>
-			<!-- <script type="text/javascript">
-				$(document).ready(function(){
-					$("#qtykeranjang").on("change", function(){
-						var qty = $("#qtykeranjang").val();
-						var rowid = $("#rowid").val();
-						var name = $("#name").val();
-						// window.alert(qty);
-						$.ajax({
-							url : "<?php echo base_url() ?>admin/kasir/grosir/updatekeranjang",
-							type :"POST",
-							data : {qty : qty,rowid : rowid,name : name},
-							dataType : "JSON",
-							complete: function(){
-							  // window.location.reload();
-							}
-						})
-					});
-					// $(document).ajaxStop(function(){
-					//     window.location.reload();
-					// });
-				});
-			</script> -->
 			<script src="<?php echo base_url("assets/") ?>js/select2.min.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function(){
@@ -464,6 +421,21 @@
 		    			$('#sisasisa').text(hasil.toLocaleString());
 
 		    		});
+		    	});
+		    </script>
+		    <script type="text/javascript">
+		    	$(document).ready(function(){
+		    		$('#nama_barang').on('change', function(){
+		    			var nama_barang = $('#nama_barang').val();
+		    			var name = $('#name').val();
+		    			if (nama_barang == name) {
+		    				$('#add_keranjang').prop('disabled',true);
+		    				$('#qty').prop('disabled',true);
+		    			}else{
+		    				$('#add_keranjang').prop('disabled',false);
+		    				$('#qty').prop('disabled',false);
+		    			}
+		    		})
 		    	});
 		    </script>
 		</body>

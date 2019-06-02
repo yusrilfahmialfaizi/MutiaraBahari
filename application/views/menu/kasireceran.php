@@ -34,7 +34,7 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<form method="post" >
+													<form method="post" action="<?php echo base_url(); ?>admin/kasir/eceran/tambah">
 														<div class="row">
 															<div class="col-md-12">
 																<div class="form-group ">
@@ -85,6 +85,62 @@
 											</div>
 										</div>
 									</div>
+									<!-- Modal -->
+									<?php foreach ($this->cart->contents() as $key) {?>
+										
+									<div class="modal fade" id="update<?php echo $key['rowid']?>" role="dialog" aria-hidden="true">
+
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														Tambah</span> 
+														<span class="fw-light">
+															Barang
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<form method="post" action="<?php echo base_url() ?>admin/kasir/eceran/updatekeranjang">
+															<?php $k = $this->cart->get_item($key['rowid']) ?>
+														<div class="row">
+															<div class="form-group">
+																<input type="text" name="rowid" id="rowid" value="<?php echo $k['rowid'] ?>" hidden>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label>Nama Barang</label>
+																	<input id="name" name="name" type="text" class="form-control" value="<?php echo $k['name'] ?>" placeholder="Stok Barang .." readonly>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group ">
+																	<label>Sisa Stok</label>
+																	<input id="stok" name="stok" type="text" class="form-control" placeholder="Stok Barang .." readonly>
+																</div>
+															</div>
+															<div class="col-md-6 pr-0">
+																<div class="form-group ">
+																	<label>Qty</label>
+																	<input id="qty" name="qty" type="number" value="<?php echo $k['qty'] ?>" class="form-control" placeholder="Qty ..." min="0">
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer no-bd">
+															<button id="add_keranjang" class="add_keranjang btn btn-primary">Simpan</button>
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+														</div>
+														<?php //endforeach ?>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<?php } ?>
 
 									<div class="table-responsive">
 										<form method="post" action="<?php echo base_url() ?>admin/kasir/eceran/proses_jual">
@@ -134,24 +190,67 @@
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
-												<tbody id="detail_keranjang"></tbody>
+												<!-- <tbody id="detail_keranjang"></tbody> -->
+												<tbody>
+													<?php foreach ($this->cart->contents() as $items): ?>
+														
+													<tr>
+									                    <td>
+									                    	<?php echo $items['id']?>
+								                    	</td>
+									                    <td>
+									                    	<div class="col-md-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td>
+									                    	<div class="col-sm-12">
+									                    		<div class="form-group">
+									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
+									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
+									                    		</div>
+									                    	</div>
+									                    </td>
+									                    <td><?php echo number_format($items['price'])?></td>
+									                    <td>
+										                    <div class="col-md-12">
+									                			<div class="form-group">
+									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
+									                			</div>
+									                		</div>
+									                	</td>
+									                    <td>
+									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
+ 																<i class="fas fa-edit"></i>
+ 															</a>
+ 														</td>
+ 														<td>
+									                    	<button type="button" id="<?php echo $items['rowid']?>" class="hapus_cart btn btn-danger btn-xs">Batal</button>
+									                    </td>
+									                </tr>
+													<?php endforeach ?>
+												</tbody>
 											</table>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly>
+													<h3><?php echo number_format($this->cart->total()) ?></h3>
+													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Bayar Rp. </label>
-													<input type="number" class="form-control" id="bayar" name="bayar">
+													<input type="number" value="" class="form-control" id="bayar" name="bayar">
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Kembali Rp. </label>
-													<input type="number" class="form-control" id="kembali" name="kembali" readonly>
+													<h3 id="sisasisa"></h3>
+													<input type="number" class="form-control" id="kembali" name="kembali" readonly hidden="hidden">
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -178,37 +277,9 @@
 				</div>
 			<?php $this->load->view('_partial/foot.php') ?>
 			</div>
-			window.alert(id);
-						window.alert(name);
-						window.alert(qty);
-						window.alert(price);
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					$(".add_keranjang").click(function(){
-						var id = $("#id_barang").val();
-					// 	// // var id = $(this).data("id_barang");
-						var name = $("#nama_barang").val();
-					// 	// // var name = $(this).data("nama_barang");
-						var qty = $("#qty").val();
-					// 	// // var qty = $(this).data("qty");
-						var price = $("#harga").val();
-					// 	// // var price = $(this).data("harga");
-					// 	var id = $(this).attr("id_barang");
-					// 	var name = $(this).attr("nama_barang");
-					// 	var qty = $(this).attr("qty");
-					// 	var price = $(this).attr("harga");
-
-						$.ajax({
-							url : "<?php echo base_url(); ?>admin/kasir/eceran/tambah",
-							method : "POST",
-							data : {id : id, name : name, qty : qty, price : price },
-							success: function(data){
-								$("#detail_keranjang").html(data);
-							}
-						});
-					});
-					$('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/eceran/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -233,7 +304,7 @@
 							method 	:"POST",
 							data 	: {row_id : row_id},
 							success	: function(data){
-								$('#detail_keranjang').html(data);
+								// $('#detail_keranjang').html(data);
 								location.reload();
 							}
 						});
@@ -254,11 +325,6 @@
 			<script type="text/javascript">
 				$(document).ready(function(){
 					setInterval(function(){auto_refresh_function();}, 500);
-					// $("#nama_pelanggan").select2({
-					// 	placeholder: "Pilih Pelanggan",
-    	// 				allowClear: true,
-    	// 				minimumInputLength : 2
-					// });
 					$("#nama_barang").select2({
 						placeholder: "Pilih Barang",
     					allowClear: true,
@@ -314,12 +380,30 @@
 		    </script>
 		    <script type="text/javascript">
 		    	$(document).ready(function(){
-		    		$('#bayar').on('keyup', function(){
+		    		$('#bayar').on('input', function(){
 		    			var total = $('#total').val()
 		    			var bayar = $('#bayar').val();
-		    			var hasil = bayar - total;
+		    			var bayar_default = 0;
+		    			var hasil = (bayar_default + bayar) - total;
 		    			$('#kembali').val(hasil);
+		    			$('#sisasisa').text(hasil.toLocaleString());
+
 		    		});
+		    	});
+		    </script>
+		    <script type="text/javascript">
+		    	$(document).ready(function(){
+		    		$('#nama_barang').on('change', function(){
+		    			var nama_barang = $('#nama_barang').val();
+		    			var name = $('#name').val();
+		    			if (nama_barang == name) {
+		    				$('#add_keranjang').prop('disabled',true);
+		    				$('#qty').prop('disabled',true);
+		    			}else{
+		    				$('#add_keranjang').prop('disabled',false);
+		    				$('#qty').prop('disabled',false);
+		    			}
+		    		})
 		    	});
 		    </script>
 		</body>

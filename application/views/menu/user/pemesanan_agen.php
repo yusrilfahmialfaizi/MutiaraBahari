@@ -1,102 +1,24 @@
-	
-	<?php ?>
 	<div class="main-panel">
 		<div class="content">
 			<div class="page-inner">
 				<div class="page-header">
-					<h4 class="page-title">Kasir Grosir</h4>
+					<h4 class="page-title">Keranjang Belanja</h4>
 						<?php $this->load->view('_partial/breadcrumbs') ?>
 					</div>
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title"></h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-											<i class="fa fa-plus"></i>
-											Tambah Barang
-										</button>
-									</div>
-								</div>
-								<div class="card-body">
-									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														Tambah</span> 
-														<span class="fw-light">
-															Barang
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<!--action="<?php //echo base_url(); ?>admin/kasir/grosir/keranjang_kasir"-->
-												<div class="modal-body">
-													<form method="post" >
-														<div class="row">
-															<div class="col-md-12">
-																<div class="form-group ">
-																	<label>ID Barang</label>
-																	<input id="id_barang" name="id_barang" type="text" class="form-control" placeholder="Id Barang .." readonly>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group">
-																	<label>Nama Barang</label><br>
-																	<select class="form-control form-control-md-12" id="nama_barang" name="nama_barang">
-															<option value="0">&nbsp;</option>
-															<?php 
-																foreach ($barang as $key) {
-															?>
-															<option><?php echo $key->nama_barang; ?></option>
-															<?php 	
-																}
-															?>
-														</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group ">
-																	<label>Sisa Stok</label>
-																	<input id="stok" name="stok" type="text" class="form-control" placeholder="Stok Barang .." readonly>
-																</div>
-															</div>
-															<div class="col-md-6 pr-0">
-																<div class="form-group ">
-																	<label>Qty</label>
-																	<input id="qty" name="qty" type="number" class="form-control" placeholder="Qty ...">
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group ">
-																	<label>Harga</label>
-																	<input id="harga" name="harga" type="text" class="form-control" placeholder="Harga ..." readonly>
-																</div>
-															</div>
-														</div>
-														<div class="modal-footer no-bd">
-															<button id="add_keranjang" class="add_keranjang btn btn-primary">Simpan</button>
-															<button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="table-responsive">
-										<form action="<?php echo base_url('admin/kasir/grosir/proses_jual') ?>" method="post">
+					<div class="row">
+						<!--  -->
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="table-responsive">
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
 														<label for="nama_pelanggan">Nama Pelanggan</label>
 														<input type="text" class="form-control form-control-sm" id="nama_pelanggan" name="nama_pelanggan" value="<?php $nama =  $this->session->userdata("nama");
 														echo $nama; ?>" readonly="readonly">
+														<input type="text" class="form-control form-control-sm" id="id_user" name="id_user" value="<?php $id_user =  $this->session->userdata("id_user");
+														echo $id_user; ?>" readonly="readonly" hidden>
 													</div>
 												</div>
 												<div class="col-md-3">
@@ -128,7 +50,6 @@
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
-												<!-- <tbody id="detail_keranjang"></tbody> -->
 												<tbody>
 													<?php foreach ($this->cart->contents() as $items): ?>
 														
@@ -136,76 +57,119 @@
 									                    <td>
 									                    	<?php echo $items['id']?>
 								                    	</td>
-									                    <td>
-									                    	<div class="col-md-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
-									                    		</div>
-									                    	</div>
-									                    </td>
-									                    <td>
-									                    	<div class="col-sm-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
-									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
-									                    		</div>
-									                    	</div>
-									                    </td>
+									                    <td><?php echo $items['name']?></td>
+									                    <td><?php echo $items['qty']?></td>
 									                    <td><?php echo number_format($items['price'])?></td>
+									                    <td><?php echo number_format($items['subtotal'])?></td>
 									                    <td>
-										                    <div class="col-md-12">
-									                			<div class="form-group">
-									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
-									                			</div>
-									                		</div>
-									                	</td>
-									                    <td>
-									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
- 																<i class="fas fa-edit"></i>
- 															</a>
- 														</td>
+									                    	<div class="form-group">
+										                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
+	 																<i class="fas fa-edit"></i>
+	 															</a>
+										                    	<button type="button" id="<?php echo $items['rowid']?>" class="hapus_cart btn btn-link btn-danger btn-lg"><i class="fa fa-times"></i></button>
+	 														</div>
+															</td>
 									                </tr>
 													<?php endforeach ?>
 												</tbody>
 											</table>
-											<div class="col-md-6 ml-auto ">
-												<div class="form-group form-inline">
-													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly>
-												</div>
-											</div>
-											<div class="col-md-6 ml-auto ">
-												<div class="form-group form-inline">
-													<label for="inlineinput" class="col-md-4 col-form-label">Bayar Rp. </label>
-													<input type="number" class="form-control" id="bayar" name="bayar">
-												</div>
-											</div>
-											<div class="col-md-6 ml-auto ">
-												<div class="form-group form-inline">
-													<label for="inlineinput" class="col-md-4 col-form-label">Kembali Rp. </label>
-													<input type="number" class="form-control" id="kembali" name="kembali" readonly>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<label>Jenis Pembayaran</label>
-													<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
-														<option value="Cash">Cash</option>
-														<option value="Transfer">Transfer</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">	
-													<button id="simpan" name="simpan" class=" btn btn-primary ml-auto">Simpan</button>
-													<button id="reset" name="reset" class="btn btn-danger ml-auto">Reset</button>
-												</div>
-											</div>
-										</form>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-sm-4">
+								<div class="card">
+									<div class="card-body">
+										<div class="col-md-12">
+											<form action="<?php echo base_url('user/agen/pemesanan/proses_pesan') ?>" method="post">
+											<div class="form-group form-inline">
+												<!-- <label class="col-md-4 col-form-label">Total Rp. </label> -->
+												<h3><strong>Total Rp. <?php echo number_format($this->cart->total()) ?></strong></h3>
+												<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
+											</div>
+										<!-- </div> -->
+										<!-- <div class="col-md-4"> -->
+											<div class="form-group">
+												<label>Jenis Pembayaran</label>
+												<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
+													<option value="Cash">Cash</option>
+													<option value="Transfer">Transfer</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>Jenis Pengiriman</label>
+												<select class="form-control" name="jenis_pengiriman" id="jenis_pengiriman">
+													<option value="Ambil Sendiri">Ambil Sendiri</option>
+													<option value="Kirim">Kirim</option>
+												</select>
+											</div>
+										<!-- </div> -->
+										<!-- <div class="col-md-4"> -->
+											<div class="form-group">	
+												<button id="simpan" name="simpan" class=" btn btn-primary ml-auto">Simpan</button>
+												<button id="reset" name="reset" class="btn btn-danger ml-auto">Reset</button>
+											</div>
+										</form>
+										</div>
+									</div>
+								</div>
+							<!-- </form> -->
 						</div>
+					</div>
+					<!-- Modal -->
+					<?php foreach ($this->cart->contents() as $key) {?>
+						
+					<div class="modal fade" id="update<?php echo $key['rowid']?>" role="dialog" aria-hidden="true">
+
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header no-bd">
+									<h5 class="modal-title">
+										<span class="fw-mediumbold">
+										Tambah</span> 
+										<span class="fw-light">
+											Barang
+										</span>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form method="post" action="<?php echo base_url() ?>user/agen/pemesanan/updatekeranjang">
+										<?php $k = $this->cart->get_item($key['rowid']) ?>
+										<div class="row">
+											<input type="text" name="rowid" id="rowid" value="<?php echo $k['rowid'] ?>" hidden readonly>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Nama Barang</label>
+													<input id="name" name="name" type="text" class="form-control" value="<?php echo $k['name'] ?>" placeholder="Stok Barang .." readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group ">
+													<label>Sisa Stok</label>
+													<input id="stok" name="stok" type="text" class="form-control" placeholder="Stok Barang .." readonly>
+												</div>
+											</div>
+											<div class="col-md-6 pr-0">
+												<div class="form-group ">
+													<label>Qty</label>
+													<input id="qty" name="qty" type="number" value="<?php echo $k['qty'] ?>" class="form-control" placeholder="Qty ..." min="0">
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer no-bd">
+											<button id="add_keranjang" class="add_keranjang btn btn-primary">Simpan</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+										</div>
+										<?php //endforeach ?>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
 					</div>
 				</div>
 			<?php $this->load->view('_partial/foot.php') ?>
@@ -213,33 +177,6 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					$(".add_keranjang").click(function(){
-						var id = $("#id_barang").val();
-						// // var id = $(this).data("id_barang");
-						var name = $("#nama_barang").val();
-						// // var name = $(this).data("nama_barang");
-						var qty = $("#qty").val();
-						// // var qty = $(this).data("qty");
-						var price = $("#harga").val();
-						// // var price = $(this).data("harga");
-						// var id = $(this).attr("id_barang");
-						// var name = $(this).attr("nama_barang");
-						// var qty = $(this).attr("qty");
-						// var price = $(this).attr("harga");
-							// window.alert(id);
-							// window.alert(name);
-							// window.alert(qty);
-							// window.alert(price);
-						$.ajax({
-							url : "<?php echo base_url(); ?>admin/kasir/grosir/keranjang_kasir",
-							method : "POST",
-							data : {id : id, name : name, qty : qty, price : price },
-							success: function(data){
-								$("#detail_keranjang").html(data);
-							}
-						});
-					});
-					$('#detail_keranjang').load("<?php echo base_url();?>admin/kasir/grosir/load_cart");
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -321,39 +258,6 @@
 		                return false;
 		           });
 		        });
-		    </script>
-		    <script type="text/javascript">
-		    	$(document).ready(function(){
-		    		$('#qty').on('input', function(){
-		 				var qty = $('#qty').val();
-		 				var stok = $('#stok').val();
-		 				if (Number(stok) < Number(qty)) {
-		 					swal("Warning", "STOK YANG DIMINTA TIDAK TERSEDIA!", {
-								icon : "error",
-								buttons: {        			
-									confirm: {
-										className : 'btn btn-danger'
-									}
-								},
-							});
-		 					$('#add_keranjang').prop('disabled',true);
-		 				}else if (Number(stok) >= Number(qty)){
-		 					$('#add_keranjang').prop('disabled',false);
-		 				}
-		 				$.ajax({
-		 					type : "POST",
-		 					url : "<?php echo base_url('admin/kasir/grosir/get_harga')?>",
-		 					data :{qty : qty, nama_barang : $('#nama_barang').val()},
-		 					dataType : "JSON",
-		 					cache : false,
-		 					success : function(data){
-		 						$.each(data,function(harga){
-		                            $('[name="harga"]').val(data.harga);
-		                        });
-		 					}
-		 				});
-		 			});
-		    	});
 		    </script>
 		    <script type="text/javascript">
 		    	$(document).ready(function(){

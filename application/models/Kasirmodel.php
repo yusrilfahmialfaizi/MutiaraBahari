@@ -52,11 +52,6 @@
 						'stok' =>$data->jumlah_stok
 						);
 					}
-					// $hasil=array(
-					// 	'id_barang' => $data->id_barang,
-					// 	'nama_barang' => $data->nama_barang,
-					// 	'harga' => $data->harga,
-					// 	);
 				}
 			}
 			return $hasil;
@@ -105,30 +100,34 @@
 		}
 		public function kode()
 		{
-		  $this->db->select('RIGHT(transaksi.id_transaksi,5) as id_transaksi', FALSE);
-		  $this->db->order_by('id_transaksi','DESC');    
-		  $this->db->limit(1);    
-		  $query = $this->db->get('transaksi');  //cek dulu apakah ada sudah ada kode di tabel.    
-		  if($query->num_rows() <> 0){      
+			date_default_timezone_set('Asia/Jakarta');
+			$t = date('m');
+			$this->db->select('MAX(RIGHT(transaksi.id_transaksi,5)) as id_transaksi', FALSE);
+			$this->db->where("MONTH(tanggal) = MONTH(NOW())");
+			$this->db->order_by('id_transaksi','DESC');    
+			$this->db->limit(1);    
+			$query = $this->db->get('transaksi');  //cek dulu apakah ada sudah ada kode di tabel.    
+			if($query->num_rows() <> 0){      
 			   //cek kode jika telah tersedia    
 			   $data = $query->row();      
 			   $kode = intval($data->id_transaksi) + 1; 
-		  }
-		  else{      
+		  	}
+		  	else{      
 			   $kode = 1;  //cek jika kode belum terdapat pada table
-		  }
-			  $tgl=date('ym'); //1905 
-			  $batas = str_pad($kode, 5, "0", STR_PAD_LEFT);     
-			  $kodetampil = "JL".$tgl."-04".$batas;  //format kode
-			  return $kodetampil;  
-		 }
-		 function tambah($transaksi)
-		 {
-		 	$this->db->insert('transaksi', $transaksi);
-		 }
-		 function tambah_detail_jual($data_detail)
-		 {
+		  	}
+		  	
+			$tgl=date('ym'); //1905 
+			$batas = str_pad($kode, 5, "0", STR_PAD_LEFT);     
+			$kodetampil = "JL".$tgl."-04".$batas;  //format kode
+			return $kodetampil;  
+		}
+		function tambah($transaksi)
+		{
+			$this->db->insert('transaksi', $transaksi);
+		}
+		function tambah_detail_jual($data_detail)
+		{
 		 	$this->db->insert('detail_transaksi', $data_detail);
-		 }
+		}
 	}
 ?>

@@ -14,12 +14,16 @@
 							<div class="card card-stats card-round">
 								<div class="card-body ">
 									<div class="row">
-										<!-- <div class="col-4">
-											<div class="icon-big text-center">
-												<i class="flaticon-chart-pie text-warning"></i>
+										<div class="col-7">
+											<div class="avatar avatar-xxl">
+												<?php if ($key->gambar == null) { ?>
+													<img src="<?php echo base_url('upload/default/default.jpg') ?>" alt="..." class="avatar-img rounded">
+												<?php }else{ ?>
+													<img src="<?php echo base_url('upload/'.$key->gambar) ?>" alt="..." class="avatar-img rounded">
+												<?php } ?>
 											</div>
-										</div> -->
-										<div class="col-7 col-stats">
+										</div>
+										<div class="col-5 col-stats">
 											<div class="numbers">
 												<h4 class="card-title"><?php echo $key->merek ?></h4>
 											</div>
