@@ -81,7 +81,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("admin/kasir/grosir") ?>">
+										<a href="<?php echo base_url("user/agen/pemesanan/data") ?>">
 											<span class="sub-item">Data Transaksi</span>
 										</a>
 									</li>

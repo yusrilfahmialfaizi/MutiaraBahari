@@ -11,29 +11,64 @@
 			# code...
 			parent::__construct();
 		}
-		function tampilPesanan()
+		function usermenunggu()
 		{
-			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Menunggu Konfirmasi'))->result();
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Menunggu konfirmasi'))->result();
+		}
+		function pesananmenunggu()
+		{
+			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Menunggu konfirmasi'))->result();
+		}
+		function userproses()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Diproses'))->result();
 		}
 		function pesananproses()
 		{
 			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Diproses'))->result();
 		}
+		function userkemas()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Dikemas'))->result();
+		}
 		function pesanankemas()
 		{
 			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Dikemas'))->result();
+		}
+		function userkirim()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Dikirim'))->result();
 		}
 		function pesanankirim()
 		{
 			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Dikirim'))->result();
 		}
+		function userterima()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Diterima'))->result();
+		}
 		function pesananterima()
 		{
 			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Diterima'))->result();
 		}
+		function userselesai()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Selesai'))->result();
+		}
 		function pesananselesai()
 		{
 			return $this->db->get_where('tampilPesanan', array('status_pesanan' => 'Selesai'))->result();
+		}
+		function userbatal()
+		{
+			$id_user = $this->session->userdata("id_user");
+			return $this->db->get_where('tampilPesanan', array('id_user' => $id_user,'status_pesanan' => 'Dibatalkan'))->result();
 		}
 		function pesananbatal()
 		{
@@ -62,6 +97,44 @@
 			$this->db->where('id_pesanan', $id_pesanan);
 			$this->db->update('pesanan',$total_harga);
 		}
+		function hapusDetail($id,$id_pesanan)
+		{
+			$this->db->delete('detail_pesanan', array('id_detail_pesan' => $id));
+			$total = $this->db->query("SELECT SUM(subtotal) as total FROM detail_pesanan where id_pesanan = $id_pesanan")->result_array();
+			$total_harga = array('total_harga' => $total[0]['total']);
+			$this->db->where('id_pesanan', $id_pesanan);
+			$this->db->update('pesanan',$total_harga);
+		}
+		function konfirmasi($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Diproses'));
+		}
+		function proses($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Dikemas'));
+		}
+		function kemas($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Dikirim'));
+		}
+		function kirim($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Diterima'));
+		}
+		function terima($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Selesai'));
+		}
+		function Batalkan($id)
+		{
+			$this->db->where('id_pesanan',$id);
+			return $this->db->update('pesanan',array('status_pesanan'=>'Dibatalkan'));
+		}
 		function load($id_pesanan)
 		{
 			$total = $this->db->query("SELECT SUM(subtotal) as total FROM detail_pesanan where id_pesanan = $id_pesanan");
@@ -70,7 +143,7 @@
 		function id_pesanan()
 		{
 			$this->db->select('MAX(RIGHT(pesanan.id_pesanan,4)) AS id_pesanan', FALSE);
-			$this->db->where('date(tanggal) = now()');
+			$this->db->where('date(tanggal) = date(now())');
 			$this->db->order_by('id_pesanan','Desc');
 			$this->db->limit(1);
 			$query = $this->db->get('pesanan');

@@ -18,7 +18,7 @@
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/atlantis.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/atlantis2.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css') ?>">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->

@@ -9,7 +9,16 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Agen dan Pelanggan</h4>
+										<div class="form-group">
+											<form action="<?php echo base_url() ?>admin/kasir/pesanan">
+												<button type="submit" class="btn btn-icon btn-link">
+													<i class="fas fa-arrow-left fas-lg"></i>
+												</button>
+											</form>
+										</div>
+										<div class="form-group">
+											<h4 class="card-title">Agen dan Pelanggan</h4>
+										</div>
 									</div>
 								</div>
 								<div class="card-body">
@@ -79,11 +88,11 @@
 										</div>
 									</div>
 									<?php endforeach ?>
+									<form method="post">
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
-													<th>ID Detail</th>
 													<th>No. Pesanan</th>
 													<th>Nama Barang</th>
 													<th>Qty</th>
@@ -94,7 +103,6 @@
 											</thead>
 											<tfoot>
 												<tr>
-													<th>ID Detail</th>
 													<th>No. Pesanan</th>
 													<th>Nama Barang</th>
 													<th>Qty</th>
@@ -108,8 +116,7 @@
 													foreach ($detail_pesanan as $key) {
 												?>
 												<tr>
-													<td><?php echo $key['id_detail_pesan'] ?></td>
-													<td><?php echo $key['id_pesanan'] ?></td>
+													<td><?php echo $key['id_pesanan'] ?><input type="text" name="id_pesanan" id="id_pesanan" value="<?php echo $key['id_pesanan'] ?>" hidden></td>
 													<td><?php echo $key['nama_barang'] ?></td>
 													<td><?php echo $key['qty'] ?></td>
 													<td><?php echo $key['harga'] ?></td>
@@ -119,9 +126,12 @@
 															<button type="button" data-toggle="modal" data-target="#ModalEdit<?php echo $key['id_detail_pesan'] ?>" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
 																<i class="fa fa-edit"></i>
 															</button>
-															<a href="<?php echo base_url("admin/detail_pesanan/hapusagen/".$key['id_detail_pesan']) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
+															<!-- <a href="<?php echo base_url("admin/kasir/pesanan/hapusdetail/".$key['id_detail_pesan']) ?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus">
 																<i class="fa fa-times"></i>
-															</a>
+															</a> -->
+															<button data-toggle="tooltip" title="" id="hapus" data-id="<?php echo $key['id_detail_pesan']?>" data-id_pesanan="<?php echo $key['id_pesanan'] ?>" class="btn btn-link btn-danger" data-original-title="Hapus">
+																<i class="fa fa-times"></i>
+															</button>
 														</div>
 													</td>
 												</tr>
@@ -129,6 +139,7 @@
 											</tbody>
 										</table>
 									</div>
+								</form>
 								</div>
 							</div>
 						</div>
@@ -151,6 +162,7 @@
 		                    cache:false,
 		                    success: function(data){
 		                        $.each(data,function(id_barang, nama_barang, harga,stok){
+		                        	$('#harga').val(data.harga)
 		                            var subtotal = qty * data.harga ;
 									$('#subtotal').val(subtotal);
 		                        });
@@ -158,7 +170,21 @@
 		                    }
 		                });
 		                return false;
-		           });
+		           	});
+					$('#hapus').on('click', function(){
+						var id_detail_pesan = $(this).attr('data-id');
+						var id_pesanan = $(this).attr('data-id_pesanan');
+						// window.alert(id + id_pesanan);
+						$.ajax({
+							type : "POST",
+		                    url  : "<?php echo base_url('admin/kasir/pesanan/hapusdetail')?>",
+		                    // dataType : "JSON",
+		                    data : {id_detail_pesan: id_detail_pesan, id_pesanan : id_pesanan },
+		                    success : function(data){
+		                    	window.alert('berhasil');
+		                    }
+						})
+					})
 				});
 			</script>
 		</body>

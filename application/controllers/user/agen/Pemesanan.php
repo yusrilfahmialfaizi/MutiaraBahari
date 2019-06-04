@@ -23,6 +23,31 @@
 			$this->load->view('_partial/headeragen');
 			$this->load->view('menu/user/pemesanan_agen');
 		}
+		function data()
+		{
+			if($this->session->userdata('stat') != "login"){
+					redirect(base_url("user/login"));
+			}
+			// $data['pesanan'] = $this->Pesananmodel->tampilPesanan($status_pesanan);
+			$data['pesanan'] = $this->Pesananmodel->usermenunggu();
+			$data['proses'] = $this->Pesananmodel->userproses();
+			$data['kemas'] = $this->Pesananmodel->userkemas();
+			$data['kirim'] = $this->Pesananmodel->userkirim();
+			$data['terima'] = $this->Pesananmodel->userterima();
+			$data['selesai'] = $this->Pesananmodel->userselesai();
+			$data['batal'] = $this->Pesananmodel->userbatal();
+			$this->load->view('_partial/headeragen');
+			$this->load->view('menu/user/data_transaksi',$data);
+		}
+		function detail_pesanan($no_pesanan)
+		{
+			if($this->session->userdata('stat') != "login"){
+					redirect(base_url("user/login"));
+			}
+			$data['detail_pesanan'] = $this->Pesananmodel->getDetail($no_pesanan);
+			$this->load->view('_partial/headeragen');
+			$this->load->view('menu/user/data_pesanan_user',$data);
+		}
 		function tambahkeranjang()
 		{
 			$id = $this->input->post('id_barang');
