@@ -10,7 +10,7 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Tambah Data Barang</h4>
-										<button class="btn btn-primary btn-md btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-md btn-round ml-auto" data-toggle="modal" data-target="#data-barang">
 											<i class="fa fa-plus"></i>
 											Tambah jenis
 										</button>
@@ -18,7 +18,7 @@
 								</div>
 								<div class="card-body">
 									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="data-barang" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -263,65 +263,14 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title">Tambah Stok</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#tambah">
 											<i class="fa fa-plus"></i>
 											Tambah Stok Barang
 										</button>
-									</div>
 								</div>
 								<div class="card-body">
-									<!-- Modal -->
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														Tamabah</span> 
-														<span class="fw-light">
-															Stok Barang
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<form>
-														<div class="row">
-															<div class="col-sm-12">
-																<div class="form-group  ">
-																	<label>Name</label>
-																	<input id="addName" type="text" class="form-control" placeholder="fill name">
-																</div>
-															</div>
-															<div class="col-md-6 pr-0">
-																<div class="form-group  ">
-																	<label>Position</label>
-																	<input id="addPosition" type="text" class="form-control" placeholder="fill position">
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group  ">
-																	<label>Office</label>
-																	<input id="addOffice" type="text" class="form-control" placeholder="fill office">
-																</div>
-															</div>
-														</div>
-														<div class="modal-footer no-bd">
-															<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover" >
+										<table id="basic-datatables" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
 													<th>ID</th>
@@ -329,7 +278,7 @@
 													<th>Nama Barrang</th>
 													<th>tanggal</th>
 													<th>Tambahan Stok</th>
-													<th style="width: 10%">Action</th>
+													<th>Keterangan</th>
 												</tr>
 											</thead>
 											<tfoot>
@@ -339,33 +288,78 @@
 													<th>Nama Barrang</th>
 													<th>tanggal</th>
 													<th>Tambahan Stok</th>
-													<th style="width: 10%">Action</th>
+													<th>Keterangan</th>
 												</tr>
 											</tfoot>
+											<?php foreach ($detail_barang as $key): ?>
+												
 											<tbody>
-												<?php 
-													 foreach ($detail_barang as $key) {
-												?>
 												<tr>
-													<td><?php echo $key->id ?></td>
-													<td><?php echo $key->barang ?></td>
+													<td><?php echo $key->id_det_barang ?></td>
 													<td><?php echo $key->nama ?></td>
+													<td><?php echo $key->nama_barang ?></td>
 													<td><?php echo $key->tanggal ?></td>
 													<td><?php echo $key->stok ?></td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
+													<td><?php echo $key->keterangan ?></td>
 												</tr>
-											<?php } ?>
 											</tbody>
+											<?php endforeach ?>
 										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="tambah" role="dialog" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header no-bd">
+										<h5 class="modal-title">
+											<span class="fw-mediumbold">
+											Tambah</span> 
+											<span class="fw-light">
+												Stok Barang
+											</span>
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form method="post" action="<?php echo base_url() ?>admin/barang/tambahdetail">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group ">
+														<label>Nama Barang</label><br>
+														<select class="form-control" id="merekBarang" name="merekBarang">
+															<option value="0"></option>
+															<?php foreach ($barang as $e): ?>
+																
+															<option><?php echo $e->nama_barang ?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="form-group">
+														<label>Jumlah Stok Tersedia</label>
+														<h4 id="name"></h4>
+														<input id="id_barang" name="id_barang" type="text" class="form-control" readonly="readonly" hidden="hidden">
+														<input id="id_pegawai" name="id_pegawai" type="text" value="<?php echo $this->session->userdata("id_pegawai") ?>" class="form-control" hidden>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="form-group ">
+														<label>Stok</label>
+														<input id="stk" name="stk" type="number" class="form-control" placeholder="Stok Barang .....">
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer no-bd">
+												<button class="btn btn-primary">Simpan</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -406,9 +400,14 @@
     					allowClear: true,
     					minimumInputLength : 2
 					});
+					$("#merekBarang").select2({
+						placeholder: "Pilih Merek",
+    					allowClear: true,
+    					minimumInputLength : 2
+					});
 				});
 			</script>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 		        $(document).ready(function(){
 		            $('#bayar').on('keyup',function(){
 		                 $.ajax({
@@ -420,7 +419,7 @@
 		                
 		           });
 		        });
-		    </script>
+		    </script> -->
 		    <script type="text/javascript">
 		        $(document).ready(function(){
 		            $('#merek').on('change',function(){
@@ -434,27 +433,37 @@
 		                    data : {merek: kode },
 		                    cache:false,
 		                    success: function(data){
-		                        // $.each(data,function(id_merek, merek, kode_merek){
-		                            $('[name="id_barang"]').val(data);
-		                            // $('[name="ab"]').val(data.id_merek);
-		                            // $('[name="nama_barang"]').val(data.nama_barang);
-		                            // $('[name="harga"]').val(data.harga);
-		                             
-		                        // });
-		                         
+                                $('[name="id_barang"]').val(data)     
 		                    }
 		                });
 		                return false;
-		           });
+		           	});
+		            $('#merekBarang').on('change',function(){
+		            	var nama_barang = $('#merekBarang').val();
+		            	window.alert(nama_barang);
+		            	$.ajax({
+		                    url  : "<?php echo base_url('admin/barang/get_barang')?>",
+		                    type : "POST",
+		                    dataType : "JSON",
+		                    data : {nama_barang: nama_barang },
+		                    cache:false,
+		                    success: function(data){
+		                    	$.each(data, function(id_barang,jumlah_stok){
+		                    		// window.alert(data.jumlah_stok);
+                                	$('[name="id_barang"]').val(data.id_barang);
+                                	$('#name').text(data.jumlah_stok);     
+
+		                    	})
+		                    }
+		                });
+		                return false;
+		            });
 		        });
 		    </script>
 		    <script type="text/javascript">
 		    	$(document).ready(function(){
 		            $('#merek').on('change',function(){
-		                 
-		                // var merek = $('#ab').val();
 		                var kode = $('#merek').val();
-		                // window.alert(kode);
 		                $.ajax({
 		                    url  : "<?php echo base_url('admin/barang/buatkode')?>",
 		                    type : "POST",
@@ -463,14 +472,8 @@
 		                    cache:false,
 		                    success: function(data){
 		                        $.each(data,function(id_merek){
-		                            $('[name="id_merek"]').val(data.id_merek);
-		                    	// window.alert('success');
-		                        //     $('[name="ab"]').val(data.id_merek);
-		                            // $('[name="nama_barang"]').val(data.nama_barang);
-		                            // $('[name="harga"]').val(data.harga);
-		                             
+		                            $('[name="id_merek"]').val(data.id_merek);      
 		                        });
-		                         
 		                    }
 		                });
 		                return false;

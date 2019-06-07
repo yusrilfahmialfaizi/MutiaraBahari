@@ -36,11 +36,28 @@
 		}
 		public function getDetailBarang()
 		{
-			$this->db->select("detail_barang.id_det_barang AS id, barang.nama_barang AS barang, pegawai.nama AS nama, detail_barang.tanggal AS tanggal, detail_barang.stok AS stok");
-			$this->db->from("detail_barang, barang, pegawai");
-			$this->db->where("detail_barang.id_barang = barang.id_barang AND detail_barang.id_pegawai = pegawai.id_pegawai");
-			$query = $this->db->get();
+			$query = $this->db->get('detailbarang');
 			return $query->result();
+		}
+		public function get_barang($kode)
+		{
+			$query = $this->db->query("CALL jumlah_stok('$kode')");
+			if($query->num_rows()>0){
+				foreach ($query->result() as $data) {
+					# code...
+					$hasil=array(
+					'id_barang' => $data->id_barang,
+					'nama_barang' => $data->nama_barang,
+					'harga' => $data->hrg_grosir1,
+					'jumlah_stok' =>$data->jumlah_stok
+					);
+				}
+			}
+			return $hasil;
+		}
+		function tambahdetail($data)
+		{
+			return $this->db->insert('detail_barang', $data);
 		}
 		public function getId($id)
 		{
@@ -91,8 +108,6 @@
 			}
 
 			$this->db->update("barang", $this,array('id_barang'=>$post["id_barang"]));
-			// $hasil=$this->db->query("UPDATE barang SET nama_barang='$nama_barang',jumlah_stok='$stok',harga='$harga',hrg_grosir1='$harga1',hrg_grosir2='$harga2',hrg_grosir3='$harga3' WHERE id_barang='$id_barang'");
-			// return $hasil;
 		}
 		public function updateMerek()
 		{
@@ -223,41 +238,6 @@
 		{
 			$hsl=$this->db->query("SELECT * FROM barang WHERE nama_barang='$name'")->result();
 			return $hsl;
-			// if($hsl->num_rows()>0){
-			// 	foreach ($hsl->result() as $data) {
-			// 		if ($qty <= 750) {
-			// 			# code...
-			// 			$hasil=array(
-			// 			'id_barang' => $data->id_barang,
-			// 			'nama_barang' => $data->nama_barang,
-			// 			'harga' => $data->hrg_grosir1,
-			// 			'stok' =>$data->jumlah_stok
-			// 			);
-			// 		}elseif ($qty>750 && $qty<1000) {
-			// 			# code...
-			// 			$hasil=array(
-			// 			'id_barang' => $data->id_barang,
-			// 			'nama_barang' => $data->nama_barang,
-			// 			'harga' => $data->hrg_grosir2,
-			// 			'stok' =>$data->jumlah_stok
-			// 			);
-			// 		}else{
-			// 			# code...
-			// 			$hasil=array(
-			// 			'id_barang' => $data->id_barang,
-			// 			'nama_barang' => $data->nama_barang,
-			// 			'harga' => $data->hrg_grosir3,
-			// 			'stok' =>$data->jumlah_stok
-			// 			);
-			// 		}
-			// 		// $hasil=array(
-			// 		// 	'id_barang' => $data->id_barang,
-			// 		// 	'nama_barang' => $data->nama_barang,
-			// 		// 	'harga' => $data->harga,
-			// 		// 	);
-			// 	}
-			// }
-			// return $hasil;
 		}
 	}
 ?>

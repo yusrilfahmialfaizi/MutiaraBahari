@@ -65,14 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		{
 			$product = $this->Barangmodel;
 			$product->edit_barang();
-			// $id_barang=$this->input->post('id_barang');
-			// $nama_barang=$this->input->post('nama_barang');
-			// $stok=$this->input->post('stok');
-			// $harga=$this->input->post('harga');
-			// $harga1=$this->input->post('grosir1');
-			// $harga2=$this->input->post('grosir2');
-			// $harga3=$this->input->post('grosir3');
-			// $this->Barangmodel->edit_barang($id_barang,$nama_barang,$stok,$harga,$harga1,$harga2,$harga3);
 			redirect('admin/barang');
     
 		}
@@ -105,16 +97,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function get_merek()
 		{
 			$kode=$this->input->post('merek');
-			// echo "<script>window.alert('$kode')</script>";
 			$data = $this->Barangmodel->id_barang($kode);
-			// return $data;
 			echo json_encode($data);
-			// print_r($data);
-		// echo $data;
 		}
-
-		function haha(){
-			echo $this->input->post('id_merek');
+		function get_barang()
+		{
+			$kode=$this->input->post('nama_barang');
+			$data = $this->Barangmodel->get_barang($kode);
+			echo json_encode($data);
 		}
+		function tambahdetail(){
+			$id_barang =  $this->input->post('id_barang');
+			$id_pegawai =  $this->input->post('id_pegawai');
+			$tanggal = date('Y-m-d');
+			$stok = $this->input->post('stk');
+			$keterangan = 'Tambah';
+			$data = array(
+				'id_barang' => $id_barang,
+				'id_pegawai' => $id_pegawai,
+				'tanggal' => $tanggal,
+				'stok' => $stok,
+				'keterangan' => $keterangan);
+			if ($this->Barangmodel->tambahdetail($data)) {
+			 	# code...
+				redirect('admin/barang');
+			 } 
 		}
+	}
 ?>
