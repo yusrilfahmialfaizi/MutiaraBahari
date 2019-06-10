@@ -10,10 +10,16 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Tambah Data Barang</h4>
-										<button class="btn btn-primary btn-md btn-round ml-auto" data-toggle="modal" data-target="#data-barang">
-											<i class="fa fa-plus"></i>
-											Tambah jenis
-										</button>
+										<div class="row ml-auto">
+											<button class="btn btn-primary btn-md btn-round ml-auto" data-toggle="modal" data-target="#data-barang">
+												<i class="fa fa-plus"></i>
+													Tambah jenis
+											</button>
+											<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#tambah">
+												<i class="fa fa-plus"></i>
+													Tambah Stok Barang
+											</button>
+										</div>
 									</div>
 								</div>
 								<div class="card-body">
@@ -260,14 +266,9 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header">
-									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#tambah">
-											<i class="fa fa-plus"></i>
-											Tambah Stok Barang
-										</button>
-								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table id="basic-datatables" class="display table table-striped table-hover" >
@@ -291,9 +292,9 @@
 													<th>Keterangan</th>
 												</tr>
 											</tfoot>
-											<?php foreach ($detail_barang as $key): ?>
 												
 											<tbody>
+											<?php foreach ($detail_barang as $key): ?>
 												<tr>
 													<td><?php echo $key->id_det_barang ?></td>
 													<td><?php echo $key->nama ?></td>
@@ -302,8 +303,8 @@
 													<td><?php echo $key->stok ?></td>
 													<td><?php echo $key->keterangan ?></td>
 												</tr>
-											</tbody>
 											<?php endforeach ?>
+											</tbody>
 										</table>
 									</div>
 								</div>

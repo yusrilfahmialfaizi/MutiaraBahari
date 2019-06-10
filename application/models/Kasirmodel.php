@@ -115,10 +115,10 @@
 		  	else{      
 			   $kode = 1;  //cek jika kode belum terdapat pada table
 		  	}
-		  	
+		  	$id = $this->session->userdata('id_pegawai');
 			$tgl=date('ym'); //1905 
 			$batas = str_pad($kode, 5, "0", STR_PAD_LEFT);     
-			$kodetampil = "JL".$tgl."-04".$batas;  //format kode
+			$kodetampil = "JL".$tgl."-".$id.$batas;  //format kode
 			return $kodetampil;  
 		}
 		function tambah($transaksi)
