@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2019 at 03:25 AM
+-- Generation Time: Jun 14, 2019 at 03:45 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -65,7 +65,7 @@ END$$
 -- Functions
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `cari_rata` () RETURNS INT(11) NO SQL
-RETURN (SELECT * FROM barang WHERE stok<10)$$
+RETURN (SELECT COUNT(id_barang) FROM barang WHERE jumlah_stok>10)$$
 
 DELIMITER ;
 
@@ -76,7 +76,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `barang` (
-  `id_barang` varchar(5) NOT NULL,
+  `id_barang` varchar(6) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
   `harga` int(11) NOT NULL,
   `jumlah_stok` int(11) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE `detailbarang` (
 ,`id_pegawai` varchar(5)
 ,`nama` varchar(30)
 ,`jabatan` enum('Owner','Admin','Kasir','Developer')
-,`id_barang` varchar(5)
+,`id_barang` varchar(6)
 ,`nama_barang` varchar(30)
 ,`jumlah_stok` int(11)
 ,`tanggal` datetime
@@ -134,7 +134,7 @@ CREATE TABLE `detailbarang` (
 
 CREATE TABLE `detail_barang` (
   `id_det_barang` int(11) NOT NULL,
-  `id_barang` varchar(5) DEFAULT NULL,
+  `id_barang` varchar(6) DEFAULT NULL,
   `id_pegawai` varchar(5) DEFAULT NULL,
   `tanggal` datetime DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
@@ -174,7 +174,7 @@ DELIMITER ;
 CREATE TABLE `detail_pesanan` (
   `id_detail_pesan` int(11) NOT NULL,
   `id_pesanan` varchar(12) DEFAULT NULL,
-  `id_barang` varchar(5) DEFAULT NULL,
+  `id_barang` varchar(6) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `subtotal` int(11) DEFAULT NULL
@@ -203,7 +203,7 @@ INSERT INTO `detail_pesanan` (`id_detail_pesan`, `id_pesanan`, `id_barang`, `qty
 CREATE TABLE `detail_transaksi` (
   `id_detail` int(11) NOT NULL,
   `id_transaksi` varchar(14) DEFAULT NULL,
-  `id_barang` varchar(5) DEFAULT NULL,
+  `id_barang` varchar(6) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `subtotal` int(11) NOT NULL
@@ -303,7 +303,7 @@ CREATE TABLE `pegawai` (
   `alamat` tinytext NOT NULL,
   `no_telepon` varchar(12) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -311,9 +311,10 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jabatan`, `alamat`, `no_telepon`, `username`, `password`) VALUES
-('01', 'Owner', 'Owner', 'Jember', '01234', 'root', 'root'),
-('02', 'Warda', 'Admin', 'Jember', '012345678910', 'warda', 'admin'),
-('03', 'Andi', 'Admin', 'Jember', '021345678901', 'andi', 'admin');
+('01', 'Owner', 'Owner', 'Jember', '01234', 'root', '$2y$10$qSU5DPBbipZ5Ev9OuyGtJ.BZ.9gYl9FaHWAQNg0c0OYbq/cfm9D9C'),
+('02', 'Warda', 'Admin', 'Jember', '012345678910', 'warda', '$2y$10$eL2wkunb4DNn1ZTCAiX3muz/fz/msdcT28TP0PT.V9o8GRs9eN/vS'),
+('03', 'Andi', 'Admin', 'Jember', '021345678901', 'andi', '$2y$10$jdc4EesjiVG2iXahxxaSKeBxeqYSByR9p7hsDRVUlWyNAw54Zfte2'),
+('04', 'Kasir', 'Kasir', 'Jember', '1234', 'kasir', '$2y$10$pCOqFtOVhMVlGG.kLBn5iuOplOD0CIygL/AMMWFphxJ.0ahVacPCO');
 
 -- --------------------------------------------------------
 
@@ -430,7 +431,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `alamat`, `no_telepon`, `username`, `password`, `status`) VALUES
-('001', 'Burhan', 'Jember', '01', 'burhan', '$2y$10$2Qh3tyOAatazEj3gE8FQDu5htrNGV.bmSASnommSE7Ryq1Ped9iCm', 'agen');
+('001', 'Burhan', 'Jember', '01', 'burhan', '$2y$10$7rCYhg6I5LufP7Sce8DV/OR4LFGBPePt/7iceWAgyAMxFQ/rqkoCq', 'agen');
 
 --
 -- Triggers `user`
