@@ -73,7 +73,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Pesanan/<?php echo $konfirmasi->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Pesanan/<?php echo $konfirmasi->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 															
 														</div>
 														<div class="col-md-4">
@@ -131,7 +131,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $p->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $p->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 															
 														</div>
 														<div class="col-md-4">
@@ -186,7 +186,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $k->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $k->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 														</div>
 														<div class="col-md-4">
 															<button type="button" id="kirim" class="kirim btn btn-success btn-round btn-sm  mr-auto" data-id="<?php echo $k->id_pesanan ?>">Kirim</button>
@@ -240,7 +240,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $r->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $r->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 														</div>
 														<div class="col-md-4">
 															<button type="button" id="diterima" class="diterima btn btn-success btn-round btn-sm  mr-auto" data-id="<?php echo $r->id_pesanan ?>">Diterima</button>
@@ -294,7 +294,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $t->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $t->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 														</div>
 														<div class="col-md-4">
 															<button type="button" id="selesai" class="selesai btn btn-success btn-round btn-sm  mr-auto" data-id="<?php echo $t->id_pesanan ?>">Selesai</button>
@@ -348,7 +348,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $s->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $s->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 														</div>
 													</div>
 												</div>
@@ -399,7 +399,7 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $key->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>kasir/pesanan/Detail/<?php echo $key->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 														</div>
 													</div>
 												</div>
@@ -413,9 +413,9 @@
 					</div>
 				</div>
 			</div>
-			<?php $this->load->view('_partial/foot.php') ?>
 		</div>
 	</div>
+	<?php $this->load->view('_partial/foot.php') ?>
 	</div>
 	<?php $this->load->view('_partial/scripttable') ?>
 	<script type="text/javascript">
@@ -441,7 +441,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/konfirmasi/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/konfirmasi/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({
@@ -493,7 +493,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/proses/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/proses/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({
@@ -545,7 +545,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/kemas/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/kemas/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({
@@ -597,7 +597,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/kirim/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/kirim/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({
@@ -649,7 +649,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/terima/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/terima/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({
@@ -701,7 +701,7 @@
 				if (willDelete) {
 				$.ajax({
 					method 	:"POST",
-					url 	:"<?php echo base_url()?>admin/kasir/pesanan/batalkan/",
+					url 	:"<?php echo base_url()?>kasir/pesanan/batalkan/",
 					data 	:{id_pesanan : id},
 					success	: function(data){
 						swal({

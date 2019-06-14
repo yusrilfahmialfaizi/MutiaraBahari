@@ -11,17 +11,30 @@
 			# code...
 			parent::__construct();
 			$this->load->model('Usermodel');
+			$this->load->model('Pegawaimodel');
 			$this->load->library('form_validation');
 			$this->load->helper('url');
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
 				redirect(base_url("admin"));
 			}
 			$user['id'] = $this->Usermodel->id_user();
 			$user['user'] = $this->Usermodel->getUser();
 			$this->load->view('_partial/header');
+			$this->load->view('menu/user', $user);
+			// $this->load->view('_partial/footertable');
+		}
+		public function owner()
+		{
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+				redirect(base_url("owner"));
+			}
+			$user['id'] = $this->Usermodel->id_user();
+			$user['id'] = $this->Pegawaimodel->getPegawai();
+			$user['user'] = $this->Usermodel->getUser();
+			$this->load->view('_partial/headerowner');
 			$this->load->view('menu/user', $user);
 			// $this->load->view('_partial/footertable');
 		}

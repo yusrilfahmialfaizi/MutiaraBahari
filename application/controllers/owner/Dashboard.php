@@ -13,12 +13,12 @@
 	 	}
 	 	public function index()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
-				redirect(base_url("admin"));
+			if($this->session->userdata('status') != "login"){
+				redirect(base_url("owner"));
 			}
-			$this->load->view('_partial/header');
-			$this->load->view('menu/dashboard');
+			$this->load->view('_partial/headerowner');
+			$this->load->view('menu/owner/dashboard');
 			$this->load->view('_partial/footer');
 		}
 	 } 
- ?>
+?>

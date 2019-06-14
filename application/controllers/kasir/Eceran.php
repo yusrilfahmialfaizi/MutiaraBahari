@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	/**
 	 * 
 	 */
-	class Grosir extends CI_Controller
+	class Eceran extends CI_Controller
 	{
 		
 		function __construct()
@@ -17,89 +17,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('jabatan') != "Kasir" || $this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$user['barang'] = $this->Kasirmodel->getBarang();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
-			$this->load->view('_partial/header');
-			$this->load->view('menu/kasirgrosir',$user);
+			$this->load->view('_partial/headerkasir');
+			$this->load->view('menu/kasir/kasireceran',$user);
 			// $this->load->view('_partial/footertable');
 		}
-		function keranjang_kasir()
+		function tambah()
 		{	
-			$id = $this->input->post('id_barang');
-			$qty = $this->input->post('qty');
-			$price = $this->input->post('harga');
-			$name = $this->input->post('nama_barang');
-			$grosir = array(
-		        'id'     => $id,
-		        'qty'    => $qty,
-		        'price'   => $price,
-		        'name'      => $name
+			$data = array(
+		        'id'     => $this->input->post('id_barang'),
+		        'qty'    => $this->input->post('qty'),
+		        'price'   => $this->input->post('harga'),
+		        'name'      => $this->input->post('nama_barang')
 			);
 			
-			$this->cart->insert($grosir);	
-			redirect('admin/kasir/grosir');
+			$this->cart->insert($data);	
+			redirect('kasir/eceran');
 			// echo $this->show_keranjang();
 		}
 		function updatekeranjang()
 		{
 			$qty = $this->input->post('qty');
-			$name = $this->input->post('name');
-			$harga = $this->Kasirmodel->get_Barang($name);
-			foreach ($harga as $key) {
-				# code...
-				if ($qty<= 750 && $qty<= $key->jumlah_stok) {
-					# code...
-					$data = array(
-						'rowid'=> $this->input->post('rowid'),
-						'qty'=>$qty,
-						'price' => $key->hrg_grosir1,
-					);
-					$code = $this->cart->update($data); 
-					$pesan = "success";
-					redirect('admin/kasir/grosir');
-
-				}elseif ($qty>750 && $qty<1000 && $qty<= $key->jumlah_stok) {
-					# code...
-					$data = array(
-						'rowid'=> $this->input->post('rowid'),
-						'qty'=>$qty,
-						'price' => $key->hrg_grosir2,
-					);
-					$code = $this->cart->update($data); 
-					redirect('admin/kasir/grosir');
-
-				}else if ($qty >= 1000 && $qty<= $key->jumlah_stok){
-					$data = array(
-						'rowid'=> $this->input->post('rowid'),
-						'qty'=>$qty,
-						'price' => $key->hrg_grosir3,
-					);
-					$code = $this->cart->update($data);
-					redirect('admin/kasir/grosir');
-
-				}else{
-					
-				redirect('admin/kasir/grosir');
-
-				}
-			}
-			// return json_encode($pesan);
-			// redirect('admin/kasir/grosir');
+			// $name = $this->input->post('name');
+			// $harga = $this->Kasirmodel->get_Barang($name);
+			$data = array(
+				'rowid'=> $this->input->post('rowid'),
+				'qty'=>$qty
+			);
+			$code = $this->cart->update($data); 
+			redirect('kasir/eceran');
 		}
-		function load($nama){
+		function load(){
 			// $this->cart->destroy();
-			// $item = $this->cart->contents();
-			// $items = $this->cart->get_item('cc315a8538112da1fb365dbd15079d54');
+			$items = $this->cart->contents();
 			// $item = $this->session->all_userdata();
-			$item = $this->Usermodel->getPelanggan($nama);
 			echo "<pre>";
-			print_r($item['id_user']);
-			echo "</pre>";
 			print_r($items);
+			echo "</pre>";
+			print_r($item);
 		}
 		function load_cart()
 		{
@@ -112,26 +72,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'rowid' => $this->input->post('row_id'),
 				'qty'	=>0,
 			);
-			$total = $this->cart->total();
 			$this->cart->update($data);
 			// echo $this->show_keranjang();
-			// redirect('admin/kasir/grosir');
 		}
-		function get_barang()
+		function get_barangeceran()
 		{
 			$kode=$this->input->post('nama_barang');
-			$qty=$this->input->post('qty');
-			$data=$this->Kasirmodel->get_data_barang_bynama($kode,$qty);
+			// $qty=$this->input->post('qty');
+			$data=$this->Kasirmodel->get_datahargaeceran($kode);
 			echo json_encode($data);
 		}
-		function get_harga()
-		{
-			$qty=$this->input->post('qty');
-			$kode=$this->input->post('nama_barang');
-			$data=$this->Kasirmodel->get_dataharga($qty,$kode);
-			echo json_encode($data);
-		}
-		// // // // // // // proses  // // // // // // // 
 		function proses_jual()
 		{
 			date_default_timezone_set('Asia/Jakarta');
@@ -186,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     }
             }
             $this->cart->destroy();
-            redirect('admin/kasir/grosir');
+            redirect('kasir/eceran');
 		}
 	}
 ?>

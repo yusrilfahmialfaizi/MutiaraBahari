@@ -16,7 +16,7 @@
 		}
 		function index()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('jabatan') != "Kasir" || $this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$data['pesanan']	= $this->Pesananmodel->pesananmenunggu();
@@ -26,25 +26,25 @@
 			$data['terima'] 	= $this->Pesananmodel->pesananterima();
 			$data['selesai']	= $this->Pesananmodel->pesananselesai();
 			$data['batal'] 		= $this->Pesananmodel->pesananbatal();
-			$this->load->view('_partial/header');
+			$this->load->view('_partial/headerkasir');
 			$this->load->view('menu/pesanan', $data);
 		}
 		function Pesanan($no_pesanan)
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('jabatan') != "Kasir" || $this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$data['detail_pesanan'] = $this->Pesananmodel->getDetail($no_pesanan);
-			$this->load->view('_partial/header');
+			$this->load->view('_partial/headerkasir');
 			$this->load->view('menu/detail_pesanan', $data);
 		}
 		function Detail($no_pesanan)
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('jabatan') != "Kasir" || $this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$data['detail_pesanan'] = $this->Pesananmodel->getDetail($no_pesanan);
-			$this->load->view('_partial/header');
+			$this->load->view('_partial/headerkasir');
 			$this->load->view('menu/user/data_pesanan', $data);
 		}
 		function editdetail()
@@ -59,7 +59,7 @@
 				'harga' 	=> $harga,
 				'subtotal'	=> $subtotal);
 			$data = $this->Pesananmodel->editDetail($id_detail_pesan, $edit, $id_pesanan);
-			redirect("admin/kasir/pesanan/Pesanan/$id_pesanan");
+			redirect("kasir/pesanan/Pesanan/$id_pesanan");
 		}
 		function get_barang()
 		{
@@ -80,37 +80,37 @@
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->konfirmasi($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function proses()
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->proses($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function kemas()
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->kemas($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function kirim()
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->kirim($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function terima()
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->terima($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function batalkan()
 		{
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->batalkan($id);
-			redirect("admin/kasir/pesanan/");
+			redirect("kasir/pesanan/");
 		}
 		function hapusdetail()
 		{

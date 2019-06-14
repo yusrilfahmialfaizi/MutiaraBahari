@@ -16,24 +16,24 @@ class Hutang extends CI_Controller
 
 	function index()
 	{
-		if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+		if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
 					redirect(base_url("admin"));
 		}
 		// $data['id'] = $this->Hutangmodel->id_hutang();
 		$data['hutang'] = $this->Hutangmodel->get_hutang();
 		$data['user'] = $this->Usermodel->getUser();
-		$this->load->view('_partial/header');
-		$this->load->view('menu/hutang', $data);
+		$this->load->view('_partial/headerowner');
+		$this->load->view('menu/owner/kasir/hutang', $data);
 	}
 	function tambahHutang()
 	{
 		$this->Hutangmodel->tambah();
-		redirect('admin/kasir/hutang');	
+		redirect('owner/kasir/hutang');	
 	}
 	function updateHutang()
 	{
 		$this->Hutangmodel->update();
-		redirect('admin/kasir/hutang');
+		redirect('owner/kasir/hutang');
 	}
 	function get_id()
 	{

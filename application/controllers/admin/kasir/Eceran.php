@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
 				redirect(base_url("admin"));
 			}
 			$user['barang'] = $this->Kasirmodel->getBarang();

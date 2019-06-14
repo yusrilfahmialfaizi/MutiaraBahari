@@ -94,8 +94,6 @@
 			$alamat = $this->input->post('alamat');
 			$no_telepon = $this->input->post('no_telepon');
 			$username = $this->input->post('username');
-			// $pass = $this->input->post('password');
-			// $password = password_hash($pass, PASSWORD_DEFAULT);
 			$status = "agen";
 			
 			$hasil = $this->db->query("UPDATE user SET nama = '$nama', alamat = '$alamat', no_telepon = '$no_telepon', username = '$username' WHERE id_user =  '$id_user'");

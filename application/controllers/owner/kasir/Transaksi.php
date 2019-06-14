@@ -18,12 +18,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function riwayat_trans()
 		{	
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
 				redirect(base_url("admin"));
 			}
 			$view_transaksi['view_transaksi'] = $this->Barangmodel->riwayat();
-			$this->load->view('_partial/header');
-			$this->load->view('menu/riwayat',$view_transaksi);
+			$this->load->view('_partial/headerowner');
+			$this->load->view('menu/owner/kasir/riwayat',$view_transaksi);
 			$this->load->view('_partial/footertable');
 		}
 	}

@@ -15,8 +15,9 @@
  		}
  		function getMerek()
  		{
- 			$data = $this->Merekandroid->merektampil();
- 			return $data;
+ 			$data = $this->Barangmodel->getMerek();
+ 			echo json_encode(array('data' => $data));
+ 			// print_r($data);
  		}
  		function getNamaBarang()
  		{

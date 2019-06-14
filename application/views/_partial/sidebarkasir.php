@@ -40,7 +40,7 @@
 					</div>
 					<ul class="nav nav-primary" id="nav-primary">
 						<li class="nav-item <?php if($this->uri->segment(2)=="dashboard"){echo "active";}?>">
-							<a class="" href="<?php echo base_url('owner/dashboard') ?>">
+							<a class="" href="<?php echo base_url('kasir/dashboard') ?>">
 								<i class="fas fa-home"></i>
 								<p>Home</p>
 							</a>
@@ -51,27 +51,6 @@
 							</span>
 							<h4 class="text-section">Fitur</h4>
 						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="user"){echo "active";}?>">
-							<a class="" data-toggle="collapse"  href="#user">
-								<i class="fas fa-user"></i>
-								<p>User</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="user">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="<?php echo base_url('owner/user') ?>">
-											<span class="sub-item">Data User</span>
-										</a>
-									</li>
-									<li>
-										<a href="<?php echo base_url('owner/user/pegawai') ?>">
-											<span class="sub-item">Data Pegawai</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
 							<a data-toggle="collapse" href="#barang">
 								<i class="fas fa-dolly"></i>
@@ -81,12 +60,12 @@
 							<div class="collapse" id="barang">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="<?php echo base_url("owner/barang") ?>">
+										<a href="<?php echo base_url("kasir/barang") ?>">
 											<span class="sub-item">Data Barang</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("owner/barang/merek") ?>">
+										<a href="<?php echo base_url("kasir/barang/merek") ?>">
 											<span class="sub-item">Data Merek Barang</span>
 										</a>
 									</li>
@@ -94,12 +73,24 @@
 							</div>
 						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
-							<a  href="<?php echo base_url('owner/barang') ?>">
+							<a  href="<?php echo base_url('kasir/barang') ?>">
 								<i class="fas fa-bell"></i>
 								<p>Notifikasi</p>
 							</a>
 						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
+						<li class="nav-item <?php
+						 if($this->uri->segment(2)=="eceran"){
+						 	echo "active";
+						 	}else if($this->uri->segment(2)=="grosir"){
+						 		echo "active";
+							 }elseif($this->uri->segment(2)=="pesanan"){
+							 	echo "active";
+							 	}elseif($this->uri->segment(2)=="hutang"){
+							 		echo "active";
+							 		}elseif($this->uri->segment(2)=="transaksi"){
+							 			echo "active";
+							 		}
+						 ?>">
 							<a data-toggle="collapse" href="#transaksi">
 								<i class="fas fa-cart-plus"></i>
 								<p>Pemesanan</p>
@@ -108,27 +99,27 @@
 							<div class="collapse" id="transaksi">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="<?php echo base_url("owner/kasir/eceran") ?>">
+										<a href="<?php echo base_url("kasir/eceran") ?>">
 											<span class="sub-item">Penjualan Eceran</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("owner/kasir/grosir") ?>">
+										<a href="<?php echo base_url("kasir/grosir") ?>">
 											<span class="sub-item">Penjualan Grosir</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("owner/kasir/pesanan") ?>">
+										<a href="<?php echo base_url("kasir/pesanan") ?>">
 											<span class="sub-item">Pesanan</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url("owner/kasir/hutang") ?>">
+										<a href="<?php echo base_url("kasir/hutang") ?>">
 											<span class="sub-item">Hutang</span>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo base_url().'owner/kasir/transaksi/riwayat_trans' ?>">
+										<a href="<?php echo base_url().'kasir/transaksi/riwayat_trans' ?>">
 											<span class="sub-item">Riwayat Pesanan</span>
 										</a>
 									</li>

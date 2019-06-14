@@ -1,5 +1,5 @@
 <?php 
-	defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 	/**
 	 * 
 	 */
@@ -17,34 +17,34 @@
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$barang['kode'] = $this->Barangmodel->id_merek();
 			$barang['merek'] = $this->Barangmodel->getmerek();
 			$barang['barang'] = $this->Barangmodel->getBarang();
 			$barang['detail_barang'] = $this->Barangmodel->getDetailBarang();
-			$this->load->view('_partial/header');
-			$this->load->view('menu/barang',$barang);
+			$this->load->view('_partial/headerowner');
+			$this->load->view('menu/owner/barang',$barang);
 			// $this->load->view('_partial/footertable');
 		}
 		public function merek()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('status') != "login"){
 				redirect(base_url("admin"));
 			}
 			$barang['kode'] = $this->Barangmodel->id_merek();
 			$barang['merek'] = $this->Barangmodel->getmerek();
 			$barang['barang'] = $this->Barangmodel->getBarang();
 			$barang['detail_barang'] = $this->Barangmodel->getDetailBarang();
-			$this->load->view('_partial/header');
-			$this->load->view('menu/merek',$barang);	
+			$this->load->view('_partial/headerowner');
+			$this->load->view('menu/owner/merek',$barang);	
 		}
 		public function add()
 		{
 			$product = $this->Barangmodel;
 			$product->tambahBarang();
-			redirect('admin/barang');
+			redirect('owner/barang');
 		}
 		public function hoho(){
 			echo(APPPATH.'../upload/');
@@ -53,33 +53,33 @@
 		{
 			$product = $this->Barangmodel;
 			$product->tambahmerek();
-			redirect('admin/barang/merek');
+			redirect('owner/barang/merek');
 		}
 		public function editModalMerek()
 		{
 			$product = $this->Barangmodel;
 			$product->updateMerek();
-			redirect('admin/barang/merek');
+			redirect('owner/barang/merek');
 		}
 		public function editModal()
 		{
 			$product = $this->Barangmodel;
 			$product->edit_barang();
-			redirect('admin/barang');
+			redirect('owner/barang');
     
 		}
 		public function hapusBarang($id)
 		{
 			if ($this->Barangmodel->deleteBarang($id)) {
 				# code...
-				redirect(site_url("admin/barang"));
+				redirect(site_url("owner/barang"));
 			}
 		}
 		public function hapusMerek($id)
 		{
 			if ($this->Barangmodel->deleteMerek($id)) {
 				# code...
-				redirect(site_url("admin/barang/merek"));
+				redirect(site_url("owner/barang/merek"));
 			}
 		}
 		function load()
@@ -120,7 +120,7 @@
 				'keterangan' => $keterangan);
 			if ($this->Barangmodel->tambahdetail($data)) {
 			 	# code...
-				redirect('admin/barang');
+				redirect('owner/barang');
 			 } 
 		}
 	}

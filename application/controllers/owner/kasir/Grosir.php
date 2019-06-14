@@ -17,14 +17,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
 				redirect(base_url("admin"));
 			}
 			$user['barang'] = $this->Kasirmodel->getBarang();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
-			$this->load->view('_partial/header');
-			$this->load->view('menu/kasirgrosir',$user);
+			$this->load->view('_partial/headerowner');
+			$this->load->view('menu/owner/kasir/kasirgrosir',$user);
 			// $this->load->view('_partial/footertable');
 		}
 		function keranjang_kasir()
@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			);
 			
 			$this->cart->insert($grosir);	
-			redirect('admin/kasir/grosir');
+			redirect('owner/kasir/grosir');
 			// echo $this->show_keranjang();
 		}
 		function updatekeranjang()
@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					);
 					$code = $this->cart->update($data); 
 					$pesan = "success";
-					redirect('admin/kasir/grosir');
+					redirect('owner/kasir/grosir');
 
 				}elseif ($qty>750 && $qty<1000 && $qty<= $key->jumlah_stok) {
 					# code...
@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'price' => $key->hrg_grosir2,
 					);
 					$code = $this->cart->update($data); 
-					redirect('admin/kasir/grosir');
+					redirect('owner/kasir/grosir');
 
 				}else if ($qty >= 1000 && $qty<= $key->jumlah_stok){
 					$data = array(
@@ -79,11 +79,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'price' => $key->hrg_grosir3,
 					);
 					$code = $this->cart->update($data);
-					redirect('admin/kasir/grosir');
+					redirect('owner/kasir/grosir');
 
 				}else{
 					
-				redirect('admin/kasir/grosir');
+				redirect('owner/kasir/grosir');
 
 				}
 			}
@@ -186,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     }
             }
             $this->cart->destroy();
-            redirect('admin/kasir/grosir');
+            redirect('owner/kasir/grosir');
 		}
 	}
 ?>
