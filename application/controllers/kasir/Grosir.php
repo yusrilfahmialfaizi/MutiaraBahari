@@ -140,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$no_invoice = $this->input->post('no_invoice');
 			$nama = $this->input->post('nama_pelanggan');
 			$id_user = $this->Usermodel->getPelanggan($nama);
-			$id_admin = $this->session->userdata("id_admin");
+			$id_admin = $this->session->userdata("id_pegawai");
 			$id_pegawai =  $id_admin;
 			$tgl=date('Y-m-d');
 			$tanggal = $tgl;
@@ -160,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'id_user' => $id_user['id_user'],
+			 	'id_user' => $id_user->id_user,
 			 	'id_pegawai' => $id_pegawai,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,

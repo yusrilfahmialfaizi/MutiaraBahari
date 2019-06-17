@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->model('Usermodel');
 			$this->load->model('Barangmodel');
 			$this->load->model('Kasirmodel');
+			$this->load->model('Ongkirmodel');
 		}
 		public function index()
 		{
@@ -23,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$user['barang'] = $this->Kasirmodel->getBarang();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
+			$user['ongkir'] = $this->Ongkirmodel->getOngkir();
 			$this->load->view('_partial/header');
 			$this->load->view('menu/kasirgrosir',$user);
 			// $this->load->view('_partial/footertable');
@@ -131,6 +133,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data=$this->Kasirmodel->get_dataharga($qty,$kode);
 			echo json_encode($data);
 		}
+		function loadi(){
+			echo $this->session->userdata("id_pegawai");
+		}
 		// // // // // // // proses  // // // // // // // 
 		function proses_jual()
 		{
@@ -139,8 +144,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// -------- No. Invoice-------------//
 			$no_invoice = $this->input->post('no_invoice');
 			$nama = $this->input->post('nama_pelanggan');
+			// $id_ongkir = $this->input->post('id');
 			$id_user = $this->Usermodel->getPelanggan($nama);
-			$id_admin = $this->session->userdata("id_admin");
+			$id_admin = $this->session->userdata("id_pegawai");
 			$id_pegawai =  $id_admin;
 			$tgl=date('Y-m-d');
 			$tanggal = $tgl;
@@ -160,8 +166,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'id_user' => $id_user['id_user'],
+			 	'id_user' => $id_user->id_user,
 			 	'id_pegawai' => $id_pegawai,
+			 	// 'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,
 			 	'total_harga' => $total,
@@ -181,12 +188,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'id_barang' => $item['id'],
                                         'qty' => $item['qty'],
                                         'harga' => $item['price'],
-                                        'subtotal' =>$subtotal);
+                                        'subtotal' =>$item['subtotal']);
                         $proses = $this->Kasirmodel->tambah_detail_jual($data_detail);
                     }
             }
             $this->cart->destroy();
             redirect('admin/kasir/grosir');
+		}
+		function getOngkir()
+		{
+			$cakupan_area = $this->input->post("cakupan_area");
+			$query = $this->Ongkirmodel->getOngkirWhere($cakupan_area);
+			foreach ($query as $key) {
+					# code...
+					$data = array(
+						'id_ongkir'	=> $key->id_ongkir,
+						'cakupan_area'	=> $key->cakupan_area,
+						'ongkir'	=> $key->ongkir
+					);
+				}
+			echo json_encode($data);
 		}
 	}
 ?>

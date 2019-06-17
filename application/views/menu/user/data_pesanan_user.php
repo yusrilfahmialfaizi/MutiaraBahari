@@ -66,6 +66,6 @@
 				</div>
 			<?php $this->load->view('_partial/foot.php') ?>
 			</div>
-			<?php $this->load->view('_partial/scripttable') ?>
+			<?php $this->load->view('_partial/scripttableagen') ?>
 		</body>
 		</html>

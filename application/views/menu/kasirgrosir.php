@@ -160,7 +160,7 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label for="nama_pelanggan">Nama Pelanggan</label>
-														<select class="form-control form-control-xl" id="nama_pelanggan" name="nama_pelanggan">
+														<select class="form-control form-control-xl" id="nama_pelanggan" name="nama_pelanggan" required>
 															<option value="0">&nbsp;</option>
 															<?php 
 																foreach ($user as $key) {
@@ -251,7 +251,7 @@
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<h3><?php echo number_format($this->cart->total()) ?></h3>
+													<h3 id="tot"><?php echo number_format($this->cart->total()) ?></h3>
 													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
 												</div>
 											</div>
@@ -268,14 +268,32 @@
 													<input type="number" class="form-control" id="kembali" name="kembali" readonly hidden="hidden">
 												</div>
 											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<label>Jenis Pembayaran</label>
-													<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
-														<option value="Cash">Cash</option>
-														<option value="Transfer">Transfer</option>
-													</select>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Jenis Pembayaran</label>
+														<select class="form-control form-control-sm" name="jenis_pembayaran" id="jenis_pembayaran">
+															<option value="Cash">Cash</option>
+															<option value="Transfer">Transfer</option>
+														</select>
+													</div>
 												</div>
+												<!-- <div class="col-md-4">
+													<div class="form-group">
+														<label>Ongkir</label>
+														<select class="form-control form-control-sm" name="ongkir" id="ongkir">
+															<option value="0">&nbsp;</option>
+															<?php 
+																foreach ($ongkir as $key) {
+															?>
+															<option><?php echo $key->id_ongkir; ?>   <?php //echo $key->alamat ?></option>
+															<?php 	
+																}
+															?>
+														</select>
+														<input type="text" name="id" id="id" class="form-control" readonly="readonly" hidden="hidden">
+													</div>
+												</div> -->
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">	
@@ -295,6 +313,26 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
+					// $("#ongkir").on('change', function(){
+					// 	var cakupan_area = $("#ongkir").val();
+					// 	$.ajax({
+					// 		url :"<?php echo base_url() ?>admin/kasir/grosir/getOngkir",
+					// 		type :"POST",
+					// 		dataType : "JSON",
+					// 		data : {cakupan_area : cakupan_area},
+					// 		cache : false,
+					// 		success : function(data){
+					// 			$.each(data,function(id_ongkir,cakupan_area,ongkir){
+					// 				$("#id").val(data.id_ongkir);
+					// 			})
+					// 			var total = $("#total").val();
+					// 			var hasil = parseInt(total) + parseInt(data.ongkir);
+					// 			$("#total").val(hasil);
+					// 			$("#tot").text(hasil.toLocaleString());
+					// 			window.alert(hasil);
+					// 		}
+					// 	})
+					// });
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -346,6 +384,11 @@
 					});
 					$("#nama_barang").select2({
 						placeholder: "Pilih Barang",
+    					allowClear: true,
+    					minimumInputLength : 2
+					});
+					$("#ongkir").select2({
+						placeholder: "Pilih harga ongkir",
     					allowClear: true,
     					minimumInputLength : 2
 					});

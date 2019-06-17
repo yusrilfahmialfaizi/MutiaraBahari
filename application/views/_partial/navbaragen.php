@@ -91,11 +91,12 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-bell"></i>
-								<span class="notification">4</span>
+								<!-- <span class="notification" id="notification"></span> -->
+								<div id="notifikasion"></div>
 							</a>
 							<ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
 								<li>
-									<div class="dropdown-title">You have 4 new notification</div>
+									<div class="dropdown-title" id="jumlah">You have <?php ?> new notification</div>
 								</li>
 								<li>
 									<div class="notif-scroll scrollbar-outer">

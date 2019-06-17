@@ -31,7 +31,7 @@
 		function cek_data($table,$where){		
 			return $this->db->get_where($table,$where);
 		}
-		public function getPelanggan($nama)
+		function getPelanggan($nama)
 		{
 			$hasil=$this->db->query("SELECT * FROM user WHERE nama='$nama'");
 	        if($hasil->num_rows()>0){

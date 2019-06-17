@@ -55,7 +55,7 @@
 			</div>
 			<?php $this->load->view('_partial/foot') ?>
 		</div>
-		<?php $this->load->view("_partial/script") ?>
+		<?php $this->load->view("_partial/scripttableagen") ?>
 	</body>
 	</html>
 

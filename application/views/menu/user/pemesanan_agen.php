@@ -174,7 +174,7 @@
 				</div>
 			<?php $this->load->view('_partial/foot.php') ?>
 			</div>
-			<?php $this->load->view('_partial/scripttable') ?>
+			<?php $this->load->view('_partial/scripttableagen') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
 					$(document).on('click', '.hapus_cart', function(){

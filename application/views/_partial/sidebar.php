@@ -79,9 +79,15 @@
 							</div>
 						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
-							<a  href="<?php echo base_url('admin/barang') ?>">
+							<a  href="<?php echo base_url('admin/notifikasi') ?>">
 								<i class="fas fa-bell"></i>
 								<p>Notifikasi</p>
+							</a>
+						</li>
+						<li class="nav-item <?php if($this->uri->segment(2)=="ongkir"){echo "active";}?>">
+							<a  href="<?php echo base_url('admin/ongkir') ?>">
+								<i class="fas fa-shipping-fast"></i>
+								<p>Ongkir</p>
 							</a>
 						</li>
 						<li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
