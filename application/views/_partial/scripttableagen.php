@@ -129,20 +129,15 @@
 				$.ajax({
 					url :"<?php echo base_url('user/agen/notifikasi/getnotif') ?>",
 					type : "POST",
-					// dataType : "JSON",
 					success : function(data){
-						// $.each(JSONparse(data), function(judul){
-								console.log(data);
-								$("#not").html(data);
-
-						// // 	// for (var i = 0; i < data.length; i++) {
-						// // 		// $("#judul").text(data.judul);
-						// // 		// $("#isi").text(data.isi);
-						// // 		// $("#url").text("base_url()"data.id_notifikasi"");
-						// // 	// }
-						// })
-						// $("#notification").text(""+response+"");
-						// setTimeout("tampil()",1000);
+							$("#not").html(data);
+					}
+				});
+				$.ajax({
+					url :"<?php echo base_url('user/agen/notifikasi/getnotif') ?>",
+					type : "POST",
+					success : function(data){
+							$("#not").html(data);
 					}
 				});
 			}
