@@ -2,6 +2,7 @@ package com.example.android.mutiarabahari;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -57,6 +58,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Toast.makeText(mContext, "ID Merek : " + mData.get(position).get("id_merek"), Toast.LENGTH_SHORT).show();
 				AppCompatActivity activity = (AppCompatActivity) v.getContext();
+				Barang barang = new Barang();
+				Bundle bundle=new Bundle();
+				bundle.putString("ID_MEREK",mData.get(position).get("id_merek"));
+//				bundle.putString("JOB",current.job);
+				barang.setArguments(bundle);
 				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
 //				FragmentManager fragmentManager = getChildFragmentManager();
 //				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
