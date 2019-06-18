@@ -19,5 +19,10 @@
 		{
 			return $this->db->query('CALL count_notif("001")')->result();
 		}
+		function getnotif()
+		{
+			$this->db->order_by('waktu DESC, status ASC');
+			return $this->db->get("notifikasi")->result();
+		}
 	}
 ?>

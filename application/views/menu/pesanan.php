@@ -131,11 +131,11 @@
 													</table>
 													<div class="row">
 														<div class="col-md-4">
-															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detail/<?php echo $p->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
+															<a href="<?php echo base_url()?>admin/kasir/pesanan/Detailproses/<?php echo $p->id_pesanan ?>" class="btn btn-primary btn-round btn-sm  mr-auto">Lihat Barang</a>
 															
 														</div>
 														<div class="col-md-4">
-															<button type="button" id="kemas" class="kemas btn btn-success btn-round btn-sm  mr-auto" data-id="<?php echo $p->id_pesanan ?>">Kemas</button>
+															<button type="button" id="kemas" class="kemas btn btn-success btn-round btn-sm  mr-auto" data-id="<?php echo $p->id_pesanan ?>">Proses & Kemas</button>
 														</div>
 													</div>
 												</div>

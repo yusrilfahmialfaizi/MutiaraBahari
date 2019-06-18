@@ -82,11 +82,24 @@
 		{
 			$this->db->insert('detail_pesanan', $detail_pesanan);
 		}
+		function tambah($transaksi)
+		{
+			$this->db->insert('transaksi', $transaksi);
+		}
+		function tambah_detail_jual($data)
+		{
+		 	$this->db->insert('detail_transaksi', $data);
+		}
 		function getDetail($no_pesanan)
 		{
 			$procedure = "CALL tampildetailpesanan(?)";
 			$query = $this->db->query($procedure, $no_pesanan);
-			return $query->result_array();
+			return $query->result();
+		}
+		function getDetailPesanan($id_pesanan)
+		{
+			$this->db->where('id_pesanan', $id_pesanan);
+			return $this->db->get('detail_pesanan')->result();
 		}
 		function editDetail($id_detail_pesan, $edit,$id_pesanan)
 		{

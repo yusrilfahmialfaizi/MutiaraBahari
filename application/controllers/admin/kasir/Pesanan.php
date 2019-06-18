@@ -47,6 +47,15 @@
 			$this->load->view('_partial/header');
 			$this->load->view('menu/user/data_pesanan', $data);
 		}
+		function Detailproses($no_pesanan)
+		{
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
+				redirect(base_url("admin"));
+			}
+			$data['detail_pesanan'] = $this->Pesananmodel->getDetail($no_pesanan);
+			$this->load->view('_partial/header');
+			$this->load->view('menu/user/data_pesananproses', $data);
+		}
 		function editdetail()
 		{
 			$id_detail_pesan = $this->input->post('id_detail_pesanan');
@@ -81,6 +90,52 @@
 			$id = $this->input->post('id_pesanan');
 			$this->Pesananmodel->konfirmasi($id);
 			redirect("admin/kasir/pesanan/");
+		}
+		function prosesjual()
+		{
+			$id_pesanan = $this->input->post("id_pesanan");
+			//Transaksi
+			$no_invoice = $this->Kasirmodel->kode();
+			date_default_timezone_set('Asia/Jakarta');
+			$tgl=date('Y-m-d');
+			$tanggal = $tgl;
+			$jtp=date('Y-m-d');
+			$tujuh_hari        = mktime(0,0,0,date("m"),date("d")+7,date("Y"));
+			$kembali        = date("Y-m-d", $tujuh_hari);
+			$jtp = $kembali;
+			$variable = $this->Pesananmodel->pesananproses();
+			foreach ($variable as $key) :
+				# code...
+				$transaksi = array(
+				'id_transaksi' => $no_invoice,
+			 	'id_user' => $key->id_user,
+			 	'id_pegawai' => $this->session->userdata("id_pegawai"),
+			 	'tanggal' => $tanggal,
+			 	'jatuh_tempo' => $jtp,
+			 	'total_harga' => $key->total_harga,
+			 	'bayar' => $key->total_harga,
+			 	'kembalian' => "0",
+			 	'jenis_pembayaran' => "Cash",
+			 	'status_pembayaran' => "Lunas",
+			 	'bukti_pembayaran' => '');
+			endforeach;
+			// print_r($detail_pesanan);
+			$jual = $this->Kasirmodel->tambah($transaksi);
+			$detail_pesanan = $this->Pesananmodel->getDetailPesanan($id_pesanan);
+			foreach ($detail_pesanan as $a) {
+				# code...
+				$data = array(
+					'id_transaksi' =>$no_invoice,
+					'id_barang' => $a->id_barang,
+					'qty' => $a->qty,
+					'harga' => $a->harga,
+					'subtotal' => $a->subtotal,
+					 );
+			}
+			// endforeach;
+			$proses = $this->Kasirmodel->tambah_detail_jual($data);
+			redirect(base_url("admin/kasir/pesanan/"));
+			// echo $id_pesanan."/".$no_invoice."/".$data['id_barang']." / ".$transaksi['total_harga'];
 		}
 		function proses()
 		{

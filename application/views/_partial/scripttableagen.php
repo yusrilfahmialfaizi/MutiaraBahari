@@ -98,29 +98,53 @@
 		});
 			function tampil(){
 
-				$.get("<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>", {}, function(response){
-					// $("#notification").text(""+response+"");
-					if (""+response+"" > 0 )
-					 {
-						// window.alert("1");
-						// document.getElementById("notification").style.display = 'none';
-								
-						$("#notifikasion").append("<span class='notification' id='notification'>"+response+"</span>");
-						setTimeout("tampil()",0);
-					}else{
-						$("#notification").remove();
-						setTimeout("tampil()",0);
-					}
-				},'json');
-				// $.ajax({
-				// 	url :"<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>",
-				// 	type : "POST",
-				// 	dataType : "JSON",
-				// 	success : function(response){
+				// $.get("<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>", {}, function(response){
+				// 	if (""+response+"" > 0 )
+				// 	 {		
 				// 		$("#notification").text(""+response+"");
-				// 		timer = setTimeout(5000);
+				// 		// $("#notifikasion").append("<span class='notification' id='notification'>"+response+"</span>");
+				// 		// $("#punya").prepend("<div class='dropdown-title' >You have "+response+" new notification</div>");
+				// 		setTimeout("tampil()",1000);
+				// 	}else{
+				// 		$("#notification").remove();
+				// 		setTimeout("tampil()",0);
 				// 	}
-				// });
+				// },'json');
+				$.ajax({
+					url :"<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>",
+					type : "GET",
+					dataType : "JSON",
+					success : function(response){
+						if (""+response+"" > 0 ){		
+							document.getElementById('notification').style.display="inline";
+							$("#notification").text(""+response+"");
+							setTimeout("tampil()",1000);
+						}else if (""+response+"" < 1){
+						// $("#notification").remove();
+							document.getElementById('notification').style.display="none";
+							setTimeout("tampil()",0);
+						}
+					}
+				});
+				$.ajax({
+					url :"<?php echo base_url('user/agen/notifikasi/getnotif') ?>",
+					type : "POST",
+					// dataType : "JSON",
+					success : function(data){
+						// $.each(JSONparse(data), function(judul){
+								console.log(data);
+								$("#not").html(data);
+
+						// // 	// for (var i = 0; i < data.length; i++) {
+						// // 		// $("#judul").text(data.judul);
+						// // 		// $("#isi").text(data.isi);
+						// // 		// $("#url").text("base_url()"data.id_notifikasi"");
+						// // 	// }
+						// })
+						// $("#notification").text(""+response+"");
+						// setTimeout("tampil()",1000);
+					}
+				});
 			}
 	</script>
 
