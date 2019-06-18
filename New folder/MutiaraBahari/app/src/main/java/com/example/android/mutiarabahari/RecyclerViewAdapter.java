@@ -1,7 +1,11 @@
 package com.example.android.mutiarabahari;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<HashMap<String, String>> mData;
 
     public RecyclerViewAdapter(Homepage homepage, ArrayList<HashMap<String,String>> mData) {
-        this.mContext = homepage;
+        this.mContext = homepage.getActivity();
         this.mData = mData;
     }
 
@@ -52,13 +56,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "ID Merek : " + mData.get(position).get("id_merek"), Toast.LENGTH_SHORT).show();
+				AppCompatActivity activity = (AppCompatActivity) v.getContext();
+				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
+//				FragmentManager fragmentManager = getChildFragmentManager();
+//				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////				Barang barang = new Barang();
+////				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+////				fragmentTransaction.replace(R.id.fragment_container, barang);
+////				fragmentTransaction.addToBackStack(null);
+////				fragmentTransaction.commit();
             }
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return mData.size();
+    	return mData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder

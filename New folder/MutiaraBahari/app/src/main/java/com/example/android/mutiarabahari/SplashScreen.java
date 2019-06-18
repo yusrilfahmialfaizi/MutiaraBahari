@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(), Homepage.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         }, waktu_loading);
