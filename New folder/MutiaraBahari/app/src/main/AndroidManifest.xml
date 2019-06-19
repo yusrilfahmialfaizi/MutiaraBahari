@@ -12,11 +12,13 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity
-<<<<<<< Updated upstream
+			Updated upstream
 			android:name=".Notif"
 			android:label="@string/title_activity_notif"
-			android:theme="@style/AppTheme.NoActionBar"></activity>
-		<activity
+			android:theme="@style/AppTheme.NoActionBar"
+			>
+
+		</activity>
 =======
 >>>>>>> Stashed changes
 			android:name=".MainActivity"
