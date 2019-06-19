@@ -12,15 +12,6 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity
-			Updated upstream
-			android:name=".Notif"
-			android:label="@string/title_activity_notif"
-			android:theme="@style/AppTheme.NoActionBar"
-			>
-
-		</activity>
-=======
->>>>>>> Stashed changes
 			android:name=".MainActivity"
 			android:label="@string/title_activity_homepage"
 			android:theme="@style/AppTheme.NoActionBar" />
