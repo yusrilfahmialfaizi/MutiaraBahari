@@ -1,42 +1,26 @@
 package com.example.android.mutiarabahari;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+public class Notif extends AppCompatActivity
+		implements NavigationView.OnNavigationItemSelectedListener {
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
+		setContentView(R.layout.activity_notif);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
@@ -48,20 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-
-
-		if  (savedInstanceState == null){
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-					new Homepage()).commit();
-			navigationView.setCheckedItem(R.id.nav_beranda);
-		}
-//        gridView = (GridView) findViewById(R.id.Gridview);
-//
-//        images = new ArrayList<>();
-//        nama = new ArrayList<>();
-
 	}
-
 
 	@Override
 	public void onBackPressed() {
@@ -80,12 +51,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+
+		return super.onOptionsItemSelected(item);
+	}
+
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
-	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
-//		int id = item.getItemId();
-//
+		//int id = item.getItemId();
 		switch (item.getItemId()){
 			case R.id.nav_beranda:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Homepage()).commit();
@@ -97,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order()).commit();
 				break;
 			case R.id.nav_notifikasi:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Notifikasi()).commit();
+				Intent intent = new Intent(this, Notif.class);
 				break;
 			case R.id.nav_message:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Pesan()).commit();
@@ -105,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.nav_bantuan:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
 				break;
+
 		}
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
