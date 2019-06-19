@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //        holder.text_merek.setText(mData.get(position).getMerek());
 //        holder.img_gambar_merek.setImageResource(mData.get(position).getGambar());
         Glide.with(mContext)
-                .load("http://192.168.43.70/mutiarabahari/upload/" + mData.get(position).get("gambar"))
+                .load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
                 .transition(withCrossFade())
                 .placeholder(R.mipmap.ic_launcher)
                 .into(holder.img_gambar_merek);
@@ -61,16 +61,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 				Barang barang = new Barang();
 				Bundle bundle=new Bundle();
 				bundle.putString("ID_MEREK",mData.get(position).get("id_merek"));
-//				bundle.putString("JOB",current.job);
 				barang.setArguments(bundle);
 				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
-//				FragmentManager fragmentManager = getChildFragmentManager();
-//				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-////				Barang barang = new Barang();
-////				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-////				fragmentTransaction.replace(R.id.fragment_container, barang);
-////				fragmentTransaction.addToBackStack(null);
-////				fragmentTransaction.commit();
             }
         });
     }
