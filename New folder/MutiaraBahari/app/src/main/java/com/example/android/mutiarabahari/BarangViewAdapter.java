@@ -25,8 +25,8 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 	private Context mContext;
 	private ArrayList<HashMap<String, String>> mBarang;
 
-	public BarangViewAdapter(Barang barang, ArrayList<HashMap<String,String>> mBarang) {
-		this.mContext = barang.getActivity();
+	public BarangViewAdapter(ListBarang barang, ArrayList<HashMap<String,String>> mBarang) {
+		this.mContext = barang;
 		this.mBarang = mBarang;
 	}
 

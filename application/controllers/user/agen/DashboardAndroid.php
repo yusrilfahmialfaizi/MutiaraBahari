@@ -19,9 +19,9 @@
  			echo json_encode(array('data' => $data));
  			// print_r($data);
  		}
- 		function getNamaBarang($id)
+ 		function getNamaBarang()
  		{
- 			// $id = $this->input->post('id');
+ 			$id = $this->input->post('id_merek');
  			$data = $this->Barangmodel->getIdbarang($id);
  			echo json_encode(array('data' => $data));
  			// print_r($data);

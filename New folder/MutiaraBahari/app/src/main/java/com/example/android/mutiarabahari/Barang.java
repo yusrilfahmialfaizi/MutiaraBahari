@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public class Barang extends Fragment {
 
-	private static final String data_url = "http://192.168.43.37/mutiarabahari/user/agen/DashboardAndroid/getNamaBarang/A002"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+	private static final String data_url = "http://192.168.43.37/mutiarabahari/user/agen/DashboardAndroid/getNamaBarang"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
 	private RecyclerView grid;
 	private ArrayList<HashMap<String,String>> mBarang;
 
@@ -43,6 +43,16 @@ public class Barang extends Fragment {
 	private StringRequest stringRequest;
 
 	View myViewBarang;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (getArguments() != null)
+		{
+//			Toast.makeText(getContext(),getArguments().getString("id_merek"),Toast.LENGTH_SHORT).show();
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -52,7 +62,12 @@ public class Barang extends Fragment {
 		GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		grid.setLayoutManager(llm);
-
+		Bundle bundle = getArguments();
+		if (bundle != null)
+		{
+			Toast.makeText(getContext(),""+ bundle.getString("id") ,Toast.LENGTH_SHORT).show();
+		}
+		Toast.makeText(getContext(),""+ bundle ,Toast.LENGTH_SHORT).show();
 		load();
 //		Bundle arguments = getArguments();
 //
@@ -70,42 +85,42 @@ public class Barang extends Fragment {
 
 	public void load()
 	{
-		requestQueue = Volley.newRequestQueue(this.getActivity());
-		mBarang = new ArrayList<HashMap<String, String>>();
-		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-				try {
-					JSONObject jsonObject = new JSONObject(response);
-					JSONArray jsonArray = jsonObject.getJSONArray("data");
-					for (int i = 0; i < jsonArray.length(); i++) {
-						JSONObject json = jsonArray.getJSONObject(i);
-						HashMap<String, String> map = new HashMap<String, String>();
-						map.put("id_barang", json.getString("id_barang"));
-						map.put("nama_barang", json.getString("nama_barang"));
-						map.put("harga", json.getString("harga"));
-						map.put("jumlah_stok", json.getString("jumlah_stok"));
-						map.put("hrg_grosir1", json.getString("hrg_grosir1"));
-						map.put("hrg_grosir2", json.getString("hrg_grosir2"));
-						map.put("hrg_grosir3", json.getString("hrg_grosir3"));
-						map.put("id_merek", json.getString("id_merek"));
-						map.put("gambar", json.getString("gambar"));
-						mBarang.add(map);
-						BarangViewAdapter adapter = new BarangViewAdapter(Barang.this, mBarang);
-						grid.setAdapter(adapter);
-
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		},
-					new Response.ErrorListener() {
-				@Override
-				public void onErrorResponse(VolleyError error) {
-					Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-				}
-		});
-		requestQueue.add(stringRequest);
+//		requestQueue = Volley.newRequestQueue(this.getActivity());
+//		mBarang = new ArrayList<HashMap<String, String>>();
+//		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
+//			@Override
+//			public void onResponse(String response) {
+//				try {
+//					JSONObject jsonObject = new JSONObject(response);
+//					JSONArray jsonArray = jsonObject.getJSONArray("data");
+//					for (int i = 0; i < jsonArray.length(); i++) {
+//						JSONObject json = jsonArray.getJSONObject(i);
+//						HashMap<String, String> map = new HashMap<String, String>();
+//						map.put("id_barang", json.getString("id_barang"));
+//						map.put("nama_barang", json.getString("nama_barang"));
+//						map.put("harga", json.getString("harga"));
+//						map.put("jumlah_stok", json.getString("jumlah_stok"));
+//						map.put("hrg_grosir1", json.getString("hrg_grosir1"));
+//						map.put("hrg_grosir2", json.getString("hrg_grosir2"));
+//						map.put("hrg_grosir3", json.getString("hrg_grosir3"));
+//						map.put("id_merek", json.getString("id_merek"));
+//						map.put("gambar", json.getString("gambar"));
+//						mBarang.add(map);
+//						BarangViewAdapter adapter = new BarangViewAdapter(ListBarang.this, mBarang);
+//						grid.setAdapter(adapter);
+//
+//					}
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		},
+//					new Response.ErrorListener() {
+//				@Override
+//				public void onErrorResponse(VolleyError error) {
+//					Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//				}
+//		});
+//		requestQueue.add(stringRequest);
 	}
 }

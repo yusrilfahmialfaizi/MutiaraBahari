@@ -66,6 +66,9 @@ public class Homepage extends Fragment {
 		GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		grid.setLayoutManager(llm);
+		Bundle bundle = new Bundle();
+		bundle.putString("id","id");
+		new Barang().setArguments(bundle);
 
 		getData();
 		return myView;

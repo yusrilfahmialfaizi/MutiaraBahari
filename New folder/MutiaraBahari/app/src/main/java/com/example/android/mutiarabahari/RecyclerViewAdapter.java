@@ -1,6 +1,7 @@
 package com.example.android.mutiarabahari;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -24,15 +25,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 	private Context mContext;
 	private ArrayList<HashMap<String, String>> mData;
 
+
 	public RecyclerViewAdapter(Homepage homepage, ArrayList<HashMap<String,String>> mData) {
 		this.mContext = homepage.getActivity();
 		this.mData = mData;
 	}
 
 	@Override
-	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType)
 	{
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item,null);
+
+//		final ViewHolder holder = new ViewHolder(view);
+//		holder.img_gambar_merek.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+////				Toast.makeText(mContext,""+mData.get(viewType).get("id_merek"),Toast.LENGTH_SHORT).show();
+////				Bundle bundle = new Bundle();
+////				bundle.putString("id_merek", mData.get(viewType).get("id_merek"));
+////				Barang barang = new Barang();
+////				barang.setArguments(bundle);
+////				AppCompatActivity activity = (AppCompatActivity) v.getContext();
+////				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
+//
+//			}
+//		});
 
 		return new ViewHolder(view);
 	}
@@ -51,13 +68,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 		holder.img_gambar_merek.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mContext, "ID Merek : " + mData.get(position).get("id_merek"), Toast.LENGTH_SHORT).show();
+////				Toast.makeText(mContext, "ID Merek : " + mData.get(position).get("id_merek"), Toast.LENGTH_SHORT).show();
 				AppCompatActivity activity = (AppCompatActivity) v.getContext();
-				Barang barang = new Barang();
-				Bundle bundle=new Bundle();
-				bundle.putString("id_merek",mData.get(position).get("id_merek"));
-				barang.setArguments(bundle);
-				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
+//				Bundle bundle=new Bundle();
+//				bundle.putString("id_merek",mData.get(position).get("id_merek"));
+//				Barang barang = new Barang();
+//				barang.setArguments(bundle);
+//
+//				Toast.makeText(mContext,""+bundle,Toast.LENGTH_SHORT).show();
+//				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
+				Intent intent = new Intent(activity.getBaseContext(), ListBarang.class);
+				intent.putExtra("id_merek", mData.get(position).get("id_merek"));
+				mContext.startActivity(intent);
 			}
 		});
 	}
@@ -71,6 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 	public static class ViewHolder extends RecyclerView.ViewHolder
 	{
 
+
 		TextView text_merek;
 		ImageView img_gambar_merek;
 
@@ -81,6 +104,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 			img_gambar_merek = (ImageView) itemView.findViewById(R.id.gambar_merek);
 		}
 	}
-
 }
 
