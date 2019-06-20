@@ -63,6 +63,10 @@
 		{
 			return $this->db->get_where('barang',["id_barang"=>$id]->row());
 		}
+		public function getIdbarang($id)
+		{
+			return $this->db->get_where('barang',array("id_merek"=>$id))->result();
+		}
 		// tambah barang
 		public function tambahBarang()
 		{

@@ -19,11 +19,12 @@
  			echo json_encode(array('data' => $data));
  			// print_r($data);
  		}
- 		function getNamaBarang()
+ 		function getNamaBarang($id)
  		{
- 			$data = $this->Barangmodel->getBarang();
- 			echo json_encode($data);
- 			print_r($data);
+ 			// $id = $this->input->post('id');
+ 			$data = $this->Barangmodel->getIdbarang($id);
+ 			echo json_encode(array('data' => $data));
+ 			// print_r($data);
  		}
  	}
 ?>
