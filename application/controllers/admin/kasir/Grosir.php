@@ -92,16 +92,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// return json_encode($pesan);
 			// redirect('admin/kasir/grosir');
 		}
-		function load($nama){
+		function load(){
 			// $this->cart->destroy();
 			// $item = $this->cart->contents();
 			// $items = $this->cart->get_item('cc315a8538112da1fb365dbd15079d54');
 			// $item = $this->session->all_userdata();
-			$item = $this->Usermodel->getPelanggan($nama);
-			echo "<pre>";
-			print_r($item['id_user']);
-			echo "</pre>";
-			print_r($items);
+			// $item = $this->Usermodel->getPelanggan($nama);
+			// echo "<pre>";
+			// print_r($item['id_user']);
+			// echo "</pre>";
+			// print_r($items);
+			$data = $this->Ongkirmodel->getOngkir();
+			print_r($data);
 		}
 		function load_cart()
 		{

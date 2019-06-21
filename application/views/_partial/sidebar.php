@@ -93,7 +93,7 @@
 						<li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
 							<a data-toggle="collapse" href="#transaksi">
 								<i class="fas fa-cart-plus"></i>
-								<p>Pemesanan</p>
+								<p>Pesanan & Penjualan</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="transaksi">

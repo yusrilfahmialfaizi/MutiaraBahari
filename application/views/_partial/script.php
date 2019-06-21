@@ -41,13 +41,18 @@
 	<script src="<?php echo base_url('assets/js/setting-demo.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/demo.js')?>"></script>
 	<script>
+		<?php foreach ($user as $key): ?>
+			<?php foreach ($agen as $a): ?>
+			var agen = "<?php echo $a->jumlah ?>";
+			// window.alert(agen);
+			var userpersen = (parseInt(agen)/parseInt("<?php echo $key->jumlah ?>"))*100;
 		Circles.create({
 			id:'circles-1',
 			radius:45,
-			value:60,
+			value:userpersen,
 			maxValue:100,
 			width:7,
-			text: 5,
+			text: agen,
 			colors:['#f1f1f1', '#FF9E27'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -55,14 +60,18 @@
 			styleWrapper:true,
 			styleText:true
 		})
-
+			<?php endforeach ?>
+		<?php foreach ($pelanggan as $p): ?>
+			var pelanggan = "<?php echo $p->jumlah ?>";
+			var pelangganpersen = (parseInt(pelanggan)/parseInt("<?php echo $key->jumlah ?>"))*100;
+			// window.alert(agen);
 		Circles.create({
 			id:'circles-2',
 			radius:45,
-			value:70,
+			value:pelangganpersen,
 			maxValue:100,
 			width:7,
-			text: 36,
+			text: pelanggan,
 			colors:['#f1f1f1', '#2BB930'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -70,14 +79,19 @@
 			styleWrapper:true,
 			styleText:true
 		})
+		<?php endforeach ?>
+		<?php endforeach ?>
 
+		<?php foreach ($allpegawai as $all): ?>
+		<?php foreach ($pegawai as $key): ?>
+			
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:40,
+			value:(parseInt("<?php echo $key->jumlah ?>")/parseInt("<?php echo $all->jumlah ?>"))*100,
 			maxValue:100,
 			width:7,
-			text: 12,
+			text: <?php echo $key->jumlah ?>,
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -85,6 +99,8 @@
 			styleWrapper:true,
 			styleText:true
 		})
+		<?php endforeach ?>
+		<?php endforeach ?>
 
 		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 

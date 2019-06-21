@@ -1,4 +1,3 @@
-	
 	<?php ?>
 	<div class="main-panel">
 		<div class="content">
@@ -214,27 +213,30 @@
 									                    	<?php echo $items['id']?>
 								                    	</td>
 									                    <td>
-									                    	<div class="col-md-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
-									                    		</div>
-									                    	</div>
+									                    	<?php echo $items['name']?>
+									                    	<!-- <div class="col-md-12">
+									                    		<div class="form-group"> -->
+									                    			<!-- <input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly> -->
+									                    		<!-- </div>
+									                    	</div> -->
 									                    </td>
 									                    <td>
-									                    	<div class="col-sm-12">
+									                    	<?php echo $items['qty']?>
+									                    	<!-- <div class="col-sm-12">
 									                    		<div class="form-group">
 									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
 									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
 									                    		</div>
-									                    	</div>
+									                    	</div> -->
 									                    </td>
 									                    <td><?php echo number_format($items['price'])?></td>
 									                    <td>
-										                    <div class="col-md-12">
+									                    	<?php echo number_format($items['subtotal'])?>
+										                    <!-- <div class="col-md-12">
 									                			<div class="form-group">
 									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
 									                			</div>
-									                		</div>
+									                		</div> -->
 									                	</td>
 									                    <td>
 									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
@@ -253,6 +255,13 @@
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
 													<h3 id="tot"><?php echo number_format($this->cart->total()) ?></h3>
 													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
+												</div>
+											</div>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Biaya Pengiriman </label>
+													<h3 id="hargaongkir"></h3>
+													<input type="number" class="form-control" id="hrg_ongkir" name="hrg_ongkir" value="" readonly hidden="hidden">
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
@@ -278,7 +287,7 @@
 														</select>
 													</div>
 												</div>
-												<!-- <div class="col-md-4">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label>Ongkir</label>
 														<select class="form-control form-control-sm" name="ongkir" id="ongkir">
@@ -286,14 +295,14 @@
 															<?php 
 																foreach ($ongkir as $key) {
 															?>
-															<option><?php echo $key->id_ongkir; ?>   <?php //echo $key->alamat ?></option>
+															<option><?php echo $key->cakupan_area ?></option>
 															<?php 	
 																}
 															?>
 														</select>
 														<input type="text" name="id" id="id" class="form-control" readonly="readonly" hidden="hidden">
 													</div>
-												</div> -->
+												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">	
@@ -313,26 +322,29 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-					// $("#ongkir").on('change', function(){
-					// 	var cakupan_area = $("#ongkir").val();
-					// 	$.ajax({
-					// 		url :"<?php echo base_url() ?>admin/kasir/grosir/getOngkir",
-					// 		type :"POST",
-					// 		dataType : "JSON",
-					// 		data : {cakupan_area : cakupan_area},
-					// 		cache : false,
-					// 		success : function(data){
-					// 			$.each(data,function(id_ongkir,cakupan_area,ongkir){
-					// 				$("#id").val(data.id_ongkir);
-					// 			})
-					// 			var total = $("#total").val();
-					// 			var hasil = parseInt(total) + parseInt(data.ongkir);
-					// 			$("#total").val(hasil);
-					// 			$("#tot").text(hasil.toLocaleString());
-					// 			window.alert(hasil);
-					// 		}
-					// 	})
-					// });
+					$("#ongkir").on('change', function(){
+						var cakupan_area = $("#ongkir").val();
+						$.ajax({
+							url :"<?php echo base_url() ?>admin/kasir/grosir/getOngkir",
+							type :"POST",
+							dataType : "JSON",
+							data : {cakupan_area : cakupan_area},
+							cache : false,
+							success : function(data){
+								$.each(data,function(id_ongkir,cakupan_area,ongkir){
+									$("#id").val(data.id_ongkir);
+									$("#hargaongkir").text(data.ongkir);
+									$("#hrg_ongkir").val(data.ongkir);
+								})
+								// var total = $("#total").val();
+								var ongkir = $("#hrg_ongkir").val();
+								var hasil = parseInt(<?php 	echo $this->cart->total() ?>) + parseInt(ongkir);
+								$("#total").val(hasil);
+								$("#tot").text(hasil.toLocaleString());
+								window.alert(hasil);
+							}
+						})
+					});
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({

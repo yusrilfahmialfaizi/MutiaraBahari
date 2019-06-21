@@ -87,29 +87,9 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			// var data = $('#notification').val();
-			// $("#notification").load(tampil());
-			// $.getJSON("<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>",function(data){
-			// 	$.each(data.result, function(){
-			// 		window.alert(this['jumlah']);
-			// 	})
-			// })
 			tampil();
 		});
 			function tampil(){
-
-				// $.get("<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>", {}, function(response){
-				// 	if (""+response+"" > 0 )
-				// 	 {		
-				// 		$("#notification").text(""+response+"");
-				// 		// $("#notifikasion").append("<span class='notification' id='notification'>"+response+"</span>");
-				// 		// $("#punya").prepend("<div class='dropdown-title' >You have "+response+" new notification</div>");
-				// 		setTimeout("tampil()",1000);
-				// 	}else{
-				// 		$("#notification").remove();
-				// 		setTimeout("tampil()",0);
-				// 	}
-				// },'json');
 				$.ajax({
 					url :"<?php echo base_url('user/agen/notifikasi/jumlah_notif') ?>",
 					type : "GET",

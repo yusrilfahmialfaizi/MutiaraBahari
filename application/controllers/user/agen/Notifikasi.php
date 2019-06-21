@@ -12,25 +12,35 @@
 			parent::__construct();
 			$this->load->model("Notifikasimodel");
 		}
+		function index()
+		{
+			if($this->session->userdata('stat') != "login"){
+				redirect(base_url("user/login"));
+			}
+			$data['notif'] = $this->Notifikasimodel->getnotifall();
+			$this->Notifikasimodel->update();
+			$this->load->view('_partial/headeragen');
+			$this->load->view('menu/user/notifikasi',$data);
+		}
 		function getnotif()
 		{
 			$datas = $this->Notifikasimodel->getnotif();
+
 			foreach ($datas as $key) {
 			// 	# code...
 				$data = '';
 				$data = 
-					'<div class="notif-center">
+					'
 							<a href="">
 								<div class="col-md-12">
-									<div class="form-group">
-										<div class="notif-content">
-											<span><strong class="block">'.$key->judul.'</strong></span>
-											<span class="time">'.$key->isi.'</span>
+									<div class="form-group" id="form-group">
+										<div class="notif-content" id="notif-content">
+											<span><strong class="block" id="judul">Admin telah menambahkan "'.$key->judul.'"</strong></span>
+											<span class="time" id="isi">'.$key->waktu.'</span>
 										</div>
 									</div>
 								</div>
-							</a>
-						</div>';
+							</a>';
 				// $data = array('judul' => $key->judul );
 				// echo json_encode($data);
 						echo $data;

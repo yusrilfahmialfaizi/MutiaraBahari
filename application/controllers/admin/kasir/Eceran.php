@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->model('Usermodel');
 			$this->load->model('Barangmodel');
 			$this->load->model('Kasirmodel');
+			$this->load->model('Ongkirmodel');
 		}
 		public function index()
 		{
@@ -23,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$user['barang'] = $this->Kasirmodel->getBarang();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
+			$user['ongkir'] = $this->Ongkirmodel->getOngkir();
 			$this->load->view('_partial/header');
 			$this->load->view('menu/kasireceran',$user);
 			// $this->load->view('_partial/footertable');
@@ -137,6 +139,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
             $this->cart->destroy();
             redirect('admin/kasir/eceran');
+		}
+		function getOngkir()
+		{
+			$cakupan_area = $this->input->post("cakupan_area");
+			$query = $this->Ongkirmodel->getOngkirWhere($cakupan_area);
+			foreach ($query as $key) {
+					# code...
+					$data = array(
+						'id_ongkir'	=> $key->id_ongkir,
+						'cakupan_area'	=> $key->cakupan_area,
+						'ongkir'	=> $key->ongkir
+					);
+				}
+			echo json_encode($data);
 		}
 	}
 ?>

@@ -99,7 +99,12 @@
 									<div id="punya"></div>
 								</li>
 								<li>
-									<div class="notif-scroll scrollbar-outer" id="not"></div>
+									<div class="notif-scroll scrollbar-outer">
+										<div class="notif-center" id="not"></div>
+									</div>
+								</li>
+								<li>
+									<a class="see-all" id="see-all" href="<?php echo base_url() ?>user/agen/notifikasi">See all notifications<i class="fa fa-angle-right"></i> </a>
 								</li>
 							</ul>
 						</li>

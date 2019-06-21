@@ -11,8 +11,7 @@
 								<div class="card-header">
 									<div class="card-title">Tambah Notifikasi</div>
 									<div class="card-category">
-										Memberikan notifikasi atau pemberitahuan kepada pelanggan 
-										<!-- <a class="link" href="https://bootstrap-notify.remabledesigns.com/">Bootstrap Notify</a> -->
+										Memberikan notifikasi atau pemberitahuan kepada pelanggan
 									</div>
 								</div>
 								<div class="card-body">
@@ -51,63 +50,6 @@
 											</div>
 										</div>
 									</form>
-									<div class="form">
-										<div class="form-group form-show-notify row">
-											<div class="col-lg-3 col-md-3 col-sm-4 text-right">
-												<label>Placement :</label>
-											</div>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<select class="form-control input-fixed" id="notify_placement_from">
-													<option value="top">Top</option>
-													<option value="bottom">Bottom</option>
-												</select>
-												<select class="form-control input-fixed" id="notify_placement_align">
-													<option value="left">Left</option>
-													<option value="right" selected="">Right</option>
-													<option value="center">Center</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group form-show-notify row">
-											<div class="col-lg-3 col-md-3 col-sm-4 text-right">
-												<label>State :</label>
-											</div>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<select class="form-control input-fixed" id="notify_state">
-													<option value="default">Default</option>
-													<option value="primary">Primary</option>
-													<option value="secondary">Secondary</option>
-													<option value="info">Info</option>
-													<option value="success">Success</option>
-													<option value="warning">Warning</option>
-													<option value="danger">Danger</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group form-show-notify row">
-											<div class="col-lg-3 col-md-3 col-sm-4 text-right">
-												<label>Style :</label>
-											</div>
-											<div class="col-lg-4 col-md-9 col-sm-8">
-												<select class="form-control input-fixed" id="notify_style">
-													<option value="plain">Plain</option>
-													<option value="withicon">With Icon</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="form">
-										<div class="form-group from-show-notify row">
-											<div class="col-lg-3 col-md-3 col-sm-12">
-
-											</div>
-											<div class="col-lg-4 col-md-9 col-sm-12">
-												<button id="displayNotif" class="btn btn-success">Display</button>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

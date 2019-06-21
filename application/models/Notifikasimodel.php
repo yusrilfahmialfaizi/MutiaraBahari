@@ -22,7 +22,18 @@
 		function getnotif()
 		{
 			$this->db->order_by('waktu DESC, status ASC');
+			$this->db->limit(5);
 			return $this->db->get("notifikasi")->result();
+		}
+		function getnotifall()
+		{
+			$this->db->order_by('waktu DESC, status ASC');
+			// $this->db->limit(5);
+			return $this->db->get("notifikasi")->result();
+		}
+		function update()
+		{
+			return $this->db->update('notifikasi', array('status' => "Dibaca" ));
 		}
 	}
 ?>

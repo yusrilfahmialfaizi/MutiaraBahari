@@ -1,16 +1,6 @@
 			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">	
 				<div class="container-fluid">
 					<div class="collapse" id="search-nav">
-						<!-- <form class="navbar-left navbar-form nav-search mr-md-3">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<button type="submit" class="btn btn-search pr-1">
-										<i class="fa fa-search search-icon"></i>
-									</button>
-								</div>
-								<input type="text" placeholder="Search ..." class="form-control">
-							</div>
-						</form> -->
 					</div>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item toggle-nav-search hidden-caret">
@@ -88,7 +78,7 @@
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item dropdown hidden-caret">
+						<!-- <li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-bell"></i>
 								<span class="notification" id="notification"></span>
@@ -145,7 +135,7 @@
 									<a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
 								</li>
 							</ul>
-						</li>
+						</li> -->
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
 								<i class="fas fa-layer-group"></i>
@@ -161,37 +151,37 @@
 											<a class="col-6 col-md-4 p-0" href="#">
 												<div class="quick-actions-item">
 													<i class="flaticon-file-1"></i>
-													<span class="text">Generated Report</span>
+													<span class="text">Laporan</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
+											<a class="col-6 col-md-4 p-0" href="<?php echo base_url("admin/barang") ?>">
 												<div class="quick-actions-item">
 													<i class="flaticon-database"></i>
-													<span class="text">Create New Database</span>
+													<span class="text">Barang</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
+											<a class="col-6 col-md-4 p-0" href="<?php echo base_url('admin/notifikasi') ?>">
 												<div class="quick-actions-item">
-													<i class="flaticon-pen"></i>
-													<span class="text">Create New Post</span>
+													<i class="flaticon-alarm-1"></i>
+													<span class="text">Notifikasi</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
+											<a class="col-6 col-md-4 p-0" href="<?php echo base_url("admin/kasir/eceran") ?>">
 												<div class="quick-actions-item">
-													<i class="flaticon-interface-1"></i>
-													<span class="text">Create New Task</span>
+													<i class="flaticon-shopping-bag"></i>
+													<span class="text">Eceran</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
+											<a class="col-6 col-md-4 p-0" href="<?php echo base_url("admin/kasir/grosir") ?>">
 												<div class="quick-actions-item">
-													<i class="flaticon-list"></i>
-													<span class="text">Completed Tasks</span>
+													<i class="flaticon-cart"></i>
+													<span class="text">Grosir</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
+											<a class="col-6 col-md-4 p-0" href="<?php echo base_url("admin/kasir/pesanan") ?>">
 												<div class="quick-actions-item">
 													<i class="flaticon-file"></i>
-													<span class="text">Create New Invoice</span>
+													<span class="text">Pesanan</span>
 												</div>
 											</a>
 										</div>

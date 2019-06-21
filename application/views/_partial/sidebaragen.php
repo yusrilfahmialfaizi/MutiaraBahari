@@ -64,6 +64,11 @@
 											<span class="sub-item">Diskusi Produk</span>
 										</a>
 									</li>
+									<li>
+										<a href="<?php echo base_url("user/agen/notifikasi") ?>">
+											<span class="sub-item">Notifikasi</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</li>
