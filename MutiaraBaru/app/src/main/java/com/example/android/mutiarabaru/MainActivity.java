@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    //private SessionHandler session;
+    private SessionHandler session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,17 +118,24 @@ public class MainActivity extends AppCompatActivity
 			case R.id.nav_order:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order()).commit();
 				break;
-           case R.id.nav_notifikasi:
+         	case R.id.nav_notifikasi:
                Intent intent = new Intent(MainActivity.this, Notifikasi.class);
                startActivity(intent);
                finish();
                break;
-			case R.id.nav_message:
+           	case R.id.nav_message:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
 				break;
 			case R.id.nav_bantuan:
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
 				break;
+		   case R.id.nav_logout:
+			   session = new SessionHandler(this);
+			   User user = session.getUserDetails();
+			   session.logoutUser();
+			   Intent i = new Intent(this,LoginActivity.class);
+			   startActivity(i);
+			   finish();
        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

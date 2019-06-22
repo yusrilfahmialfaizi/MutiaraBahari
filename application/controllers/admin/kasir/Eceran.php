@@ -89,21 +89,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			date_default_timezone_set('Asia/Jakarta');
 			
 			// -------- No. Invoice-------------//
-			$no_invoice = $this->input->post('no_invoice');
-			$nama = $this->input->post('nama_pelanggan');
-			$id_user = $this->Usermodel->getPelanggan($nama);
-			$id_admin = $this->session->userdata("id_admin");
-			$id_pegawai =  $id_admin;
-			$tgl=date('Y-m-d');
-			$tanggal = $tgl;
-			$jtp=date('Y-m-d');
-			$tujuh_hari        = mktime(0,0,0,date("m"),date("d")+7,date("Y"));
-			$kembali        = date("Y-m-d", $tujuh_hari);
-			$jtp = $kembali;
-			$total = $this->input->post('total');
-			$bayar = $this->input->post('bayar');
-			$kembali = $this->input->post('kembali');
-			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
+			$no_invoice 		= $this->input->post('no_invoice');
+			$nama 				= $this->input->post('nama_pelanggan');
+			$id_user 			= $this->Usermodel->getPelanggan($nama);
+			$id_admin 			= $this->session->userdata("id_admin");
+			$id_pegawai 		= $id_admin;
+			$id_ongkir 			= $this->input->post('id');
+			$tgl 				= date('Y-m-d');
+			$tanggal 			= $tgl;
+			$jtp 				= date('Y-m-d');
+			$tujuh_hari     	= mktime(0,0,0,date("m"),date("d")+7,date("Y"));
+			$kembali        	= date("Y-m-d", $tujuh_hari);
+			$jtp 				= $kembali;
+			$total 				= $this->input->post('total');
+			$bayar 				= $this->input->post('bayar');
+			$kembali 			= $this->input->post('kembali');
+			$jenis_pembayaran 	= $this->input->post('jenis_pembayaran');
 			if ($kembali >= 0) {
 			 	# code...
 			 	$status_pembayaran = 'Lunas';
@@ -112,8 +113,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'id_user' => $id_user['id_user'],
+			 	'id_user' => $id_user_>id_user,
 			 	'id_pegawai' => $id_pegawai,
+			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,
 			 	'total_harga' => $total,

@@ -33,24 +33,27 @@ import java.util.HashMap;
  * A simple {@link Fragment} subclass.
  */
 public class Beranda extends Fragment {
-    private static final String data_url = "http://192.168.43.70/mutiarabahari/user/agen/DashboardAndroid/getMerek"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+    private static final String data_url = "http://192.168.43.37/mutiarabahari/user/agen/DashboardAndroid/getMerek"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
     private ArrayList<HashMap<String,String>> mData;
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
     private RecyclerView grid;
+    private SessionHandler session;
     View myView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView =  inflater.inflate(R.layout.content_main, container, false);
-        grid = (RecyclerView) myView.findViewById(R.id.recyclerview_merek);
-        GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        grid.setLayoutManager(llm);
-        Bundle bundle = new Bundle();
-        bundle.putString("id","id");
-        new Barang().setArguments(bundle);
-
+		session = new SessionHandler(getContext());
+		User user = session.getUserDetails();
+		Toast.makeText(getContext(),user.getId_user()+" "+user.getUsername(),Toast.LENGTH_SHORT).show();
+		grid = (RecyclerView) myView.findViewById(R.id.recyclerview_merek);
+		GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
+		llm.setOrientation(LinearLayoutManager.VERTICAL);
+		grid.setLayoutManager(llm);
+		Bundle bundle = new Bundle();
+		bundle.putString("id","id");
+		new Barang().setArguments(bundle);
         getData();
         return myView;
     }

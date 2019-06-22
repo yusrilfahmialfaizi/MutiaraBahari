@@ -157,6 +157,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$kembali        = date("Y-m-d", $tujuh_hari);
 			$jtp = $kembali;
 			$total = $this->input->post('total');
+			$id_ongkir  = $this->input->post('id');
 			$bayar = $this->input->post('bayar');
 			$kembali = $this->input->post('kembali');
 			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
@@ -170,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 	'id_transaksi' => $no_invoice,
 			 	'id_user' => $id_user->id_user,
 			 	'id_pegawai' => $id_pegawai,
-			 	// 'id_ongkir' => $id_ongkir,
+			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,
 			 	'total_harga' => $total,

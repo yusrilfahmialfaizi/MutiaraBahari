@@ -21,6 +21,8 @@
 			$data['agen'] = $this->Dashboardmodel->count_agen();
 			$data['pelanggan'] = $this->Dashboardmodel->count_pelanggan();
 			$data['pegawai'] = $this->Dashboardmodel->count_pegawai();
+			$data['pendapatan_perhari'] = $this->Dashboardmodel->pendapatan_perhari();
+			$data['pendapatan_perbulan'] = $this->Dashboardmodel->pendapatan_perbulan();
 			$data['allpegawai'] = $this->Dashboardmodel->count_allpegawai();
 			$this->load->view('_partial/header');
 			$this->load->view('menu/dashboard',$data);

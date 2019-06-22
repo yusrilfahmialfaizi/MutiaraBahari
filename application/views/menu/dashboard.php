@@ -41,17 +41,20 @@
 						<div class="col-md-6">
 							<div class="card full-height">
 								<div class="card-body">
-									<div class="card-title">Total income & spend statistics</div>
+									<div class="card-title">Statistic Total Pendapatan</div>
 									<div class="row py-3">
 										<div class="col-md-4 d-flex flex-column justify-content-around">
 											<div>
-												<h6 class="fw-bold text-uppercase text-success op-8">Total Income</h6>
-												<h3 class="fw-bold">$9.782</h3>
+												<h6 class="fw-bold text-uppercase text-success op-8">Total Pendapatan</h6>
+												<?php foreach ($pendapatan_perhari as $key): ?>
+													
+												<h3 class="fw-bold">Rp.<?php echo number_format($key->jumlah) ?></h3>
+												<?php endforeach ?>
 											</div>
-											<div>
+											<!-- <div>
 												<h6 class="fw-bold text-uppercase text-danger op-8">Total Spend</h6>
 												<h3 class="fw-bold">$1,248</h3>
-											</div>
+											</div> -->
 										</div>
 										<div class="col-md-8">
 											<div id="chart-container">
@@ -97,11 +100,29 @@
 							<div class="card card-primary">
 								<div class="card-header">
 									<div class="card-title">Daily Sales</div>
-									<div class="card-category">March 25 - April 02</div>
+									<div class="card-category"><?php date_default_timezone_set('Asia/Jakarta');
+										$bulan = array(
+							                '01' => 'JANUARI',
+							                '02' => 'FEBRUARI',
+							                '03' => 'MARET',
+							                '04' => 'APRIL',
+							                '05' => 'MEI',
+							                '06' => 'JUNI',
+							                '07' => 'JULI',
+							                '08' => 'AGUSTUS',
+							                '09' => 'SEPTEMBER',
+							                '10' => 'OKTOBER',
+							                '11' => 'NOVEMBER',
+							                '12' => 'DESEMBER',
+							        	);
+							        	echo $bulan[date('m')]." ".date('Y'); ?>
+						        	</div>
 								</div>
 								<div class="card-body pb-0">
 									<div class="mb-4 mt-2">
-										<h1>$4,578.58</h1>
+										<?php foreach ($pendapatan_perbulan as $key): ?>
+											<h1>Rp. <?php echo number_format($key->jumlah) ?></h1>
+										<?php endforeach ?>
 									</div>
 									<div class="pull-in">
 										<canvas id="dailySalesChart"></canvas>

@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListBarang extends AppCompatActivity {
-    private static final String data_url = "http://192.168.43.70/mutiarabahari/user/agen/DashboardAndroid/getNamaBarang/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+    private static final String data_url = "http://192.168.43.37/mutiarabahari/user/agen/DashboardAndroid/getNamaBarang/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
     private RecyclerView grid;
     private ArrayList<HashMap<String,String>> mBarang;
 

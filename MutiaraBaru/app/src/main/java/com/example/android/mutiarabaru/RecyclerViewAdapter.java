@@ -43,7 +43,7 @@ public class RecyclerViewAdapter extends
        // holder.text_merek.setText(mData.get(position).getMerek());
        //holder.img_gambar_merek.setImageResource(mData.get(position).getGambar());
         Glide.with(mContext)
-                .load("http://192.168.43.70/mutiarabahari/upload/" + mData.get(position).get("gambar"))
+                .load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
                 .transition(withCrossFade())
                 .placeholder(R.mipmap.ic_launcher)
                 .into(holder.img_gambar_merek);

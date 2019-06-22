@@ -125,6 +125,15 @@
 									</li>
 								</ul>
 							</div>
+							<div class="collapse" id="laporan">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="">
+											<span>Laporan</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</li>
 					</ul>
 				</div>

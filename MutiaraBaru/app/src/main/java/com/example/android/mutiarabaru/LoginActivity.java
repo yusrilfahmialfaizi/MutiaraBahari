@@ -24,18 +24,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String KEY_STATUS = "status";
-    private static final String KEY_MESSAGE = "message";
-    private static final String KEY_FULL_NAME = "full_name";
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_PASSWORD = "password";
+//    private static final String KEY_STATUS = "status";
+//    private static final String KEY_MESSAGE = "message";
+//    private static final String KEY_FULL_NAME = "full_name";
+//    private static final String KEY_USERNAME = "username";
+//    private static final String KEY_PASSWORD = "password";
+	private static final String KEY_ID_USER 	= "id_user";
+	private static final String KEY_NAMA_USER 	= "nama";
+	private static final String KEY_ALAMAT 		= "alamat";
+	private static final String KEY_NO_TELEPON	= "no_telepon";
+	private static final String KEY_USERNAME 	= "username";
     private static final String KEY_EMPTY = "";
     private EditText etUsername;
     private EditText etPassword;
     private String username;
     private String password;
     private ProgressDialog pDialog;
-    private String login_url = "http://192.168.43.70/member/login.php";
+    private String login_url = "http://192.168.43.37/mutiarabahari/user/agen/loginandroid/login_agen";
     private SessionHandler session;
 
     @Override
@@ -71,7 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                 //Retrieve the data entered in the edit texts
                 username = etUsername.getText().toString().toLowerCase().trim();
                 password = etPassword.getText().toString().trim();
-                login();
+                String id_user;
+//                Toast.makeText(LoginActivity.this, username + password,Toast.LENGTH_LONG).show();
+				if (validateInputs()){
+					login();
+				}
             }
         });
     }
@@ -91,24 +100,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
+//		displayLoader();
         StringRequest request = new StringRequest(Request.Method.POST, login_url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            System.out.println(response);
-                            String status = jsonObject.getString("status");
-                            System.out.println(status);
+//						pDialog.dismiss();
+						try {
+							JSONObject jsonObject = new JSONObject(response);
+							System.out.println(response);
+							String respon = jsonObject.getString("respon");
+							String id_user = jsonObject.getString("id_user");
+							System.out.println(id_user);
+							System.out.println(respon);
 
-                            if(status.equals("0")) {
-//                                pDialog.dismiss();
-                                session.loginUser(username,"niko wahyu");
+							if(respon.equals("0")) {
+//								session.loginUser("username", jsonObject.getString("username"));
+								session.loginUser(username, );
+//								Toast.makeText(LoginActivity.this, ""+ id_user,Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
-                            if(status.equals("1")) {
+                            if(respon.equals("1")) {
 //                                pDialog.dismiss();
                                 Toast.makeText(LoginActivity.this,"password salah",Toast.LENGTH_SHORT).show();
                             }

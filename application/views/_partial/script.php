@@ -141,7 +141,7 @@
 			}
 		});
 
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+		$('#lineChart').sparkline([100,103,123,100,95,105,115], {
 			type: 'line',
 			height: '70',
 			width: '100%',

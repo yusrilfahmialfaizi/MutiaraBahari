@@ -32,5 +32,13 @@
 		{
 			return $this->db->query("SELECT count_pegawai() AS jumlah")->result();
 		}
+		function pendapatan_perhari()
+		{
+			return $this->db->query("SELECT pendapatan_perhari() AS jumlah")->result();
+		}
+		function pendapatan_perbulan()
+		{
+			return $this->db->query("SELECT pendapatan_perbulan() AS jumlah")->result();
+		}
 	}
 ?>
