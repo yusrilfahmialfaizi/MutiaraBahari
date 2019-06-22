@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Mutiara Baru</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <!--<string name="nav_header_subtitle">android.studio@android.com</string>-->
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title"></string>
+
+    <!--Notifikasi-->
+    <string name="tab_label1">Konfirmasi</string>
+    <string name="tab_label2">Diproses</string>
+    <string name="tab_label3">Dikemas</string>
+    <string name="tab_label4">Dikirim</string>
+    <string name="tab_label5">Diterima</string>
+    <string name="tab_label6">Selesai</string>
+    <string name="tab_label7">Dibatalkan</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_having_account">Already Having An Account ></string>
+    <string name="not_having_account">Not Having an Account?</string>
+    <string name="log_in">Login</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_login">Login</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+</resources>

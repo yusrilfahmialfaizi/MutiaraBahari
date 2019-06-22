@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="5dp">
+	<android.support.v7.widget.CardView
+		xmlns:cardview="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="3dp"
+		android:background="@color/colorAccent"
+		cardview:cardCornerRadius="4dp">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="5dp"
+			>
+
+			<ImageView
+				android:id="@+id/gambar_barang"
+				android:layout_width="100dp"
+				android:layout_height="100dp"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentTop="true"
+				android:layout_margin="5dp"
+				android:scaleType="centerCrop"
+				android:src="@drawable/no_image"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/barang"
+				android:text="Merek Barang"
+				android:textColor="#000000"
+				android:layout_toRightOf="@+id/gambar_barang"
+				android:layout_alignParentTop="true"
+				android:textSize="20sp"
+				android:layout_margin="10dp"
+				/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/harga"
+				android:text="Harga"
+				android:textColor="#000000"
+				android:textSize="20sp"
+				android:layout_marginLeft="10dp"
+				android:layout_toRightOf="@+id/gambar_barang"
+				android:layout_below="@+id/barang"
+				/>
+
+		</RelativeLayout>
+
+	</android.support.v7.widget.CardView>
+</RelativeLayout>
