@@ -19,6 +19,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SessionHandler session;
+    TextView name;
+    TextView status;
+    View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       // session = new SessionHandler(getApplicationContext());
-//        User user = session.getUserDetails();
+        session = new SessionHandler(getApplicationContext());
+        User user = session.getUserDetails();
 //        TextView welcomeText = findViewById(R.id.welcomeText);
 //
 //        welcomeText.setText("Welcome "+user.getFullName()+", your session will expire on "+user.getSessionExpiryDate());
@@ -61,6 +64,15 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        view = navigationView.getHeaderView(0);
+        name = (TextView) view.findViewById(R.id.nama_user);
+        status = (TextView) view.findViewById(R.id.status_user);
+		String nama  = user.getNama();
+		nama = nama.substring(0,1).toUpperCase() + nama.substring(1).toLowerCase();
+		name.setText(nama);
+		String stat  = user.getStatus();
+		stat = stat.substring(0,1).toUpperCase() + stat.substring(1).toLowerCase();
+        status.setText(stat);
         navigationView.setNavigationItemSelectedListener(this);
 
         if  (savedInstanceState == null){

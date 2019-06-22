@@ -21,6 +21,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 
     private Context mContext;
     private ArrayList<HashMap<String, String>> mBarang;
+    private SessionHandler sessionHandler;
 
     public BarangViewAdapter(ListBarang barang, ArrayList<HashMap<String,String>> mBarang) {
         this.mContext = barang;
@@ -43,6 +44,13 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
                 .placeholder(R.mipmap.ic_launcher)
                 .into(holder.img_gambar_barang);
         holder.text_barang.setText(mBarang.get(position).get("nama_barang"));
+        sessionHandler = new SessionHandler(mContext);
+        User user = sessionHandler.getUserDetails();
+        if (user.getStatus().equals("agen")){
+			holder.harga.setText(mBarang.get(position).get("hrg_grosir1"));
+		}else if(user.getStatus().equals("pelanggan biasa")){
+			holder.harga.setText(mBarang.get(position).get("harga"));
+		}
         holder.img_gambar_barang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,12 +73,14 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
     {
 
         TextView text_barang;
+        TextView harga;
         ImageView img_gambar_barang;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             text_barang = (TextView) itemView.findViewById(R.id.barang);
+            harga = (TextView) itemView.findViewById(R.id.harga);
             img_gambar_barang = (ImageView) itemView.findViewById(R.id.gambar_barang);
         }
     }

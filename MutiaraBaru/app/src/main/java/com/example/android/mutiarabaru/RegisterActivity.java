@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //Check if user got registered successfully
                             if (response.getInt(KEY_STATUS) == 0) {
                                 //Set the user session
-                                session.loginUser(username,fullName);
+//                                session.loginUser(username,fullName);
                                 loadMainActivity();
 
                             }else if(response.getInt(KEY_STATUS) == 1){

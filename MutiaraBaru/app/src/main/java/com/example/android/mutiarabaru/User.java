@@ -3,28 +3,57 @@ package com.example.android.mutiarabaru;
 import java.util.Date;
 
 public class User {
-    String username, fullName;
+    String id_user;
+	String nama;
+	String alamat;
+	String no_telepon;
+
+	public String getNama() {
+		return nama;
+	}
+
+	public String getAlamat() {
+		return alamat;
+	}
+
+	public String getNo_telepon() {
+		return no_telepon;
+	}
+
+	public void setNama(String nama) {
+		this.nama = nama;
+	}
+
+	public void setAlamat(String alamat) {
+		this.alamat = alamat;
+	}
+
+	public void setNo_telepon(String no_telepon) {
+		this.no_telepon = no_telepon;
+	}
+
+	String status;
     Date sessionExpiryDate;
 
-    public void setUsername(String username)
+    public void setId_user(String id_user)
     {
-        this.username = username;
+        this.id_user = id_user;
     }
-    public void setFullName(String fullName)
+    public void setStatus(String status)
     {
-        this.fullName = fullName;
+        this.status = status;
     }
     public  void setSessionExpiryDate(Date sessionExpiryDate)
     {
         this.sessionExpiryDate = sessionExpiryDate;
     }
-    public String getUsername()
+    public String getId_user()
     {
-        return username;
+        return id_user;
     }
-    public  String getFullName()
+    public  String getStatus()
     {
-        return fullName;
+        return status;
     }
 
     public Date getSessionExpiryDate() {

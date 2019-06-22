@@ -7,9 +7,12 @@ import java.util.Date;
 
 public class SessionHandler {
     private static final String PREF_NAME = "UserSession";
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_EXPIRES = "expires";
-    private static final String KEY_FULL_NAME = "full_name";
+    private static final String KEY_ID_USER = "id_user";
+    private static final String KEY_NAMA = "nama";
+    private static final String KEY_ALAMAT = "alamat";
+    private static final String KEY_NO_TELEPON = "no_telepon";
+	private static final String KEY_STATUS = "status";
+	private static final String KEY_EXPIRES = "expires";
     private static final String KEY_EMPTY = "";
     private Context mContext;
     private SharedPreferences.Editor mEditor;
@@ -22,9 +25,12 @@ public class SessionHandler {
         this.mEditor = mPreferences.edit();
     }
 
-    public void loginUser(String username, String fullName) {
-        mEditor.putString(KEY_USERNAME, username);
-        mEditor.putString(KEY_FULL_NAME, fullName);
+    public void loginUser(String id_user, String nama,String alamat, String no_telepon, String status) {
+        mEditor.putString(KEY_ID_USER, id_user);
+        mEditor.putString(KEY_NAMA, nama);
+        mEditor.putString(KEY_ALAMAT, alamat);
+        mEditor.putString(KEY_NO_TELEPON, no_telepon);
+        mEditor.putString(KEY_STATUS, status);
         Date date = new Date();
 
         //Set user session for next 7 days
@@ -57,8 +63,11 @@ public class SessionHandler {
             return null;
         }
         User user = new User();
-        user.setUsername(mPreferences.getString(KEY_USERNAME, KEY_EMPTY));
-        user.setFullName(mPreferences.getString(KEY_FULL_NAME, KEY_EMPTY));
+        user.setId_user(mPreferences.getString(KEY_ID_USER, KEY_EMPTY));
+        user.setNama(mPreferences.getString(KEY_NAMA, KEY_EMPTY));
+        user.setAlamat(mPreferences.getString(KEY_ALAMAT, KEY_EMPTY));
+        user.setNo_telepon(mPreferences.getString(KEY_NO_TELEPON, KEY_EMPTY));
+        user.setStatus(mPreferences.getString(KEY_STATUS, KEY_EMPTY));
         user.setSessionExpiryDate(new Date(mPreferences.getLong(KEY_EXPIRES, 0)));
 
         return user;

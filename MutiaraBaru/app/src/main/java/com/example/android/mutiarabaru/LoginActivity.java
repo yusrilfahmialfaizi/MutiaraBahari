@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 	private static final String KEY_NAMA_USER 	= "nama";
 	private static final String KEY_ALAMAT 		= "alamat";
 	private static final String KEY_NO_TELEPON	= "no_telepon";
-	private static final String KEY_USERNAME 	= "username";
+	private static final String KEY_STATUS		= "status";
     private static final String KEY_EMPTY = "";
     private EditText etUsername;
     private EditText etPassword;
@@ -109,14 +109,16 @@ public class LoginActivity extends AppCompatActivity {
 						try {
 							JSONObject jsonObject = new JSONObject(response);
 							System.out.println(response);
-							String respon = jsonObject.getString("respon");
-							String id_user = jsonObject.getString("id_user");
-							System.out.println(id_user);
-							System.out.println(respon);
+							String respon 		= jsonObject.getString("respon");
+							String id_user 		= jsonObject.getString("id_user");
+							String nama 		= jsonObject.getString("nama");
+							String alamat 		= jsonObject.getString("alamat");
+							String no_telepon 	= jsonObject.getString("no_telepon");
+							String status 		= jsonObject.getString("status");
 
 							if(respon.equals("0")) {
-//								session.loginUser("username", jsonObject.getString("username"));
-								session.loginUser(username, );
+								session.loginUser(id_user,nama,alamat,no_telepon,status);
+//								session.loginUser(username, id_user);
 //								Toast.makeText(LoginActivity.this, ""+ id_user,Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
