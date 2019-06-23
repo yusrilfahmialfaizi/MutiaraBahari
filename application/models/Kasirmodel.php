@@ -21,6 +21,11 @@
 		{
 			return $this->db->get_where('barang',array('nama_barang' => $name))->result();
 		}
+		function getUserbiasa()
+		{
+			$this->db->where("status", "pelanggan biasa");
+			return $this->db->get("user")->result();
+		}
 		//////////////Grosir//////////////////////
 		function get_data_barang_bynama($kode,$qty)
 		{

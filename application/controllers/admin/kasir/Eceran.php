@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$user['barang'] = $this->Kasirmodel->getBarang();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
+			$user['biasa'] = $this->Kasirmodel->getUserbiasa();
 			$user['ongkir'] = $this->Ongkirmodel->getOngkir();
 			$this->load->view('_partial/header');
 			$this->load->view('menu/kasireceran',$user);
@@ -92,7 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$no_invoice 		= $this->input->post('no_invoice');
 			$nama 				= $this->input->post('nama_pelanggan');
 			$id_user 			= $this->Usermodel->getPelanggan($nama);
-			$id_admin 			= $this->session->userdata("id_admin");
+			$id_admin 			= $this->session->userdata("id_pegawai");
 			$id_pegawai 		= $id_admin;
 			$id_ongkir 			= $this->input->post('id');
 			$tgl 				= date('Y-m-d');
@@ -113,7 +114,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'id_user' => $id_user_>id_user,
+			 	'id_user' => $id_user->id_user,
+			 	'nama_pelanggan' => $nama,
 			 	'id_pegawai' => $id_pegawai,
 			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
@@ -135,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'id_barang' => $item['id'],
                                         'qty' => $item['qty'],
                                         'harga' => $item['price'],
-                                        'subtotal' =>$subtotal);
+                                        'subtotal' =>$item['subtotal']);
                         $proses = $this->Kasirmodel->tambah_detail_jual($data_detail);
                     }
             }

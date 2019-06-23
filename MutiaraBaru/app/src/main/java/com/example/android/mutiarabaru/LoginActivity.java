@@ -2,6 +2,7 @@ package com.example.android.mutiarabaru;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 //Retrieve the data entered in the edit texts
                 username = etUsername.getText().toString().toLowerCase().trim();
                 password = etPassword.getText().toString().trim();
-                String id_user;
-//                Toast.makeText(LoginActivity.this, username + password,Toast.LENGTH_LONG).show();
 				if (validateInputs()){
 					login();
 				}
@@ -118,8 +117,6 @@ public class LoginActivity extends AppCompatActivity {
 
 							if(respon.equals("0")) {
 								session.loginUser(id_user,nama,alamat,no_telepon,status);
-//								session.loginUser(username, id_user);
-//								Toast.makeText(LoginActivity.this, ""+ id_user,Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

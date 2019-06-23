@@ -171,6 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 	'id_transaksi' => $no_invoice,
 			 	'id_user' => $id_user->id_user,
 			 	'id_pegawai' => $id_pegawai,
+			 	'nama_pelanggan'=> $nama
 			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,
