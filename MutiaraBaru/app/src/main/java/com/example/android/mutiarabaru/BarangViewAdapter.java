@@ -1,11 +1,13 @@
 package com.example.android.mutiarabaru;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,15 +40,12 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-  //      holder.text_merek.setText(mData.get(position).getMerek());
-  //      holder.img_gambar_merek.setImageResource(mData.get(position).getGambar());
         Glide.with(mContext)
                 .load("http://192.168.43.70/mutiarabahari/upload/" + mBarang.get(position).get("gambar"))
                 .transition(withCrossFade())
                 .placeholder(R.mipmap.no_image)
                 .into(holder.img_gambar_barang);
         holder.text_barang.setText(mBarang.get(position).get("nama_barang"));
-//		final Integer[] jumlah = {Integer.valueOf(String.valueOf(holder.qty.getText()))};
 
 
 		sessionHandler = new SessionHandler(mContext);
@@ -56,18 +55,13 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 		}else if(user.getStatus().equals("pelanggan biasa")){
 			holder.harga.setText("Rp. "+mBarang.get(position).get("harga"));
 		}
-        holder.img_gambar_barang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "ID Barang : " + mBarang.get(position).get("id_barang"), Toast.LENGTH_SHORT).show();
-//				AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//				Barang barang = new Barang();
-//				Bundle bundle=new Bundle();
-//				bundle.putString("id_merek",mBarang.get(position).get("id_merek"));
-//				barang.setArguments(bundle);
-//				activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Barang()).commit();
-            }
-        });
+		holder.pesan.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(mContext,": " + mBarang.get(position).get("id_barang")+" : "+ holder.qty.getText(),Toast.LENGTH_LONG).show();
+//				mContext.startActivity(new Intent(mContext, Order.class));
+			}
+		});
     }
     @Override
     public int getItemCount() {
@@ -80,8 +74,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
         TextView text_barang;
         TextView harga;
         EditText qty;
-        ImageButton minus;
-        ImageButton plus;
+        Button pesan;
         ImageView img_gambar_barang;
 
         public ViewHolder(View itemView) {
@@ -91,6 +84,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
             harga = (TextView) itemView.findViewById(R.id.harga);
             qty = (EditText) itemView.findViewById(R.id.qty);
             img_gambar_barang = (ImageView) itemView.findViewById(R.id.gambar_barang);
+            pesan = (Button) itemView.findViewById(R.id.Pesan);
 
 
         }

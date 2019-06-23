@@ -105,7 +105,10 @@ public class Notifikasi extends AppCompatActivity
         // int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_beranda:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
+				Intent i = new Intent(Notifikasi.this, MainActivity.class);
+				startActivity(i);
+				finish();
                 break;
             case R.id.nav_profil:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profil()).commit();
