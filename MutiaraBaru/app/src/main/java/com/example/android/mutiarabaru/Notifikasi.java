@@ -114,7 +114,7 @@ public class Notifikasi extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profil()).commit();
                 break;
             case R.id.nav_order:
-                getSupportFragmentManager().beginTransaction().replace(R.id.notifikasi_content, new Order()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order()).commit();
                 break;
             case R.id.nav_notifikasi:
                 Intent intent = new Intent(this, Notifikasi.class);
