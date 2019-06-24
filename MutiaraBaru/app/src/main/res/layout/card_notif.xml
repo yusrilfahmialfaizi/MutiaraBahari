@@ -9,23 +9,13 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_margin="3dp"
+		android:background="@color/colorAccent"
 		cardview:cardCornerRadius="4dp">
 
 		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:padding="5dp"
-			android:background="@color/AliceBlue">
-
-			<ImageView
-				android:id="@+id/gambar_barang"
-				android:layout_width="110dp"
-				android:layout_height="110dp"
-				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="true"
-				android:layout_margin="5dp"
-				android:scaleType="centerCrop"
-				android:src="@drawable/no_image" />
+			android:padding="5dp">
 
 			<TextView
 				android:id="@+id/barang"
@@ -73,17 +63,6 @@
 				android:textSize="20sp"
 				android:layout_toRightOf="@+id/title_qty"/>
 
-			<Button
-				android:id="@+id/Pesan"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/qty"
-				android:layout_below="@+id/harga"
-				android:layout_marginTop="10dp"
-				android:background="@drawable/btn_rounded"
-				android:layout_marginLeft="80dp"
-				android:textColor="#FFFF"
-				android:text="PESAN"/>
 
 		</RelativeLayout>
 

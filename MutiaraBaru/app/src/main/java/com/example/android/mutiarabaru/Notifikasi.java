@@ -15,56 +15,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Notifikasi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+	private SessionHandler session;
+	TextView name;
+	TextView status;
+	View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifikasi);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_notifikasi);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+		session = new SessionHandler(getApplicationContext());
+		User user = session.getUserDetails();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawer.addDrawerListener(toggle);
+		toggle.syncState();
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label1));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label2));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label3));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label4));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label5));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label6));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label7));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.addOnPageChangeListener(new
-                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-    }
+		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		view = navigationView.getHeaderView(0);
+		name = (TextView) view.findViewById(R.id.nama_user);
+		status = (TextView) view.findViewById(R.id.status_user);
+		String nama = user.getNama();
+		nama = nama.substring(0, 1).toUpperCase() + nama.substring(1).toLowerCase();
+		name.setText(nama);
+		String stat = user.getStatus();
+		stat = stat.substring(0, 1).toUpperCase() + stat.substring(1).toLowerCase();
+		status.setText(stat);
+		navigationView.setNavigationItemSelectedListener(this);
+	}
 
     @Override
     public void onBackPressed() {
@@ -105,7 +92,6 @@ public class Notifikasi extends AppCompatActivity
         // int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_beranda:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
 				Intent i = new Intent(Notifikasi.this, MainActivity.class);
 				startActivity(i);
 				finish();
@@ -131,6 +117,13 @@ public class Notifikasi extends AppCompatActivity
             case R.id.nav_bantuan:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
                 break;
+			case R.id.nav_logout:
+				session = new SessionHandler(this);
+				User user = session.getUserDetails();
+				session.logoutUser();
+				Intent logout = new Intent(this,LoginActivity.class);
+				startActivity(logout);
+				finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
