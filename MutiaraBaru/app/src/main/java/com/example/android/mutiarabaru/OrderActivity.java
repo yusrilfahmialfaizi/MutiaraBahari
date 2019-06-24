@@ -13,15 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class OrderActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 	private SessionHandler session;
+	TextView name;
+	TextView status;
+	View view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order);
+
 		session = new SessionHandler(getApplicationContext());
 		User user = session.getUserDetails();
 
@@ -44,6 +49,15 @@ public class OrderActivity extends AppCompatActivity
 		toggle.syncState();
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		view = navigationView.getHeaderView(0);
+		name = (TextView) view.findViewById(R.id.nama_user);
+		status = (TextView) view.findViewById(R.id.status_user);
+		String nama  = user.getNama();
+		nama = nama.substring(0,1).toUpperCase() + nama.substring(1).toLowerCase();
+		name.setText(nama);
+		String stat  = user.getStatus();
+		stat = stat.substring(0,1).toUpperCase() + stat.substring(1).toLowerCase();
+		status.setText(stat);
 		navigationView.setNavigationItemSelectedListener(this);
 	}
 
@@ -85,7 +99,9 @@ public class OrderActivity extends AppCompatActivity
 		// Handle navigation view item clicks here.
 		switch (item.getItemId()) {
 			case R.id.nav_beranda:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
+				Intent beranda = new Intent(OrderActivity.this, MainActivity.class);
+				startActivity(beranda);
+				finish();
 				break;
 			case R.id.nav_profil:
 				Intent profil = new Intent (OrderActivity.this, ProfilActivity.class);

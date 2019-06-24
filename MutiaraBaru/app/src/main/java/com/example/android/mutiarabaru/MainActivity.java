@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity
 			   session = new SessionHandler(this);
 			   User user = session.getUserDetails();
 			   session.logoutUser();
-			   Intent i = new Intent(this,LoginActivity.class);
-			   startActivity(i);
+			   Intent logout = new Intent(this,LoginActivity.class);
+			   startActivity(logout);
 			   finish();
        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
