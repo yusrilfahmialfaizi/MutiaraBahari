@@ -125,14 +125,18 @@ public class MainActivity extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
 				break;
 			case R.id.nav_profil:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profil()).commit();
+				Intent profil = new Intent(MainActivity.this, ProfilActivity.class);
+				startActivity(profil);
+				finish();
 				break;
 			case R.id.nav_order:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order()).commit();
+				Intent order = new Intent(MainActivity.this, OrderActivity.class);
+				startActivity(order);
+				finish();
 				break;
          	case R.id.nav_notifikasi:
-               Intent intent = new Intent(MainActivity.this, Notifikasi.class);
-               startActivity(intent);
+               Intent notif = new Intent(MainActivity.this, Notifikasi.class);
+               startActivity(notif);
                finish();
                break;
            	case R.id.nav_message:
