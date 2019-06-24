@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->load->model('Usermodel');
 			$this->load->model('Barangmodel');
 			$this->load->model('Kasirmodel');
+			$this->load->model('Ongkirmodel');
 		}
 		public function index()
 		{
@@ -21,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				redirect(base_url("admin"));
 			}
 			$user['barang'] = $this->Kasirmodel->getBarang();
+			$user['ongkir'] = $this->Ongkirmodel->getOngkir();
 			$user['kode'] = $this->Kasirmodel->kode();
 			$user['user'] = $this->Usermodel->getUser();
 			$this->load->view('_partial/headerkasir');
@@ -87,21 +89,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			date_default_timezone_set('Asia/Jakarta');
 			
 			// -------- No. Invoice-------------//
-			$no_invoice = $this->input->post('no_invoice');
-			$nama = $this->input->post('nama_pelanggan');
-			$id_user = $this->Usermodel->getPelanggan($nama);
-			$id_admin = $this->session->userdata("id_admin");
-			$id_pegawai =  $id_admin;
-			$tgl=date('Y-m-d');
-			$tanggal = $tgl;
-			$jtp=date('Y-m-d');
-			$tujuh_hari        = mktime(0,0,0,date("m"),date("d")+7,date("Y"));
-			$kembali        = date("Y-m-d", $tujuh_hari);
-			$jtp = $kembali;
-			$total = $this->input->post('total');
-			$bayar = $this->input->post('bayar');
-			$kembali = $this->input->post('kembali');
-			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
+			$no_invoice 		= $this->input->post('no_invoice');
+			$nama 				= $this->input->post('nama_pelanggan');
+			$id_user 			= $this->Usermodel->getPelanggan($nama);
+			$id_admin 			= $this->session->userdata("id_pegawai");
+			$id_pegawai 		= $id_admin;
+			
+			if ($this->input->post('id') == null) {
+				# code...
+				$id_ongkir = "1";
+			}else{
+				$id_ongkir 			= $this->input->post('id');
+			}
+			$tgl 				= date('Y-m-d');
+			$tanggal 			= $tgl;
+			$jtp 				= date('Y-m-d');
+			$tujuh_hari     	= mktime(0,0,0,date("m"),date("d")+7,date("Y"));
+			$kembali        	= date("Y-m-d", $tujuh_hari);
+			$jtp 				= $kembali;
+			$total 				= $this->input->post('total');
+			$bayar 				= $this->input->post('bayar');
+			$kembali 			= $this->input->post('kembali');
+			$jenis_pembayaran 	= $this->input->post('jenis_pembayaran');
 			if ($kembali >= 0) {
 			 	# code...
 			 	$status_pembayaran = 'Lunas';
@@ -110,8 +119,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 }
 			 $transaksi = array(
 			 	'id_transaksi' => $no_invoice,
-			 	'id_user' => $id_user['id_user'],
+			 	'id_user' => $id_user->id_user,
+			 	'nama_pelanggan' => $nama,
 			 	'id_pegawai' => $id_pegawai,
+			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,
 			 	'total_harga' => $total,
@@ -131,12 +142,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'id_barang' => $item['id'],
                                         'qty' => $item['qty'],
                                         'harga' => $item['price'],
-                                        'subtotal' =>$subtotal);
+                                        'subtotal' =>$item['subtotal']);
                         $proses = $this->Kasirmodel->tambah_detail_jual($data_detail);
                     }
             }
             $this->cart->destroy();
             redirect('kasir/eceran');
+		}
+		function getOngkir()
+		{
+			$cakupan_area = $this->input->post("cakupan_area");
+			// $cakupan_area = "Kec. Tempurejo Jember";
+			$query = $this->Ongkirmodel->getOngkirWhere($cakupan_area);
+			foreach ($query as $key) {
+					# code...
+					$data = array(
+						'id_ongkir'	=> $key->id_ongkir,
+						'cakupan_area'	=> $key->cakupan_area,
+						'ongkir'	=> $key->ongkir
+					);
+			echo json_encode($data);
+				}
 		}
 	}
 ?>

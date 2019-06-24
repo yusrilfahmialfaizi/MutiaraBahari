@@ -95,7 +95,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$id_user 			= $this->Usermodel->getPelanggan($nama);
 			$id_admin 			= $this->session->userdata("id_pegawai");
 			$id_pegawai 		= $id_admin;
-			$id_ongkir 			= $this->input->post('id');
+			if ($this->input->post('id') == null) {
+				# code...
+				$id_ongkir = "1";
+			}else{
+				$id_ongkir 			= $this->input->post('id');
+			}
 			$tgl 				= date('Y-m-d');
 			$tanggal 			= $tgl;
 			$jtp 				= date('Y-m-d');

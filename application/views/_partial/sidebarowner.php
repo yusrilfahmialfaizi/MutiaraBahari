@@ -72,7 +72,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
+						<!-- <li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
 							<a data-toggle="collapse" href="#barang">
 								<i class="fas fa-dolly"></i>
 								<p>Barang</p>
@@ -92,14 +92,14 @@
 									</li>
 								</ul>
 							</div>
-						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
+						</li> -->
+						<!-- <li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
 							<a  href="<?php echo base_url('owner/barang') ?>">
 								<i class="fas fa-bell"></i>
 								<p>Notifikasi</p>
 							</a>
-						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
+						</li> -->
+						<!-- <li class="nav-item <?php if($this->uri->segment(2)=="kasir"){echo "active";}?>">
 							<a data-toggle="collapse" href="#transaksi">
 								<i class="fas fa-cart-plus"></i>
 								<p>Pemesanan</p>
@@ -134,7 +134,7 @@
 									</li>
 								</ul>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>

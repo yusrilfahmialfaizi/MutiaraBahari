@@ -341,7 +341,6 @@
 								var hasil = parseInt(<?php 	echo $this->cart->total() ?>) + parseInt(ongkir);
 								$("#total").val(hasil);
 								$("#tot").text(hasil.toLocaleString());
-								window.alert(hasil);
 							}
 						})
 					});

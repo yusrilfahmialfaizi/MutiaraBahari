@@ -1,4 +1,3 @@
-	
 	<?php ?>
 	<div class="main-panel">
 		<div class="content">
@@ -160,7 +159,7 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label for="nama_pelanggan">Nama Pelanggan</label>
-														<select class="form-control form-control-xl" id="nama_pelanggan" name="nama_pelanggan">
+														<select class="form-control form-control-xl" id="nama_pelanggan" name="nama_pelanggan" required>
 															<option value="0">&nbsp;</option>
 															<?php 
 																foreach ($user as $key) {
@@ -214,27 +213,30 @@
 									                    	<?php echo $items['id']?>
 								                    	</td>
 									                    <td>
-									                    	<div class="col-md-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
-									                    		</div>
-									                    	</div>
+									                    	<?php echo $items['name']?>
+									                    	<!-- <div class="col-md-12">
+									                    		<div class="form-group"> -->
+									                    			<!-- <input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly> -->
+									                    		<!-- </div>
+									                    	</div> -->
 									                    </td>
 									                    <td>
-									                    	<div class="col-sm-12">
+									                    	<?php echo $items['qty']?>
+									                    	<!-- <div class="col-sm-12">
 									                    		<div class="form-group">
 									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
 									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
 									                    		</div>
-									                    	</div>
+									                    	</div> -->
 									                    </td>
 									                    <td><?php echo number_format($items['price'])?></td>
 									                    <td>
-										                    <div class="col-md-12">
+									                    	<?php echo number_format($items['subtotal'])?>
+										                    <!-- <div class="col-md-12">
 									                			<div class="form-group">
 									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
 									                			</div>
-									                		</div>
+									                		</div> -->
 									                	</td>
 									                    <td>
 									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
@@ -251,8 +253,15 @@
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<h3><?php echo number_format($this->cart->total()) ?></h3>
+													<h3 id="tot"><?php echo number_format($this->cart->total()) ?></h3>
 													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
+												</div>
+											</div>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Biaya Pengiriman </label>
+													<h3 id="hargaongkir"></h3>
+													<input type="number" class="form-control" id="hrg_ongkir" name="hrg_ongkir" value="" readonly hidden="hidden">
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
@@ -268,13 +277,31 @@
 													<input type="number" class="form-control" id="kembali" name="kembali" readonly hidden="hidden">
 												</div>
 											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<label>Jenis Pembayaran</label>
-													<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
-														<option value="Cash">Cash</option>
-														<option value="Transfer">Transfer</option>
-													</select>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Jenis Pembayaran</label>
+														<select class="form-control form-control-sm" name="jenis_pembayaran" id="jenis_pembayaran">
+															<option value="Cash">Cash</option>
+															<option value="Transfer">Transfer</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Ongkir</label>
+														<select class="form-control form-control-sm" name="ongkir" id="ongkir">
+															<option value="0">&nbsp;</option>
+															<?php 
+																foreach ($ongkir as $key) {
+															?>
+															<option><?php echo $key->cakupan_area ?></option>
+															<?php 	
+																}
+															?>
+														</select>
+														<input type="text" name="id" id="id" class="form-control" readonly="readonly" hidden="hidden">
+													</div>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -295,6 +322,28 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
+					$("#ongkir").on('change', function(){
+						var cakupan_area = $("#ongkir").val();
+						$.ajax({
+							url :"<?php echo base_url() ?>kasir/grosir/getOngkir",
+							type :"POST",
+							dataType : "JSON",
+							data : {cakupan_area : cakupan_area},
+							cache : false,
+							success : function(data){
+								$.each(data,function(id_ongkir,cakupan_area,ongkir){
+									$("#id").val(data.id_ongkir);
+									$("#hargaongkir").text(data.ongkir);
+									$("#hrg_ongkir").val(data.ongkir);
+								})
+								// var total = $("#total").val();
+								var ongkir = $("#hrg_ongkir").val();
+								var hasil = parseInt(<?php 	echo $this->cart->total() ?>) + parseInt(ongkir);
+								$("#total").val(hasil);
+								$("#tot").text(hasil.toLocaleString());
+							}
+						})
+					});
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -346,6 +395,11 @@
 					});
 					$("#nama_barang").select2({
 						placeholder: "Pilih Barang",
+    					allowClear: true,
+    					minimumInputLength : 2
+					});
+					$("#ongkir").select2({
+						placeholder: "Pilih harga ongkir",
     					allowClear: true,
     					minimumInputLength : 2
 					});

@@ -146,7 +146,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// -------- No. Invoice-------------//
 			$no_invoice = $this->input->post('no_invoice');
 			$nama = $this->input->post('nama_pelanggan');
-			// $id_ongkir = $this->input->post('id');
+			if ($this->input->post('id') == null) {
+				# code...
+				$id_ongkir = "1";
+			}else{
+				$id_ongkir 			= $this->input->post('id');
+			}
 			$id_user = $this->Usermodel->getPelanggan($nama);
 			$id_admin = $this->session->userdata("id_pegawai");
 			$id_pegawai =  $id_admin;
@@ -157,7 +162,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$kembali        = date("Y-m-d", $tujuh_hari);
 			$jtp = $kembali;
 			$total = $this->input->post('total');
-			$id_ongkir  = $this->input->post('id');
 			$bayar = $this->input->post('bayar');
 			$kembali = $this->input->post('kembali');
 			$jenis_pembayaran = $this->input->post('jenis_pembayaran');
@@ -171,7 +175,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 	'id_transaksi' => $no_invoice,
 			 	'id_user' => $id_user->id_user,
 			 	'id_pegawai' => $id_pegawai,
-			 	'nama_pelanggan'=> $nama
+			 	'nama_pelanggan'=> $nama,
 			 	'id_ongkir' => $id_ongkir,
 			 	'tanggal' => $tanggal,
 			 	'jatuh_tempo' => $jtp,

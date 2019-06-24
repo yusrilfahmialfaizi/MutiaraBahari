@@ -51,7 +51,7 @@
 							</span>
 							<h4 class="text-section">Fitur</h4>
 						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
+						<!-- <li class="nav-item <?php if($this->uri->segment(2)=="barang"){echo "active";}?>">
 							<a data-toggle="collapse" href="#barang">
 								<i class="fas fa-dolly"></i>
 								<p>Barang</p>
@@ -71,13 +71,7 @@
 									</li>
 								</ul>
 							</div>
-						</li>
-						<li class="nav-item <?php if($this->uri->segment(2)=="notifikasi"){echo "active";}?>">
-							<a  href="<?php echo base_url('kasir/barang') ?>">
-								<i class="fas fa-bell"></i>
-								<p>Notifikasi</p>
-							</a>
-						</li>
+						</li> -->
 						<li class="nav-item <?php
 						 if($this->uri->segment(2)=="eceran"){
 						 	echo "active";

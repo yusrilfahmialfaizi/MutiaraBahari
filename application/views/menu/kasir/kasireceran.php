@@ -154,7 +154,7 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label for="nama_pelanggan">Nama Pelanggan</label>
-														<input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control form-control-sm">
+														<input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control form-control-sm" required="required">
 													</div>
 												</div>
 												<div class="col-md-2">
@@ -199,27 +199,14 @@
 									                    	<?php echo $items['id']?>
 								                    	</td>
 									                    <td>
-									                    	<div class="col-md-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="name" id="name" value="<?php echo $items['name']?>" class="form-control form-control-sm "readonly>
-									                    		</div>
-									                    	</div>
+									                    	<?php echo $items['name']?>
 									                    </td>
 									                    <td>
-									                    	<div class="col-sm-12">
-									                    		<div class="form-group">
-									                    			<input type="text" name="rowid" id="rowid" value="<?php echo $items['rowid']?>" class="form-control "hidden>
-									                    			<input type="number" name="qtykeranjang" id="qtykeranjang" value="<?php echo $items['qty']?>" class="form-control ">
-									                    		</div>
-									                    	</div>
+									                    	<?php echo $items['qty']?>
 									                    </td>
 									                    <td><?php echo number_format($items['price'])?></td>
 									                    <td>
-										                    <div class="col-md-12">
-									                			<div class="form-group">
-									                				<input type="text" id="subtotal" name="subtotal" value="<?php echo number_format($items['subtotal'])?>" class="form-control" style="text-align:right;margin-bottom:5px;" readonly>
-									                			</div>
-									                		</div>
+									                    	<?php echo number_format($items['subtotal'])?>
 									                	</td>
 									                    <td>
 									                    	<a href="#" class="btn btn-link btn-primary btn-lg" data-toggle="modal" data-target="#update<?php echo $items['rowid']?>">
@@ -236,8 +223,15 @@
 											<div class="col-md-6 ml-auto ">
 												<div class="form-group form-inline">
 													<label for="inlineinput" class="col-md-4 col-form-label">Total Rp. </label>
-													<h3><?php echo number_format($this->cart->total()) ?></h3>
+													<h3 id="tot"><?php echo number_format($this->cart->total()) ?></h3>
 													<input type="number" class="form-control" id="total" name="total" value="<?php echo $this->cart->total() ?>" readonly hidden>
+												</div>
+											</div>
+											<div class="col-md-6 ml-auto ">
+												<div class="form-group form-inline">
+													<label for="inlineinput" class="col-md-4 col-form-label">Biaya Pengiriman </label>
+													<h3 id="hargaongkir"></h3>
+													<input type="number" class="form-control" id="hrg_ongkir" name="hrg_ongkir" value="" readonly hidden="hidden">
 												</div>
 											</div>
 											<div class="col-md-6 ml-auto ">
@@ -253,13 +247,31 @@
 													<input type="number" class="form-control" id="kembali" name="kembali" readonly hidden="hidden">
 												</div>
 											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<label>Jenis Pembayaran</label>
-													<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
-														<option value="Cash">Cash</option>
-														<option value="Transfer">Transfer</option>
-													</select>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Jenis Pembayaran</label>
+														<select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
+															<option value="Cash">Cash</option>
+															<option value="Transfer">Transfer</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<label>Ongkir</label>
+														<select class="form-control form-control-sm" name="ongkir" id="ongkir">
+															<option value="0">&nbsp;</option>
+															<?php 
+																foreach ($ongkir as $key) {
+															?>
+															<option><?php echo $key->cakupan_area ?></option>
+															<?php 	
+																}
+															?>
+														</select>
+														<input type="text" name="id" id="id" class="form-control" readonly="readonly" hidden="hidden">
+													</div>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -280,6 +292,29 @@
 			<?php $this->load->view('_partial/scripttable') ?>
 			<script type="text/javascript">
 				$(document).ready(function(){
+					$("#ongkir").on('change', function(){
+						var cakupan_area = $("#ongkir").val();
+						$.ajax({
+							url :"<?php echo base_url() ?>kasir/eceran/getOngkir",
+							type :"POST",
+							dataType : "JSON",
+							data : {cakupan_area : cakupan_area},
+							cache : false,
+							success : function(data){
+								$.each(data,function(id_ongkir,cakupan_area,ongkir){
+									$("#id").val(data.id_ongkir);
+									$("#hargaongkir").text(data.ongkir);
+									$("#hrg_ongkir").val(data.ongkir);
+								})
+								// var total = $("#total").val();
+								var ongkir = $("#hrg_ongkir").val();
+								var hasil = parseInt(<?php 	echo $this->cart->total() ?>) + parseInt(ongkir);
+								$("#total").val(hasil);
+								$("#tot").text(hasil.toLocaleString());
+								// window.alert(hasil);
+							}
+						})
+					});
 					$(document).on('click', '.hapus_cart', function(){
 						var row_id = $(this).attr("id");
 						swal({
@@ -327,6 +362,11 @@
 					setInterval(function(){auto_refresh_function();}, 500);
 					$("#nama_barang").select2({
 						placeholder: "Pilih Barang",
+    					allowClear: true,
+    					minimumInputLength : 2
+					});
+					$("#ongkir").select2({
+						placeholder: "Pilih harga ongkir",
     					allowClear: true,
     					minimumInputLength : 2
 					});
