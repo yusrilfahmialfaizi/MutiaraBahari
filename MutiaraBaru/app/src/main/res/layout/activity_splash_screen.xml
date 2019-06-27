@@ -10,9 +10,9 @@
 
     <ImageView
         android:id="@+id/logo_splash"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/no_image"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/logo"
         android:layout_gravity="center"/>
 
 </RelativeLayout>

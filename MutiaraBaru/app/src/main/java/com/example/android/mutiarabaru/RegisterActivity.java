@@ -83,7 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
         pDialog.show();
 
     }
-
     /**
      * Launch Dashboard Activity on Successful Sign Up
      */
@@ -138,18 +137,14 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         pDialog.dismiss();
-
                         //Display error message whenever an error occurs
                         Toast.makeText(getApplicationContext(),
                                 error.getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
                 });
-
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsArrayRequest);
     }
-
     private boolean validateInputs() {
         if (KEY_EMPTY.equals(fullName)) {
             etFullName.setError("Full Name cannot be empty");
