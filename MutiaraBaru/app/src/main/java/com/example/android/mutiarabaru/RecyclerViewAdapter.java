@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends
 //					.into(holder.img_gambar_merek);
 //		}
         holder.text_merek.setText(mData.get(position).get("merek"));
-        holder.img_gambar_merek.setOnClickListener(new View.OnClickListener() {
+        holder.img_gambar_merek.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ListBarang.class);
