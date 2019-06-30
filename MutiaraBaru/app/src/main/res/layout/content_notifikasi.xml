@@ -9,6 +9,11 @@
     tools:context=".Notifikasi"
     tools:showIn="@layout/app_bar_notifikasi">
 
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recyclerview_notif"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+
     <!--<android.support.design.widget.TabLayout-->
         <!--android:id="@+id/tab_layout"-->
         <!--android:layout_width="match_parent"-->

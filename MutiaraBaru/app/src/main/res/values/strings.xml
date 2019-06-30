@@ -38,4 +38,8 @@
 	<string name="title_activity_order">OrderActivity</string>
 	<string name="nav_header_subtitle">android.studio@android.com</string>
 	<string name="title_activity_profil">ProfilActivity</string>
+
+	<string name="help1">Bagaimana cara belanja di Mutiara Bahari?</string>
+	<string name="help2">Bagaimana melihat riwayat pesanan yang sudah di pesan?</string>
+	<string name="help3">Bagaimana jika barang tidak sesuai dengan keinginan customer ?</string>
 </resources>

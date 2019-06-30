@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 public class Notifikasi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+	private static final String data_url = "http://192.168.43.37/controller/user/agen/pemesanan/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+	private RecyclerView grid;
 	private SessionHandler session;
 	TextView name;
 	TextView status;
