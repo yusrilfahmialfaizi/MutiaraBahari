@@ -36,8 +36,8 @@ public class RecyclerViewAdapter extends
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, null);
-    return new ViewHolder(view);
+    	View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, null);
+    	return new ViewHolder(view);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends
 //					.into(holder.img_gambar_merek);
 //		}
         holder.text_merek.setText(mData.get(position).get("merek"));
-        holder.img_gambar_merek.setOnClickListener(new View.OnClickListener() {
+        holder.img_gambar_merek.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ListBarang.class);

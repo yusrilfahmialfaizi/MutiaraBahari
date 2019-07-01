@@ -2,14 +2,12 @@ package com.example.android.mutiarabaru;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -25,6 +24,10 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 
     private Context mContext;
     private ArrayList<HashMap<String, String>> mBarang;
+	public static ArrayList<Cart_detail> productsArray = new ArrayList<Cart_detail>();
+	public static ArrayList<Cart> cartModels = new ArrayList<Cart>();
+	public static Cart cartModel;
+	public static Cart_detail cartDetail;
     private SessionHandler sessionHandler;
 
     public BarangViewAdapter(ListBarang barang, ArrayList<HashMap<String,String>> mBarang) {
@@ -59,10 +62,29 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(mContext,": " + mBarang.get(position).get("id_barang")+" : "+ holder.qty.getText(),Toast.LENGTH_LONG).show();
-//				mContext.startActivity(new Intent(mContext, Order.class));
+				String id_barang = mBarang.get(position).get("id_barang");
+				sessionHandler = new SessionHandler(mContext.getApplicationContext());
+				User user = sessionHandler.getUserDetails();
+//				cartModel = new Cart();
+//				cartModel.setId_user(user.getId_user());
+//				cartModel.setJenis_pembayaran("Cash");
+				cartDetail = new Cart_detail();
+				cartDetail.setId_barang(mBarang.get(position).get("id_barang"));
+				cartDetail.setNama_barang(mBarang.get(position).get("nama_barang"));
+				cartDetail.setQty(Integer.valueOf(String.valueOf(holder.qty.getText())));
+				cartDetail.setHarga(Integer.valueOf(mBarang.get(position).get("harga")));
+//				cartDetail.setSub_total(100);
+				productsArray.add(cartDetail);
+
+//				Toast.makeText(mContext,productsArray.get(position).getNama_barang(),Toast.LENGTH_LONG).show();
+				Intent i = new Intent(mContext, OrderActivity.class);
+				mContext.startActivity(i);
 			}
 		});
     }
+    private void addToCart(){
+
+	}
     @Override
     public int getItemCount() {
         return mBarang.size();

@@ -1,12 +1,12 @@
 package com.example.android.mutiarabaru;
 
 public class CartHelper {
-	private static Cart cart = new Cart();
+	private static Cart_detail cartDetail = new Cart_detail();
 
-	public static Cart getCart(){
-		if (cart == null){
-			cart = new Cart();
+	public static Cart_detail getCartDetail(){
+		if (cartDetail == null){
+			cartDetail = new Cart_detail();
 		}
-		return cart;
+		return cartDetail;
 	}
 }

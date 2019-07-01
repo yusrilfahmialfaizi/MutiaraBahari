@@ -56,6 +56,9 @@ public class Beranda extends Fragment {
 //		bundle.putString("id","id");
 //		new ListBarang().setArguments(bundle);
         getData();
+//        Cart_detail cartDetail = new Cart_detail();
+//        String a = "asdasda";
+//        cartDetail.setNama_barang(a);
         return myView;
     }
 

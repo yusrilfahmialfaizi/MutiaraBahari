@@ -1,38 +1,46 @@
 package com.example.android.mutiarabaru;
 
-public class Cart  {
-	public static String id_barang,nama_barang;
-	public static int qty,harga;
+public class Cart {
+	int total_harga;
+	String id_user, jenis_pembayaran, jenis_pengiriman, status_pesanan;
 
-	public static String getId_barang() {
-		return id_barang;
+	public String getId_user() {
+		return id_user;
 	}
 
-	public static void setId_barang(String id_barang) {
-		Cart.id_barang = id_barang;
+	public void setId_user(String id_user) {
+		this.id_user = id_user;
 	}
 
-	public static String getNama_barang() {
-		return nama_barang;
+	public int getTotal_harga() {
+		return total_harga;
 	}
 
-	public static void setNama_barang(String nama_barang) {
-		Cart.nama_barang = nama_barang;
+	public void setTotal_harga(int total_harga) {
+		this.total_harga = total_harga;
 	}
 
-	public static int getQty() {
-		return qty;
+	public String getJenis_pembayaran() {
+		return jenis_pembayaran;
 	}
 
-	public static void setQty(int qty) {
-		Cart.qty = qty;
+	public void setJenis_pembayaran(String jenis_pembayaran) {
+		this.jenis_pembayaran = jenis_pembayaran;
 	}
 
-	public static int getHarga() {
-		return harga;
+	public String getJenis_pengiriman() {
+		return jenis_pengiriman;
 	}
 
-	public static void setHarga(int harga) {
-		Cart.harga = harga;
+	public void setJenis_pengiriman(String jenis_pengiriman) {
+		this.jenis_pengiriman = jenis_pengiriman;
+	}
+
+	public String getStatus_pesanan() {
+		return status_pesanan;
+	}
+
+	public void setStatus_pesanan(String status_pesanan) {
+		this.status_pesanan = status_pesanan;
 	}
 }

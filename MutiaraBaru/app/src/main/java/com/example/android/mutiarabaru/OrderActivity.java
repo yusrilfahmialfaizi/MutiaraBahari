@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +16,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class OrderActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 	private SessionHandler session;
+	RecyclerView cartRecyclerView;
+	ArrayList<Cart_detail> productsArray;
+	Cart_detail cartDetail;
 	TextView name;
 	TextView status;
 	View view;
@@ -33,14 +42,14 @@ public class OrderActivity extends AppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
+//		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//		fab.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//						.setAction("Action", null).show();
+//			}
+//		});
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,6 +68,23 @@ public class OrderActivity extends AppCompatActivity
 		stat = stat.substring(0,1).toUpperCase() + stat.substring(1).toLowerCase();
 		status.setText(stat);
 		navigationView.setNavigationItemSelectedListener(this);
+
+		if  (savedInstanceState == null){
+			getSupportFragmentManager().beginTransaction().replace(R.id.notifikasi_container,
+					new Order_fragment()).commit();
+			navigationView.setCheckedItem(R.id.nav_order);
+		}
+//		Cart_detail cartDetail = new Cart_detail();
+//		cartDetail.setId_barang("L001");
+//		cartDetail.setNama_barang("nama");
+//		cartDetail.setQty(1);
+//		cartDetail.setHarga(1);
+////		cartDetail.setSub_total(100);
+//		productsArray.add(cartDetail);
+//		cartRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_cart);
+//		LinearLayoutManager llm=new LinearLayoutManager(OrderActivity.this);
+//		llm.setOrientation(LinearLayoutManager.VERTICAL);
+//		cartRecyclerView.setLayoutManager(llm);
 	}
 
 	@Override
@@ -109,8 +135,7 @@ public class OrderActivity extends AppCompatActivity
 				finish();
 				break;
 			case R.id.nav_order:
-				Intent order = new Intent (OrderActivity.this, OrderActivity.class);
-				startActivity(order);
+				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order_fragment()).commit();
 				break;
 			case R.id.nav_notifikasi:
 				Intent notif = new Intent(OrderActivity.this, Notifikasi.class);
