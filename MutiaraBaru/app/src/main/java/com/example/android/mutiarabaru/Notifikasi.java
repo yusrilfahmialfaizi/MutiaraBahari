@@ -6,6 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,9 +19,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Notifikasi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+	private static final String data_url = "http://192.168.43.37/controller/user/agen/pemesanan/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+	private ArrayList<HashMap<String,String>> mNotif;
+	private RecyclerView grid;
+
+	private RequestQueue requestQueue;
+	private StringRequest stringRequest;
+
 	private SessionHandler session;
 	TextView name;
 	TextView status;
@@ -28,6 +53,7 @@ public class Notifikasi extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notifikasi);
+
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
@@ -51,6 +77,41 @@ public class Notifikasi extends AppCompatActivity
 		stat = stat.substring(0, 1).toUpperCase() + stat.substring(1).toLowerCase();
 		status.setText(stat);
 		navigationView.setNavigationItemSelectedListener(this);
+
+		grid = (RecyclerView) findViewById(R.id.recyclerview_notif);
+		GridLayoutManager llm=new GridLayoutManager(this,1);
+		llm.setOrientation(LinearLayoutManager.VERTICAL);
+		grid.setLayoutManager(llm);
+
+		requestQueue = Volley.newRequestQueue(this);
+		mNotif = new ArrayList<HashMap<String, String>>();
+		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				try {
+					JSONObject jsonObject = new JSONObject(response);
+					JSONArray jsonArray = jsonObject.getJSONArray("data");
+					for (int i = 0; i < jsonArray.length(); i++) {
+						JSONObject json = jsonArray.getJSONObject(i);
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("id_pesanan", json.getString("id_pesanan"));
+						map.put("id_user", json.getString("id_user"));
+						map.put("tanggal", json.getString("tanggal"));
+						map.put("total_harga", json.getString("total_harga"));
+						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
+						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
+						map.put("status_pesanan", json.getString("status_pesanan"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		},  new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Toast.makeText(Notifikasi.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
     @Override
@@ -107,8 +168,8 @@ public class Notifikasi extends AppCompatActivity
             	finish();
                 break;
             case R.id.nav_notifikasi:
-                Intent intent = new Intent(this, Notifikasi.class);
-                startActivity(intent);
+                Intent notif = new Intent(this, Notifikasi.class);
+                startActivity(notif);
                 finish();
                 break;
             case R.id.nav_message:
