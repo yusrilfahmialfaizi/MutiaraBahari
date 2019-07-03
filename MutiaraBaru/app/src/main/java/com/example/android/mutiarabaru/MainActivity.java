@@ -140,7 +140,9 @@ public class MainActivity extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
 				break;
 			case R.id.nav_bantuan:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
+				Intent bantuan = new Intent (MainActivity.this, Bantuan.class);
+				startActivity(bantuan);
+				finish();
 				break;
 		   case R.id.nav_logout:
 			   session = new SessionHandler(this);
