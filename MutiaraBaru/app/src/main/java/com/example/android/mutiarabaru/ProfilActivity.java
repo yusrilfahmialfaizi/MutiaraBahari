@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -37,6 +38,9 @@ public class ProfilActivity extends AppCompatActivity
 	private StringRequest stringRequest;
 	TextView name;
 	TextView status;
+	TextView alamat;
+	TextView password;
+	TextView no_telepon;
 	View view;
 
 	@Override
@@ -66,7 +70,11 @@ public class ProfilActivity extends AppCompatActivity
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		view = navigationView.getHeaderView(0);
 		name = (TextView) view.findViewById(R.id.nama_user);
+		no_telepon = (TextView)view.findViewById(R.id.etPhone);
+		alamat = (EditText)view.findViewById(R.id.etAddress);
 		status = (TextView) view.findViewById(R.id.status_user);
+
+
 		String nama = user.getNama();
 		nama = nama.substring(0, 1).toUpperCase() + nama.substring(1).toLowerCase();
 		name.setText(nama);
