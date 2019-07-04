@@ -48,6 +48,12 @@ public class Beranda extends Fragment {
 		User user = session.getUserDetails();
 //		Toast.makeText(getContext(),"ID : "+user.getId_user()+" Status : "+user.getStatus(),Toast.LENGTH_LONG).show();
 //		Toast.makeText(getContext(),"NAMA : "+user.getNama()+" Alamat : "+user.getAlamat()+"No :"+user.getNo_telepon(),Toast.LENGTH_LONG).show();
+
+
+		Toast.makeText(getContext(),"ID : "+user.getId_user()+" Status : "+user.getStatus(),Toast.LENGTH_LONG).show();
+		Toast.makeText(getContext(),"NAMA : "+user.getNama()+" Alamat : "+user.getAlamat()+"No :"+user.getNo_telepon(),Toast.LENGTH_LONG).show();
+
+
 		grid = (RecyclerView) myView.findViewById(R.id.recyclerview_merek);
 		GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);

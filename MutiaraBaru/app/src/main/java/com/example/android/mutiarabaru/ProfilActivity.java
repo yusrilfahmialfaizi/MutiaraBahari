@@ -1,3 +1,4 @@
+
 package com.example.android.mutiarabaru;
 
 import android.content.Intent;
@@ -13,13 +14,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProfilActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
+	private static final String data_url = "http://192.168.43.37/";
 	private SessionHandler session;
+	private ArrayList<HashMap<String,String>> mProfil;
+	private RequestQueue requestQueue;
+	private StringRequest stringRequest;
 	TextView name;
 	TextView status;
+	TextView alamat;
+	TextView password;
+	TextView no_telepon;
 	View view;
 
 	@Override
@@ -49,7 +70,11 @@ public class ProfilActivity extends AppCompatActivity
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		view = navigationView.getHeaderView(0);
 		name = (TextView) view.findViewById(R.id.nama_user);
+		no_telepon = (TextView)view.findViewById(R.id.etPhone);
+		alamat = (EditText)view.findViewById(R.id.etAddress);
 		status = (TextView) view.findViewById(R.id.status_user);
+
+
 		String nama = user.getNama();
 		nama = nama.substring(0, 1).toUpperCase() + nama.substring(1).toLowerCase();
 		name.setText(nama);
@@ -57,6 +82,30 @@ public class ProfilActivity extends AppCompatActivity
 		stat = stat.substring(0, 1).toUpperCase() + stat.substring(1).toLowerCase();
 		status.setText(stat);
 		navigationView.setNavigationItemSelectedListener(this);
+
+		requestQueue = Volley.newRequestQueue(this);
+		mProfil = new ArrayList<HashMap<String, String>>();
+//		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
+//			@Override
+//			public void onResponse(String response) {
+//				try {
+//					JSONObject jsonObject = new JSONObject(response);
+//					JSONArray jsonArray = jsonObject.getJSONArray("data");
+//					for (int i = 0; i < jsonArray.length(); i++) {
+//						JSONObject json = jsonArray.getJSONObject(i);
+//						HashMap<String, String> map = new HashMap<String, String>();
+//						map.put("imageView", json.getString("id_pesanan"));
+//						map.put("etLoginUsername", json.getString("id_user"));
+//						map.put("tanggal", json.getString("tanggal"));
+//						map.put("total_harga", json.getString("total_harga"));
+//						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
+//						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
+//						map.put("status_pesanan", json.getString("status_pesanan"));
+//					}
+//
+//			}
+//		}
+//	}
 	}
 
 	@Override
@@ -69,27 +118,27 @@ public class ProfilActivity extends AppCompatActivity
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle action bar item clicks here. The action bar will
+//		// automatically handle clicks on the Home/Up button, so long
+//		// as you specify a parent activity in AndroidManifest.xml.
+//		int id = item.getItemId();
+//
+//		//noinspection SimplifiableIfStatement
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
+//
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
@@ -120,7 +169,9 @@ public class ProfilActivity extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
 				break;
 			case R.id.nav_bantuan:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
+				Intent bantuan = new Intent(ProfilActivity.this, Bantuan.class);
+				startActivity(bantuan);
+				finish();
 				break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);

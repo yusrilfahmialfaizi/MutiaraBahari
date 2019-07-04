@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-    tools:context=".Bantuan">
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:showIn="@layout/app_bar_bantuan"
+	tools:context=".Bantuan">
 
 	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="FAQ"
 		android:textSize="15sp"
+		android:textColor="@android:color/black"
+		android:textStyle="bold"
 		android:layout_marginLeft="10dp"
 		android:layout_marginTop="10dp"/>
 
@@ -21,7 +26,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:layout_margin="10dp"
-		android:background="@color/AliceBlue">
+		android:background="@color/gainsboro">
 		<TextView
 			android:id="@+id/txt_help1"
 			android:layout_width="match_parent"
@@ -34,6 +39,14 @@
 			android:textColor="@android:color/black"
 			android:textSize="18sp"
 			/>
+
+		<TextView
+			android:id="@+id/deskripsi1"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="25dp"
+			android:text="lalalalala"
+			android:visibility="invisible"/>
 		<TextView
 			android:id="@+id/txt_help2"
 			android:layout_width="match_parent"
@@ -57,6 +70,8 @@
 		android:layout_height="wrap_content"
 		android:text="Contact Us"
 		android:textSize="15sp"
+		android:textColor="@android:color/black"
+		android:textStyle="bold"
 		android:layout_marginLeft="10dp"
 		android:layout_marginTop="10dp" />
 
@@ -64,19 +79,20 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/faq"
-		android:background="@color/AliceBlue"
+		android:background="@color/gainsboro"
 		android:layout_margin="10dp"
 		android:orientation="vertical">
 		<TextView
-			android:id="@+id/id1"
+			android:id="@+id/c1"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp"
-			android:text=" supriantoarif79@gmail.com"
+			android:text="supriantoarif79@gmail.com"
 			android:textColor="@android:color/black"
 			android:textSize="15sp"
 			android:drawableLeft="@drawable/ic_pesan"/>
 		<TextView
+			android:id="@+id/c2"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dp"

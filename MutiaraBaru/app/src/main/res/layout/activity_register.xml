@@ -24,7 +24,7 @@
 
 
     <EditText
-        android:id="@+id/etaFullName"
+        android:id="@+id/etFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -86,5 +86,13 @@
         android:layout_height="wrap_content"
         android:background="@color/CornBlue"
         android:text="@string/log_in"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+		/>
+
+	<!--<ProgressBar-->
+		<!--android:id="@+id/loading"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="match_parent"-->
+		<!--android:visibility="gone"-->
+		<!--android:layout_marginTop="20dp"/>-->
 </LinearLayout>
