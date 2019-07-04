@@ -60,7 +60,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 			@Override
 			public void onClick(View v) {
 //				modelProductsArrayList = new ArrayList<ModelProducts>();
-				Controller ct = new Controller();
+				Controller ct = (Controller) mContext.getApplicationContext();
 				modelProducts = null;
 				String id_barang = mBarang.get(position).get("id_barang");
 				String nama_barang = mBarang.get(position).get("nama_barang");

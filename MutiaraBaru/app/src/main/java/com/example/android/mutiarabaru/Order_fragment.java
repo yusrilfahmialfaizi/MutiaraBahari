@@ -33,12 +33,9 @@ public class Order_fragment extends Fragment {
 		// Inflate the layout for this fragment
 		view =  inflater.inflate(R.layout.content_order, container, false);
 		cartRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_cart);
-		LinearLayoutManager llm=new LinearLayoutManager(this.getActivity());
-		llm.setOrientation(LinearLayoutManager.VERTICAL);
-		cartRecyclerView.setLayoutManager(llm);
 
 
-		final Controller ct = (Controller) view.getContext();
+		final Controller ct = (Controller) getActivity().getApplicationContext();
 		for(int i = 0; i<ct.getCart().getCartsize();i++){
 			HashMap<String,String> map = new HashMap<String, String>();
 			map.put("id_barang",ct.getProducts(i).getId_barang());
@@ -47,6 +44,9 @@ public class Order_fragment extends Fragment {
 			map.put("hargasatuan", String.valueOf(ct.getProducts(i).getHargasatuan()));
 			data.add(map);
 			OrderViewAdapter adapter = new OrderViewAdapter(Order_fragment.this, data);
+			LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+			llm.setOrientation(LinearLayoutManager.VERTICAL);
+			cartRecyclerView.setLayoutManager(llm);
 			cartRecyclerView.setAdapter(adapter);
 		}
 		return view;

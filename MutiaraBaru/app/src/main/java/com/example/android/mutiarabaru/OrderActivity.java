@@ -66,11 +66,11 @@ public class OrderActivity extends AppCompatActivity
 		navigationView.setNavigationItemSelectedListener(this);
 
 
-//		if  (savedInstanceState == null){
-//			getSupportFragmentManager().beginTransaction().replace(R.id.notifikasi_container,
-//					new Order_fragment()).commit();
-//			navigationView.setCheckedItem(R.id.nav_order);
-//		}
+		if  (savedInstanceState == null){
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+					new Order_fragment()).commit();
+			navigationView.setCheckedItem(R.id.nav_order);
+		}
 		
 //		Cart_detail cartDetail = new Cart_detail();
 //		cartDetail.setId_barang("L001");
@@ -144,7 +144,7 @@ public class OrderActivity extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
 				break;
 			case R.id.nav_bantuan:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
+//				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
 				break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);
