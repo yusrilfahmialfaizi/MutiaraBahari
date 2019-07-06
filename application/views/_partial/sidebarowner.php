@@ -72,8 +72,8 @@
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item">
-							<a href="#laporan" data-toggle="collapse">
+						<li class="nav-item <?php if($this->uri->segment(2)=="laporan"){echo "active";}?>">
+							<a class="" href="#laporan" data-toggle="collapse">
 								<i class="fas fa-clipboard-list"></i>
 								<p>Laporan</p>
 								<span class="caret"></span>
@@ -81,10 +81,10 @@
 							<div class="collapse" id="laporan">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="">
+										<a href="<?php echo base_url("owner/laporan/laporanharian") ?>">
 											<span class="sub-item">Laporan Harian</span>
 										</a>
-										<a href="">
+										<a href="<?php echo base_url("owner/laporan/laporanbulanan") ?>">
 											<span class="sub-item">Laporan Bulanan</span>
 										</a>
 										<a href="">

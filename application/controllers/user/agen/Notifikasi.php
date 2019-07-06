@@ -14,7 +14,7 @@
 		}
 		function index()
 		{
-			if($this->session->userdata('stat') != "login"){
+			if($this->session->userdata('stat') != "login" || $this->session->userdata("status") != "agen"){
 				redirect(base_url("user/login"));
 			}
 			$data['notif'] = $this->Notifikasimodel->getnotifall();

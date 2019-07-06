@@ -17,17 +17,20 @@
 		}
 		function jumlah()
 		{
-			return $this->db->query('CALL count_notif("001")')->result();
+			$data = $this->session->userdata("id_user");
+			return $this->db->query("CALL count_notif($data)")->result();
 		}
 		function getnotif()
 		{
 			$this->db->order_by('waktu DESC, status ASC');
+			$this->db->where('id_user',$this->session->userdata("id_user"));
 			$this->db->limit(5);
 			return $this->db->get("notifikasi")->result();
 		}
 		function getnotifall()
 		{
 			$this->db->order_by('waktu DESC, status ASC');
+			$this->db->where('id_user',$this->session->userdata("id_user"));
 			// $this->db->limit(5);
 			return $this->db->get("notifikasi")->result();
 		}

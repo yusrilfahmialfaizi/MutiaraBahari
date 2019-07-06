@@ -43,8 +43,18 @@
 						$this->session->set_userdata($data_session);
 
 						redirect(base_url("user/agen/dashboard"));
-					}else if (password_verify($pass, $key->password) && $key->status == 'pelanggan') {
-						echo "str";
+					}else if (password_verify($pass, $key->password) && $key->status == 'pelanggan biasa') {
+						$data_session = array(
+							'id_user' => $key->id_user,
+							'nama' => $key->nama,
+							'alamat' => $key->alamat,
+							'no_telepon' => $key->no_telepon,
+							'username' => $key->username,
+							'status' => $key->status,
+							'stat' => "login"
+						);
+						$this->session->set_userdata($data_session);
+						redirect(base_url("user/pelanggan/dashboard"));
 					}else{
 						redirect('user/login');
 					}
