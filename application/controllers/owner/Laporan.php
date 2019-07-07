@@ -26,7 +26,15 @@
 		}
 		function laporanbulanan()
 		{
-			$data['all'] = $this->Laporanmodel->getTransaksiAll();
+			$year = $this->input->post('tahun');
+			$month = $this->input->post('bulan');
+			if ($year == null && $month == null) {
+				# code...
+				$data['all'] = $this->Laporanmodel->getTransaksiAll();
+			}else{
+				$data['all'] = $this->Laporanmodel->getTransaksiMonth($year,$month);
+			}
+			$data['year'] = $this->Laporanmodel->getYear();
 			$this->load->view('_partial/headerowner');
 			$this->load->view('menu/laporanbulanan',$data);
 		}
