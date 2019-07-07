@@ -17,12 +17,14 @@
 	<string name="tab_label6">Selesai</string>
 	<string name="tab_label7">Dibatalkan</string>
 
-	<string name="username">Username</string>
-	<string name="password">Password</string>
+	<string name="username">Masukkan Email</string>
+	<string name="password">Masukkan Password</string>
 	<string name="sign_in">Sign In</string>
 	<string name="sign_up">Sign Up</string>
-	<string name="full_name">Full Name</string>
-	<string name="confirm_password">Confirm Password</string>
+	<string name="full_name">Masukkan Nama</string>
+	<string name="alamat">Masukkan Alamat</string>
+	<string name="no_telepon">Masukkan No Telepon</string>
+	<string name="confirm_password">Masukkan Konfirmasi Password</string>
 	<string name="already_having_account">Already Having An Account ></string>
 	<string name="not_having_account">Not Having an Account?</string>
 	<string name="log_in">Login</string>

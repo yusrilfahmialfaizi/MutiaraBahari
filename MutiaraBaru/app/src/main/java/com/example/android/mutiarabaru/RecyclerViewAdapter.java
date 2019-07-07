@@ -42,21 +42,12 @@ public class RecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(ViewHolder holder,final int position) {
-       // holder.text_merek.setText(mData.get(position).getMerek());
-       //holder.img_gambar_merek.setImageResource(mData.get(position).getGambar());
-//		if (mData.get(position).get("gambar").equals(null)){
-			Glide.with(mContext)
-					.load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
-					.transition(withCrossFade())
-					.placeholder(R.mipmap.no_image)
-					.into(holder.img_gambar_merek);
-//		}else{
-//			Glide.with(mContext)
-//					.load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
-//					.transition(withCrossFade())
-//					.placeholder(R.mipmap.ic_launcher)
-//					.into(holder.img_gambar_merek);
-//		}
+		Glide.with(mContext)
+				.load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
+				.transition(withCrossFade())
+				.placeholder(R.mipmap.no_image)
+				.into(holder.img_gambar_merek);
+
         holder.text_merek.setText(mData.get(position).get("merek"));
         holder.img_gambar_merek.setOnClickListener( new View.OnClickListener() {
             @Override

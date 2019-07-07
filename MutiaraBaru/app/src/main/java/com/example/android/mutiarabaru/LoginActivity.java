@@ -99,12 +99,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
-//		displayLoader();
+		displayLoader();
         StringRequest request = new StringRequest(Request.Method.POST, login_url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-//						pDialog.dismiss();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonObject = new JSONObject(response);
 							System.out.println(response);

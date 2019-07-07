@@ -12,7 +12,7 @@
 								<div class="row">
 									<div class="col-md-4 ml-auto">
 										<div class="form-group">
-											<form method="post" action="<?php echo base_url("owner/laporan/laporanharian")?>">
+											<form method="post" action="<?php echo base_url("admin/laporan/laporanharian")?>">
 												<div class="input-group">
 													<input type="date" id="tanggal" name="tanggal" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
 													<div class="input-group-prepend">

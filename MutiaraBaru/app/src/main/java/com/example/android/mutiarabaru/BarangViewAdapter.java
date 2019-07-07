@@ -80,8 +80,11 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 				}
 				ct.setProducts(modelProducts);
 
-				Intent i = new Intent(mContext, OrderActivity.class);
-				mContext.startActivity(i);
+				for (int i = 0; i<ct.getCart().getCartsize();i++){
+					System.out.println(ct.getCart().getProducts(i).getId_barang());
+				}
+//				Intent i = new Intent(mContext, OrderActivity.class);
+//				mContext.startActivity(i);
 			}
 		});
     }

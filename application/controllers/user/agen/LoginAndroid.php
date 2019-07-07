@@ -32,6 +32,16 @@
 							'alamat' 	=> $hasil->alamat,
 							'no_telepon' => $hasil->no_telepon);
 						// echo json_encode($response);
+					}else if (password_verify($password, $hasil->password) && $hasil->status == "pelanggan biasa") {
+						# code...
+						$response = array(
+							'respon' 	=> 0,
+							'status' 	=> "pelanggan biasa",
+							'id_user' 	=> $hasil->id_user,
+							'nama' 		=> $hasil->nama,
+							'alamat' 	=> $hasil->alamat,
+							'no_telepon' => $hasil->no_telepon);
+						// echo json_encode($response);
 					}
 				}
 			}else{

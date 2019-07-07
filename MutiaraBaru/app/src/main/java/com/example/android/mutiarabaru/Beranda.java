@@ -46,25 +46,11 @@ public class Beranda extends Fragment {
         myView =  inflater.inflate(R.layout.content_main, container, false);
 		session = new SessionHandler(getContext());
 		User user = session.getUserDetails();
-//		Toast.makeText(getContext(),"ID : "+user.getId_user()+" Status : "+user.getStatus(),Toast.LENGTH_LONG).show();
-//		Toast.makeText(getContext(),"NAMA : "+user.getNama()+" Alamat : "+user.getAlamat()+"No :"+user.getNo_telepon(),Toast.LENGTH_LONG).show();
-
-
-		Toast.makeText(getContext(),"ID : "+user.getId_user()+" Status : "+user.getStatus(),Toast.LENGTH_LONG).show();
-		Toast.makeText(getContext(),"NAMA : "+user.getNama()+" Alamat : "+user.getAlamat()+"No :"+user.getNo_telepon(),Toast.LENGTH_LONG).show();
-
-
 		grid = (RecyclerView) myView.findViewById(R.id.recyclerview_merek);
 		GridLayoutManager llm=new GridLayoutManager(this.getActivity(),3);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		grid.setLayoutManager(llm);
-//		Bundle bundle = new Bundle();
-//		bundle.putString("id","id");
-//		new ListBarang().setArguments(bundle);
         getData();
-//        Cart_detail cartDetail = new Cart_detail();
-//        String a = "asdasda";
-//        cartDetail.setNama_barang(a);
         return myView;
     }
 

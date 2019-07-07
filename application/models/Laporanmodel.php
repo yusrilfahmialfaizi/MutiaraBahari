@@ -17,12 +17,8 @@
 		}
 		function getTransaksi($date)
 		{
-			// return $date;
-			
 			$this->db->like('tanggal',$date);
-			// $this->db->or_like('harga',$keyword);
 			return $this->db->get('laporan_transaksi_all')->result();
-			// return $this->db->query("SELECT * FROM `laporan_transaksi_all` WHERE tanggal LIKE $date")->result();
 		}
 		function getTransaksiMonth($year,$month)
 		{
@@ -34,6 +30,10 @@
 		function getYear()
 		{
 			return $this->db->query("Select DISTINCT YEAR(tanggal) as year From laporan_transaksi_all")->result();
+		}
+		function getHutang()
+		{
+			return $this->db->get('tampilhutang')->result();
 		}
 	}
 ?>

@@ -90,8 +90,5 @@ public class ListBarang extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
-    public void load()
-    {
-        }
 
     }

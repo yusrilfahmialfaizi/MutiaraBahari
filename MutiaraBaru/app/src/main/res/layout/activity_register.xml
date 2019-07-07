@@ -24,7 +24,7 @@
 
 
     <EditText
-        android:id="@+id/etFullName"
+        android:id="@+id/nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -32,20 +32,38 @@
         android:hint="@string/full_name"
         android:inputType="textPersonName"
         android:padding="10dp" />
+	<EditText
+        android:id="@+id/alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:hint="@string/alamat"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
+	<EditText
+        android:id="@+id/no_telepon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
+        android:hint="@string/no_telepon"
+        android:inputType="phone"
+        android:padding="10dp" />
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@android:color/white"
         android:hint="@string/username"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:padding="10dp" />
 
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -55,7 +73,7 @@
         android:padding="10dp" />
 
     <EditText
-        android:id="@+id/etConfirmPassword"
+        android:id="@+id/ConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

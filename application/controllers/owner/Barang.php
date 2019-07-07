@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function index()
 		{
-			if($this->session->userdata('status') != "login"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
 				redirect(base_url("admin"));
 			}
 			$barang['kode'] = $this->Barangmodel->id_merek();
@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		public function merek()
 		{
-			if($this->session->userdata('status') != "login"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
 				redirect(base_url("admin"));
 			}
 			$barang['kode'] = $this->Barangmodel->id_merek();

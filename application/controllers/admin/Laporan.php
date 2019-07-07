@@ -15,7 +15,7 @@
 		}
 		function laporanharian()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
 				redirect(base_url("admin"));
 			}
 			$date = $this->input->post('tanggal');
@@ -25,11 +25,11 @@
 				$data['all'] = $this->Laporanmodel->getTransaksi($date);
 			}
 			$this->load->view('_partial/header');
-			$this->load->view('menu/laporanharian',$data);
+			$this->load->view('menu/laporanharianadmin',$data);
 		}
 		function laporanbulanan()
 		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
 				redirect(base_url("admin"));
 			}
 			$year = $this->input->post('tahun');
@@ -42,16 +42,15 @@
 			}
 			$data['year'] = $this->Laporanmodel->getYear();
 			$this->load->view('_partial/header');
-			$this->load->view('menu/laporanbulanan',$data);
+			$this->load->view('menu/laporanbulananadmin',$data);
 		}
-		function laporanhutang()
-		{
-			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
+		function laporanhutang(){
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Admin"){
 				redirect(base_url("admin"));
 			}
 			$data['all'] = $this->Laporanmodel->getHutang();
 			$this->load->view('_partial/header');
-			$this->load->view('menu/laporanhutang',$data);
+			$this->load->view('menu/laporanhutangadmin',$data);
 		}
 	}
  ?>
