@@ -146,8 +146,10 @@ public class OrderActivity extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
 				break;
 			case R.id.nav_bantuan:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
-				break;
+				Intent bantuan = new Intent(OrderActivity.this, Bantuan.class);
+				startActivity(bantuan);
+				finish();
+			break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);
 				User user = session.getUserDetails();
