@@ -176,7 +176,7 @@ public class Notifikasi extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
                 break;
             case R.id.nav_bantuan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
                 break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);

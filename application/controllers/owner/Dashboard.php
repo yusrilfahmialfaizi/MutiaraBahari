@@ -13,8 +13,8 @@
 	 	}
 	 	public function index()
 		{
-			if($this->session->userdata('status') != "login"){
-				redirect(base_url("owner"));
+			if($this->session->userdata('status') != "login" || $this->session->userdata("jabatan") != "Owner"){
+				redirect(base_url("admin"));
 			}
 			$this->load->view('_partial/headerowner');
 			$this->load->view('menu/owner/dashboard');

@@ -35,7 +35,7 @@
 					</div>
 					<div class="row">
 						<div class="container-login100-form-btn">
-							<a href="#" class="login100-form-btn">
+							<a href="<?php echo base_url() ?>user/login/register" class="login100-form-btn">
 								Register Untuk Pelanggan
 							</a>
 						</div>

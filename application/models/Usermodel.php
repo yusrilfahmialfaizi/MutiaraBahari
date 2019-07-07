@@ -114,5 +114,13 @@
 		{
 			return $this->db->delete("user", array("id_user" => $id));
 		}
+		function register($data)
+		{
+			$this->db->insert('user',$data);
+		}
+		function cek($helo)
+		{
+			$this->db->get_where('user',$helo)->result_array();
+		}
 	}
 ?>

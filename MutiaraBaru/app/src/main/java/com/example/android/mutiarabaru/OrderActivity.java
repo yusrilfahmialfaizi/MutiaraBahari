@@ -2,8 +2,6 @@ package com.example.android.mutiarabaru;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,17 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OrderActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 	private SessionHandler session;
 	RecyclerView cartRecyclerView;
-	ArrayList<Cart_detail> productsArray;
-	Cart_detail cartDetail;
 	TextView name;
 	TextView status;
 	View view;
@@ -69,11 +65,13 @@ public class OrderActivity extends AppCompatActivity
 		status.setText(stat);
 		navigationView.setNavigationItemSelectedListener(this);
 
+
 		if  (savedInstanceState == null){
-			getSupportFragmentManager().beginTransaction().replace(R.id.notifikasi_container,
+			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
 					new Order_fragment()).commit();
 			navigationView.setCheckedItem(R.id.nav_order);
 		}
+		
 //		Cart_detail cartDetail = new Cart_detail();
 //		cartDetail.setId_barang("L001");
 //		cartDetail.setNama_barang("nama");
@@ -149,7 +147,8 @@ public class OrderActivity extends AppCompatActivity
 				Intent bantuan = new Intent(OrderActivity.this, Bantuan.class);
 				startActivity(bantuan);
 				finish();
-			break;
+//				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
+				break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);
 				User user = session.getUserDetails();

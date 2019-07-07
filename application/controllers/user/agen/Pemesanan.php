@@ -17,7 +17,7 @@
 		}
 		function index()
 		{
-			if($this->session->userdata('stat') != "login"){
+			if($this->session->userdata('stat') != "login" || $this->session->userdata("status") != "agen"){
 					redirect(base_url("user/login"));
 			}
 			$this->load->view('_partial/headeragen');
@@ -25,7 +25,7 @@
 		}
 		function data()
 		{
-			if($this->session->userdata('stat') != "login"){
+			if($this->session->userdata('stat') != "login" || $this->session->userdata("status") != "agen"){
 					redirect(base_url("user/login"));
 			}
 			// $data['pesanan'] = $this->Pesananmodel->tampilPesanan($status_pesanan);
@@ -41,7 +41,7 @@
 		}
 		function detail_pesanan($no_pesanan)
 		{
-			if($this->session->userdata('stat') != "login"){
+			if($this->session->userdata('stat') != "login" || $this->session->userdata("status") != "agen"){
 					redirect(base_url("user/login"));
 			}
 			$data['detail_pesanan'] = $this->Pesananmodel->getDetail($no_pesanan);

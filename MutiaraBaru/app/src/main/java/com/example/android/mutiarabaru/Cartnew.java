@@ -14,9 +14,9 @@ public class Cartnew implements Serializable {
 	private int totalQuantity = 0;
 
 	/**
-	 * Add a quantity of a certain {@link Saleable} product to this shopping cart
+	 * Add a quantity of a certain {@link Saleable} product to this shopping modelProducts
 	 *
-	 * @param saleable the product will be added to this shopping cart
+	 * @param saleable the product will be added to this shopping modelProducts
 	 * @param quantity the amount to be added
 	 */
 	public void add(final Saleable saleable, int quantity) {
@@ -31,11 +31,11 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Set new quantity for a {@link Saleable} product in this shopping cart
+	 * Set new quantity for a {@link Saleable} product in this shopping modelProducts
 	 *
 	 * @param sellable the product which quantity will be updated
 	 * @param quantity the new quantity will be assigned for the product
-	 * @throws ProductNotFoundException    if the product is not found in this shopping cart.
+	 * @throws ProductNotFoundException    if the product is not found in this shopping modelProducts.
 	 * @throws QuantityOutOfRangeException if the quantity is negative
 	 */
 	public void update(final Saleable sellable, int quantity) throws ProductNotFoundException, QuantityOutOfRangeException {
@@ -54,12 +54,12 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Remove a certain quantity of a {@link Saleable} product from this shopping cart
+	 * Remove a certain quantity of a {@link Saleable} product from this shopping modelProducts
 	 *
 	 * @param saleable the product which will be removed
 	 * @param quantity the quantity of product which will be removed
-	 * @throws ProductNotFoundException    if the product is not found in this shopping cart
-	 * @throws QuantityOutOfRangeException if the quantity is negative or more than the existing quantity of the product in this shopping cart
+	 * @throws ProductNotFoundException    if the product is not found in this shopping modelProducts
+	 * @throws QuantityOutOfRangeException if the quantity is negative or more than the existing quantity of the product in this shopping modelProducts
 	 */
 	public void remove(final Saleable saleable, int quantity)
 			throws ProductNotFoundException, QuantityOutOfRangeException {
@@ -68,7 +68,7 @@ public class Cartnew implements Serializable {
 		int productQuantity = cartItemMap.get(saleable);
 
 		if (quantity < 0 || quantity > productQuantity)
-			throw new QuantityOutOfRangeException(quantity + " is not a valid quantity. It must be non-negative and less than the current quantity of the product in the shopping cart.");
+			throw new QuantityOutOfRangeException(quantity + " is not a valid quantity. It must be non-negative and less than the current quantity of the product in the shopping modelProducts.");
 
 		if (productQuantity == quantity) {
 			cartItemMap.remove(saleable);
@@ -81,10 +81,10 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Remove a {@link Saleable} product from this shopping cart totally
+	 * Remove a {@link Saleable} product from this shopping modelProducts totally
 	 *
 	 * @param saleable the product to be removed
-	 * @throws ProductNotFoundException if the product is not found in this shopping cart
+	 * @throws ProductNotFoundException if the product is not found in this shopping modelProducts
 	 */
 	public void remove(final Saleable saleable) throws ProductNotFoundException {
 		if (!cartItemMap.containsKey(saleable)) throw new ProductNotFoundException();
@@ -96,7 +96,7 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Remove all products from this shopping cart
+	 * Remove all products from this shopping modelProducts
 	 */
 	public void clear() {
 		cartItemMap.clear();
@@ -105,11 +105,11 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Get quantity of a {@link Saleable} product in this shopping cart
+	 * Get quantity of a {@link Saleable} product in this shopping modelProducts
 	 *
 	 * @param saleable the product of interest which this method will return the quantity
-	 * @return The product quantity in this shopping cart
-	 * @throws ProductNotFoundException if the product is not found in this shopping cart
+	 * @return The product quantity in this shopping modelProducts
+	 * @throws ProductNotFoundException if the product is not found in this shopping modelProducts
 	 */
 	public int getQuantity(final Saleable saleable) throws ProductNotFoundException {
 		if (!cartItemMap.containsKey(saleable)) throw new ProductNotFoundException();
@@ -117,11 +117,11 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Get total cost of a {@link Saleable} product in this shopping cart
+	 * Get total cost of a {@link Saleable} product in this shopping modelProducts
 	 *
 	 * @param saleable the product of interest which this method will return the total cost
 	 * @return Total cost of the product
-	 * @throws ProductNotFoundException if the product is not found in this shopping cart
+	 * @throws ProductNotFoundException if the product is not found in this shopping modelProducts
 	 */
 	public BigDecimal getCost(final Saleable saleable) throws ProductNotFoundException {
 		if (!cartItemMap.containsKey(saleable)) throw new ProductNotFoundException();
@@ -129,36 +129,36 @@ public class Cartnew implements Serializable {
 	}
 
 	/**
-	 * Get total price of all products in this shopping cart
+	 * Get total price of all products in this shopping modelProducts
 	 *
-	 * @return Total price of all products in this shopping cart
+	 * @return Total price of all products in this shopping modelProducts
 	 */
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
 	/**
-	 * Get total quantity of all products in this shopping cart
+	 * Get total quantity of all products in this shopping modelProducts
 	 *
-	 * @return Total quantity of all products in this shopping cart
+	 * @return Total quantity of all products in this shopping modelProducts
 	 */
 	public int getTotalQuantity() {
 		return totalQuantity;
 	}
 
 	/**
-	 * Get set of products in this shopping cart
+	 * Get set of products in this shopping modelProducts
 	 *
-	 * @return Set of {@link Saleable} products in this shopping cart
+	 * @return Set of {@link Saleable} products in this shopping modelProducts
 	 */
 	public Set<Saleable> getProducts() {
 		return cartItemMap.keySet();
 	}
 
 	/**
-	 * Get a map of products to their quantities in the shopping cart
+	 * Get a map of products to their quantities in the shopping modelProducts
 	 *
-	 * @return A map from product to its quantity in this shopping cart
+	 * @return A map from product to its quantity in this shopping modelProducts
 	 */
 	public Map<Saleable, Integer> getItemWithQuantity() {
 		Map<Saleable, Integer> cartItemMap = new HashMap<Saleable, Integer>();

@@ -44,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#f05924"
-        android:text="@string/sign_in"
+        android:background="@color/CornBlue"
+        android:text="@string/log_in"
         android:textColor="@android:color/white" />
     <TextView
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#aaa"
+        android:background="#f05924"
         android:text="@string/register"
         android:textColor="@android:color/white" />
 

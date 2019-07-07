@@ -3,6 +3,7 @@ package com.example.android.mutiarabaru;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static com.example.android.mutiarabaru.ModelProducts.hargasatuan;
 
 public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.ViewHolder> {
 
     private Context mContext;
     private ArrayList<HashMap<String, String>> mBarang;
-	public static ArrayList<Cart_detail> productsArray = new ArrayList<Cart_detail>();
-	public static ArrayList<Cart> cartModels = new ArrayList<Cart>();
-	public static Cart cartModel;
-	public static Cart_detail cartDetail;
+    private ArrayList<ModelProducts> modelProductsArrayList;
+    ModelProducts modelProducts;
     private SessionHandler sessionHandler;
 
     public BarangViewAdapter(ListBarang barang, ArrayList<HashMap<String,String>> mBarang) {
@@ -52,7 +50,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 
 
 		sessionHandler = new SessionHandler(mContext);
-        User user = sessionHandler.getUserDetails();
+        final User user = sessionHandler.getUserDetails();
         if (user.getStatus().equals("agen")){
 			holder.harga.setText("Rp. "+mBarang.get(position).get("hrg_grosir1"));
 		}else if(user.getStatus().equals("pelanggan biasa")){
@@ -61,30 +59,35 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 		holder.pesan.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mContext,": " + mBarang.get(position).get("id_barang")+" : "+ holder.qty.getText(),Toast.LENGTH_LONG).show();
+//				modelProductsArrayList = new ArrayList<ModelProducts>();
+				Controller ct = (Controller) mContext.getApplicationContext();
+				modelProducts = null;
 				String id_barang = mBarang.get(position).get("id_barang");
-				sessionHandler = new SessionHandler(mContext.getApplicationContext());
-				User user = sessionHandler.getUserDetails();
-//				cartModel = new Cart();
-//				cartModel.setId_user(user.getId_user());
-//				cartModel.setJenis_pembayaran("Cash");
-				cartDetail = new Cart_detail();
-				cartDetail.setId_barang(mBarang.get(position).get("id_barang"));
-				cartDetail.setNama_barang(mBarang.get(position).get("nama_barang"));
-				cartDetail.setQty(Integer.valueOf(String.valueOf(holder.qty.getText())));
-				cartDetail.setHarga(Integer.valueOf(mBarang.get(position).get("harga")));
-//				cartDetail.setSub_total(100);
-				productsArray.add(cartDetail);
+				String nama_barang = mBarang.get(position).get("nama_barang");
+				int qty = Integer.valueOf(String.valueOf(holder.qty.getText()));
+				if (qty <= 750 && user.getStatus().equals("agen")){
+					int hargasatuan1 = Integer.parseInt((mBarang.get(position).get("hrg_grosir1")));
+					modelProducts = new ModelProducts(id_barang,nama_barang,qty,hargasatuan1);
+				}else if (qty >750 && qty<1000 && user.getStatus().equals("agen")){
+					int hargasatuan2 = Integer.parseInt((mBarang.get(position).get("hrg_grosir2")));
+					modelProducts = new ModelProducts(id_barang,nama_barang,qty,hargasatuan2);
+				}else if (qty >= 1000 && user.getStatus().equals("agen")){
+					int hargasatuan3 = Integer.parseInt((mBarang.get(position).get("hrg_grosir3")));
+					modelProducts = new ModelProducts(id_barang,nama_barang,qty,hargasatuan3);
+				}else if (user.getStatus().equals("pelanggan biasa")){
+					int hargasatuan = Integer.parseInt((mBarang.get(position).get("harga")));
+					modelProducts = new ModelProducts(id_barang,nama_barang,qty,hargasatuan);
+				}
+				ct.setProducts(modelProducts);
 
-//				Toast.makeText(mContext,productsArray.get(position).getNama_barang(),Toast.LENGTH_LONG).show();
-				Intent i = new Intent(mContext, OrderActivity.class);
-				mContext.startActivity(i);
+				for (int i = 0; i<ct.getCart().getCartsize();i++){
+					System.out.println(ct.getCart().getProducts(i).getId_barang());
+				}
+//				Intent i = new Intent(mContext, OrderActivity.class);
+//				mContext.startActivity(i);
 			}
 		});
     }
-    private void addToCart(){
-
-	}
     @Override
     public int getItemCount() {
         return mBarang.size();
@@ -107,7 +110,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
             qty = (EditText) itemView.findViewById(R.id.qty);
             img_gambar_barang = (ImageView) itemView.findViewById(R.id.gambar_barang);
             pesan = (Button) itemView.findViewById(R.id.Pesan);
-
+			final Controller ct = (Controller) itemView.getApplicationWindowToken();
 
         }
     }
