@@ -30,6 +30,12 @@
 			$this->load->view('login_user/lupapass');
 			$this->load->view('login_user/footer');
 		}
+		function terkirim()
+		{
+			$this->load->view('login_user/header');
+			$this->load->view('login_user/emailterkirim');
+			$this->load->view('login_user/footer');
+		}
 		function newpass($id)
 		{
 			$data['id'] = $id;
@@ -84,7 +90,8 @@
 
 	        // Tampilkan pesan sukses atau error
 	        if ($this->email->send()) {
-	            echo 'Sukses! email berhasil dikirim.';
+	            // echo 'Sukses! email berhasil dikirim.';
+	            redirect("user/login/terkirim");
 	        } else {
 	            echo 'Error! email tidak dapat dikirim.';
 	        }
