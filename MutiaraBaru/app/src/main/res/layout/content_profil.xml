@@ -17,7 +17,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:layout_marginTop="80dp"
 	android:src="@drawable/ic_launcher_foreground" />
 
-<EditText
+<TextView
 	android:id="@+id/etLoginUsername"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -28,7 +28,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:padding="10dp" />
 
 
-<EditText
+<TextView
 	android:id="@+id/etLoginPassword"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -38,7 +38,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:inputType="textPassword"
 	android:padding="10dp" />
 
-<EditText
+<TextView
 	android:id="@+id/etFullName"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -49,7 +49,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:padding="10dp"
 	/>
 
-<EditText
+<TextView
 	android:id="@+id/etPhone"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -59,7 +59,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:inputType="phone"
 	android:padding="10dp"/>
 
-<EditText
+<TextView
 	android:id="@+id/etAddress"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -73,7 +73,7 @@ tools:showIn="@layout/app_bar_profil">
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_margin="10dp"
-	android:text="Save"
+	android:text="Edit Profil"
 	android:background="@color/CornBlue"
 	android:textSize="15sp"/>
 
