@@ -2,8 +2,6 @@ package com.example.android.mutiarabaru;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,12 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class OrderActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -140,13 +134,12 @@ public class OrderActivity extends AppCompatActivity
 				//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OrderActivity()).commit();
 				break;
 			case R.id.nav_notifikasi:
-				Intent notif = new Intent(OrderActivity.this, Notifikasi.class);
+				Intent notif = new Intent(OrderActivity.this, Riwayat.class);
 				startActivity(notif);
 				finish();
 				break;
-
-			case R.id.about:
-				Intent bantuan = new Intent(OrderActivity.this, Bantuan.class);
+			case R.id.nav_about:
+				Intent bantuan = new Intent(OrderActivity.this, About.class);
 				startActivity(bantuan);
 				finish();
 				break;

@@ -3,8 +3,6 @@ package com.example.android.mutiarabaru;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,7 +18,6 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -173,12 +169,12 @@ public class ProfilActivity extends AppCompatActivity
 				finish();
 				break;
 			case R.id.nav_notifikasi:
-				Intent notif = new Intent(ProfilActivity.this, Notifikasi.class);
+				Intent notif = new Intent(ProfilActivity.this, Riwayat.class);
 				startActivity(notif);
 				finish();
 				break;
 			case R.id.about:
-				Intent bantuan = new Intent(ProfilActivity.this, Bantuan.class);
+				Intent bantuan = new Intent(ProfilActivity.this, About.class);
 				startActivity(bantuan);
 				finish();
 				break;

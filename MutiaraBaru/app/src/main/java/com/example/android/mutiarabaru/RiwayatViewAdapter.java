@@ -7,23 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class NotifViewAdapter extends RecyclerView.Adapter<NotifViewAdapter.ViewHolder> {
+public class RiwayatViewAdapter extends RecyclerView.Adapter<RiwayatViewAdapter.ViewHolder> {
 	private Context mContext;
 	private ArrayList<HashMap<String, String>> mNotif;
 	private SessionHandler sessionHandler;
 
-	public NotifViewAdapter(Notifikasi notifikasi, ArrayList<HashMap<String, String>> mNotif) {
+	public RiwayatViewAdapter(Riwayat notifikasi, ArrayList<HashMap<String, String>> mNotif) {
 		this.mContext = notifikasi;
 		this.mNotif = mNotif;
 	}
@@ -31,7 +27,7 @@ public class NotifViewAdapter extends RecyclerView.Adapter<NotifViewAdapter.View
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_notif,null);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_riwayat,null);
 		return new ViewHolder(view);
 	}
 

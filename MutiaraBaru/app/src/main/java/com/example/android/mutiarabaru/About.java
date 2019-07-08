@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class Bantuan extends AppCompatActivity
+public class About extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener{
 	private SessionHandler session;
 	private TextView txt_help1, deskripsi1, txt_help2, txt_help3, c1, c2;
@@ -83,22 +83,22 @@ public class Bantuan extends AppCompatActivity
 				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Beranda()).commit();
 				break;
 			case R.id.nav_profil:
-				Intent profil = new Intent(Bantuan.this, ProfilActivity.class);
+				Intent profil = new Intent(About.this, ProfilActivity.class);
 				startActivity(profil);
 				finish();
 				break;
 			case R.id.nav_order:
-				Intent order = new Intent(Bantuan.this, OrderActivity.class);
+				Intent order = new Intent(About.this, OrderActivity.class);
 				startActivity(order);
 				finish();
 				break;
 			case R.id.nav_notifikasi:
-				Intent notif = new Intent(Bantuan.this, Notifikasi.class);
+				Intent notif = new Intent(About.this, Riwayat.class);
 				startActivity(notif);
 				finish();
 				break;
 			case R.id.nav_about:
-				Intent bantuan = new Intent(Bantuan.this, Bantuan.class);
+				Intent bantuan = new Intent(About.this, About.class);
 				startActivity(bantuan);
 				finish();
 				break;

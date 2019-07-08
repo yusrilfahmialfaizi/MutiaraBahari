@@ -2,10 +2,6 @@ package com.example.android.mutiarabaru;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Notifikasi extends AppCompatActivity
+public class Riwayat extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 	private static final String data_url = "http://192.168.43.70/controller/user/agen/pemesanan/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
 	private ArrayList<HashMap<String,String>> mNotif;
@@ -52,7 +47,7 @@ public class Notifikasi extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_notifikasi);
+		setContentView(R.layout.activity_riwayat);
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -109,7 +104,7 @@ public class Notifikasi extends AppCompatActivity
 		},  new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Toast.makeText(Notifikasi.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(Riwayat.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -153,27 +148,27 @@ public class Notifikasi extends AppCompatActivity
         // int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_beranda:
-				Intent i = new Intent(Notifikasi.this, MainActivity.class);
+				Intent i = new Intent(Riwayat.this, MainActivity.class);
 				startActivity(i);
 				finish();
                 break;
             case R.id.nav_profil:
-            	Intent profil = new Intent(Notifikasi.this, ProfilActivity.class);
+            	Intent profil = new Intent(Riwayat.this, ProfilActivity.class);
             	startActivity(profil);
             	finish();
                 break;
             case R.id.nav_order:
-            	Intent order= new Intent(Notifikasi.this, OrderActivity.class);
+            	Intent order= new Intent(Riwayat.this, OrderActivity.class);
             	startActivity(order);
             	finish();
                 break;
             case R.id.nav_notifikasi:
-                Intent notif = new Intent(this, Notifikasi.class);
+                Intent notif = new Intent(this, Riwayat.class);
                 startActivity(notif);
                 finish();
                 break;
-            case R.id.about:
-				Intent bantuan = new Intent(Notifikasi.this, Bantuan.class);
+            case R.id.nav_about:
+				Intent bantuan = new Intent(Riwayat.this, About.class);
 				startActivity(bantuan);
 				finish();
             	break;

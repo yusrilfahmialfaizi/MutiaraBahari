@@ -23,7 +23,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".Bantuan"
+			android:name=".About"
 			android:label="@string/title_activity_bantuan"
 			android:theme="@style/AppTheme.NoActionBar" />
 		<activity
@@ -45,7 +45,7 @@
 			android:label=""
 			android:theme="@style/AppTheme.NoActionBar" />
 		<activity
-			android:name=".Notifikasi"
+			android:name=".Riwayat"
 			android:label="@string/title_activity_riwayat" />
 	</application>
 
