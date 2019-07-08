@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +31,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProfilActivity extends AppCompatActivity
-		implements NavigationView.OnNavigationItemSelectedListener {
+		implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 	private static final String data_url = "http://192.168.43.70/";
 	private SessionHandler session;
-	private ArrayList<HashMap<String,String>> mProfil;
+	private ArrayList<HashMap<String, String>> mProfil;
 	private RequestQueue requestQueue;
 	private StringRequest stringRequest;
 	TextView name;
@@ -41,6 +42,7 @@ public class ProfilActivity extends AppCompatActivity
 	TextView alamat;
 	TextView password;
 	TextView no_telepon;
+	Button btn_edit;
 	View view;
 
 	@Override
@@ -48,19 +50,12 @@ public class ProfilActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profil);
 
-		session = new SessionHandler(getApplicationContext());
-		User user = session.getUserDetails();
+//		session = new SessionHandler(getApplicationContext());
+//		User user = session.getUserDetails();
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-//		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//		fab.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//						.setAction("Action", null).show();
-//			}
-//		});
+
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -70,51 +65,56 @@ public class ProfilActivity extends AppCompatActivity
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		view = navigationView.getHeaderView(0);
 		name = (TextView) view.findViewById(R.id.nama_user);
-		no_telepon = (TextView)view.findViewById(R.id.etPhone);
-		alamat = (EditText)view.findViewById(R.id.etAddress);
-		password = (TextView)view.findViewById(R.id.etLoginPassword);
+		no_telepon = (TextView) view.findViewById(R.id.etPhone);
+		alamat = (EditText) view.findViewById(R.id.etAddress);
+		password = (TextView) view.findViewById(R.id.etLoginPassword);
 		status = (TextView) view.findViewById(R.id.status_user);
 
+		btn_edit = (Button) findViewById(R.id.btn_edit);
 
-		String nama = user.getNama();
-		nama = nama.substring(0, 1).toUpperCase() + nama.substring(1).toLowerCase();
-		name.setText(nama);
-		String stat = user.getStatus();
-		stat = stat.substring(0, 1).toUpperCase() + stat.substring(1).toLowerCase();
-		status.setText(stat);
-		navigationView.setNavigationItemSelectedListener(this);
-
-		requestQueue = Volley.newRequestQueue(this);
-		mProfil = new ArrayList<HashMap<String, String>>();
-		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-				try {
-					JSONObject jsonObject = new JSONObject(response);
-					JSONArray jsonArray = jsonObject.getJSONArray("data");
-					for (int i = 0; i < jsonArray.length(); i++) {
-						JSONObject json = jsonArray.getJSONObject(i);
-						HashMap<String, String> map = new HashMap<String, String>();
-						map.put("imageView", json.getString("id_pesanan"));
-						map.put("etLoginUsername", json.getString("id_user"));
-						map.put("etLoginPassword", json.getString(""));
-						map.put("alamat", json.getString(""));
-						map.put("", json.getString("total_harga"));
-						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
-						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
-						map.put("status_pesanan", json.getString("status_pesanan"));
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		},  new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Toast.makeText(ProfilActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-			}
-		});
+		btn_edit.setOnClickListener(this);
 	}
+
+
+//		String nama = user.getNama();
+//		nama = nama.substring(0, 1).toUpperCase() + nama.substring(1).toLowerCase();
+//		name.setText(nama);
+//		String stat = user.getStatus();
+//		stat = stat.substring(0, 1).toUpperCase() + stat.substring(1).toLowerCase();
+//		status.setText(stat);
+//		navigationView.setNavigationItemSelectedListener(this);
+
+//		requestQueue = Volley.newRequestQueue(this);
+//		mProfil = new ArrayList<HashMap<String, String>>();
+//		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
+//			@Override
+//			public void onResponse(String response) {
+//				try {
+//					JSONObject jsonObject = new JSONObject(response);
+//					JSONArray jsonArray = jsonObject.getJSONArray("data");
+//					for (int i = 0; i < jsonArray.length(); i++) {
+//						JSONObject json = jsonArray.getJSONObject(i);
+//						HashMap<String, String> map = new HashMap<String, String>();
+//						map.put("imageView", json.getString("id_pesanan"));
+//						map.put("etLoginUsername", json.getString("id_user"));
+//						map.put("etLoginPassword", json.getString(""));
+//						map.put("alamat", json.getString(""));
+//						map.put("", json.getString("total_harga"));
+//						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
+//						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
+//						map.put("status_pesanan", json.getString("status_pesanan"));
+//					}
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		},  new Response.ErrorListener() {
+//			@Override
+//			public void onErrorResponse(VolleyError error) {
+//				Toast.makeText(ProfilActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
 
 	@Override
 	public void onBackPressed() {
@@ -191,5 +191,12 @@ public class ProfilActivity extends AppCompatActivity
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent btn = new Intent(ProfilActivity.this, Edit_Profil.class);
+		startActivity(btn);
+		finish();
 	}
 }
