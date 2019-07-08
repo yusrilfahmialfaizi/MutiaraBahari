@@ -133,7 +133,9 @@ public class OrderActivity extends AppCompatActivity
 				finish();
 				break;
 			case R.id.nav_order:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order_fragment()).commit();
+				Intent order = new Intent(OrderActivity.this, OrderActivity.class);
+				startActivity(order);
+//				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order_fragment()).commit();
 				break;
 			case R.id.nav_notifikasi:
 				Intent notif = new Intent(OrderActivity.this, Notifikasi.class);
