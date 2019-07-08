@@ -31,7 +31,7 @@ import java.util.HashMap;
 
 public class ProfilActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
-	private static final String data_url = "http://192.168.43.37/";
+	private static final String data_url = "http://192.168.43.70/";
 	private SessionHandler session;
 	private ArrayList<HashMap<String,String>> mProfil;
 	private RequestQueue requestQueue;

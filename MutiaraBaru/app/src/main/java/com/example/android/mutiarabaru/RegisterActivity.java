@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String confirmPassword;
     private String fullName;
     private ProgressDialog pDialog;
-    private String register_url = "http://192.168.43.37/mutiarabahari/user/login/daftarandroid";
+    private String register_url = "http://192.168.43.70/mutiarabahari/user/login/daftarandroid";
     private SessionHandler session;
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Cartnew implements Serializable {
-	private static final String data_url = "http://192.168.43.37/";
+	private static final String data_url = "http://192.168.43.70/";
 
 	private Map<Saleable, Integer> cartItemMap = new HashMap<Saleable, Integer>();
 	private BigDecimal totalPrice = BigDecimal.ZERO;
