@@ -9,7 +9,7 @@
 		{
 			# code...
 			parent::__construct();
-			// $this->load->library('email');
+			$this->load->model('Usermodel');
 		}
 		function index()
 		{
@@ -49,6 +49,16 @@
 	        } else {
 	            echo 'Error! email tidak dapat dikirim.';
 	        }
+	    }
+	    function load()
+	    {
+	    	$email = "yusrilfahmi09@gmail.com";
+	        $data = $this->Usermodel->getget($email);
+	    	$post = $this->input->post("id_barang");
+	    	foreach ($data as $key) {
+	    	echo $key->id_user;
+	    		# code...
+	    	}
 	    }
 
 	}

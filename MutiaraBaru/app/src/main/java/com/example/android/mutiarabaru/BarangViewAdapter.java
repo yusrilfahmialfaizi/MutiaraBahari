@@ -65,6 +65,7 @@ public class BarangViewAdapter extends RecyclerView.Adapter<BarangViewAdapter.Vi
 		holder.pesan.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				int temp_position=-1;
 				String id_barang = mBarang.get(position).get("id_barang");
 				String nama_barang = mBarang.get(position).get("nama_barang");
