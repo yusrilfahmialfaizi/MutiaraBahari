@@ -28,8 +28,16 @@
 			// return $query->result_array()
 			return $this->db->get_where('user',array('username' => $username))->result();
 		}
+		function getget($email){
+			return $this->db->query("SELECT id_user from user where username = '$email'")->result();
+		}
 		function cek_data($table,$where){		
 			return $this->db->get_where($table,$where);
+		}
+		function updatepass($id_user,$password)
+		{
+			$this->db->where('id_user', $id_user);
+			$this->db->update("user", array('password' => password_hash($password,PASSWORD_DEFAULT)));
 		}
 		function getPelanggan($nama)
 		{

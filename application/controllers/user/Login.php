@@ -24,6 +24,71 @@
 			$this->load->view('login_user/Register');
 			$this->load->view('login_user/footer');
 		}
+		function lupapass()
+		{
+			$this->load->view('login_user/header');
+			$this->load->view('login_user/lupapass');
+			$this->load->view('login_user/footer');
+		}
+		function newpass($id)
+		{
+			$data['id'] = $id;
+			$this->load->view('login_user/header');
+			$this->load->view('login_user/newpass',$data);
+			$this->load->view('login_user/footer');
+		}
+		function updatepass()
+		{
+			$id_user = $this->input->post("id_user");
+			$password = $this->input->post("password");
+
+			$this->Usermodel->updatepass($id_user,$password);
+			redirect('user/login');
+		}
+		function sendEmail()
+		{
+			$email = $this->input->post("username");
+			$config = [
+               'mailtype'  => 'html',
+               'charset'   => 'utf-8',
+               'protocol'  => 'smtp',
+               'smtp_host' => 'ssl://smtp.gmail.com',
+               'smtp_user' => 'mutiarabahari412@gmail.com',    // Ganti dengan email gmail kamu
+               'smtp_pass' => 'mutiara123',      // Password gmail kamu
+               'smtp_port' => 465,
+               'crlf'      => "\r\n",
+               'newline'   => "\r\n"
+           ];
+
+	        // Load library email dan konfigurasinya
+	        $this->load->library('email', $config);
+
+	        // Email dan nama pengirim
+	        $this->email->from('no-reply@mutiarabahari.com', 'Mutiara Bahari');
+
+	        // Email penerima
+	        $this->email->to($email); // Ganti dengan email tujuan kamu
+
+	        // Lampiran email, isi dengan url/path file
+	        // $this->email->attach('https://masrud.com/content/images/20181215150137-codeigniter-smtp-gmail.png');
+
+	        // Subject email
+	        $this->email->subject('Link untuk memperbarui password');
+	        $data = $this->Usermodel->getget($email);
+	        foreach ($data as $key) {
+	    		$id =  $key->id_user;
+	    		# code...
+	        // Isi email
+	        $this->email->message("Klik '<a href='http://localhost/mutiarabahari/user/login/newpass/$id'>Disini</a> untuk reset password");
+	    	}
+
+	        // Tampilkan pesan sukses atau error
+	        if ($this->email->send()) {
+	            echo 'Sukses! email berhasil dikirim.';
+	        } else {
+	            echo 'Error! email tidak dapat dikirim.';
+	        }
+		}
 		function daftar()
 		{
 			$id_user = $this->Usermodel->id_user();

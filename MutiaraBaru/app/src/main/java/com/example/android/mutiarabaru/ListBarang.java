@@ -82,7 +82,8 @@ public class ListBarang extends AppCompatActivity {
                 })
         {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+			{
                 Map<String, String> params = new HashMap<>();
                 params.put("id_merek", name);
                 return params;
