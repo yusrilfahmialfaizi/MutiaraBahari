@@ -133,6 +133,9 @@ public class OrderActivity extends AppCompatActivity
 				finish();
 				break;
 			case R.id.nav_order:
+				Intent order = new Intent(OrderActivity.this, OrderActivity.class);
+				startActivity(order);
+//				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order_fragment()).commit();
 
 				//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OrderActivity()).commit();
 				break;

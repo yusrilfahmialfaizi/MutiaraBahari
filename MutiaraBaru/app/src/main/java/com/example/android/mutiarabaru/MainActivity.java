@@ -66,8 +66,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         view = navigationView.getHeaderView(0);
+
         name = (TextView) view.findViewById(R.id.nama_user);
         status = (TextView) view.findViewById(R.id.status_user);
+
 
         String nama  = user.getNama();
 		nama = nama.substring(0,1).toUpperCase() + nama.substring(1).toLowerCase();
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity
 		String stat  = user.getStatus();
 		stat = stat.substring(0,1).toUpperCase() + stat.substring(1).toLowerCase();
         status.setText(stat);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         if  (savedInstanceState == null){

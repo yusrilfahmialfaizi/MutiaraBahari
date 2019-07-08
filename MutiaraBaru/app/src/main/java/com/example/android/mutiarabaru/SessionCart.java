@@ -12,7 +12,7 @@ public class SessionCart {
 	private static final String KEY_QTY = "qty";
 	private static final String KEY_HARGA = "harga";
 	private static final String KEY_EMPTY = "";
-//	private static ArrayList<Cart_detail> arrayCartDetail = new ArrayList<Cart_detail>();
+	private static ArrayList<ModelProducts> arrayCartDetail = new ArrayList<ModelProducts>();
 	private Context mContext;
 	private SharedPreferences.Editor mEditor;
 	private SharedPreferences mPreferences;
@@ -24,11 +24,12 @@ public class SessionCart {
 		this.mEditor = mPreferences.edit();
 	}
 
-	public void inCart(String id_barang, String nama_barang,int qty, int harga) {
-		mEditor.putString(KEY_ID_BARANG, id_barang);
-		mEditor.putString(KEY_NAMA_BARANG, nama_barang);
-		mEditor.putInt(KEY_QTY, qty);
-		mEditor.putInt(KEY_HARGA, harga);
+	public void inCart(ArrayList<ModelProducts> cart) {
+//		mEditor.putString(KEY_ID_BARANG, id_barang);
+//		mEditor.putString(KEY_NAMA_BARANG, nama_barang);
+//		mEditor.putInt(KEY_QTY, qty);
+//		mEditor.putInt(KEY_HARGA, harga);
+//		mEditor.putString(cart,)
 		mEditor.commit();
 	}
 	
