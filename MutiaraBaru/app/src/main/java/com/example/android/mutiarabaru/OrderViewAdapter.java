@@ -125,6 +125,13 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.View
 			harga = (TextView) itemView.findViewById(R.id.harga_cart);
 			qty = (EditText) itemView.findViewById(R.id.cart_qty);
 			textView = (Button) itemView.findViewById(R.id.asdasd);
+
+//			textView.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					Toast.makeText(mContext,"asdad",Toast.LENGTH_SHORT).show();
+//				}
+//			});
 		}
 	}
 }
