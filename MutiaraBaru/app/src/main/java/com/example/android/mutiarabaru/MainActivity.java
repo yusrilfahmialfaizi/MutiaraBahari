@@ -64,10 +64,12 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         view = navigationView.getHeaderView(0);
         name = (TextView) view.findViewById(R.id.nama_user);
         status = (TextView) view.findViewById(R.id.status_user);
-		String nama  = user.getNama();
+
+        String nama  = user.getNama();
 		nama = nama.substring(0,1).toUpperCase() + nama.substring(1).toLowerCase();
 		name.setText(nama);
 		String stat  = user.getStatus();

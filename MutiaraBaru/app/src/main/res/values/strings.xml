@@ -23,9 +23,11 @@
 	<string name="register">Register</string>
 	<string name="logout">Logout</string>
 
+	<string name="title_activity_beranda">Beranda</string>
 	<string name="title_activity_login">Login</string>
 	<string name="title_activity_order">Order</string>
 	<string name="title_activity_profil">Profil</string>
+	<string name="title_activity_riwayat">Riwayat</string>
 	<string name="title_activity_bantuan">Bantuan</string>
 	<string name="title_activity_edit">Edit Profil</string>
 
@@ -36,12 +38,8 @@
 	<string name="address">Address</string>
 	<string name="nav_header_subtitle">android.studio@android.com</string>
 
-
-	<string name="help1">Bagaimana cara belanja di Mutiara Bahari?</string>
-	<string name="help2">Bagaimana melihat riwayat pesanan yang sudah di pesan?</string>
-	<string name="help3">Bagaimana jika barang tidak sesuai dengan keinginan customer ?</string>
-	<string name="desk1"></string>
-	<string name="desk2"></string>
-	<string name="desk3"></string>
+	<string name="about"> Mutiara Bahari merupakan Toko sosis yang menyediakan berbagai macam sosis dengan harga yang beraneka ragam.
+		Mutiara Bahari juga menerima pemesanan antar jemput untuk agen maupun non-agen dengan tarif pengiriman yang sangat terjangkau.
+		Jika pemesanan tidak sesuai, pelanggan dapat mengembalikan barang ke toko dengan prasyarat tertentu.</string>
 
 </resources>

@@ -1,80 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:background="@drawable/latar"
-android:padding="30dp"
-tools:context=".ProfilActivity"
-tools:showIn="@layout/app_bar_profil">
-
-<ImageView
-	android:id="@+id/imageView"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_marginBottom="30dp"
-	android:layout_marginTop="80dp"
-	android:src="@drawable/ic_launcher_foreground" />
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@drawable/latar"
+	android:padding="30dp"
+	tools:context=".ProfilActivity"
+	tools:showIn="@layout/app_bar_profil">
+	<ImageView
+		android:id="@+id/imageView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="30dp"
+		android:layout_marginTop="80dp"
+		android:src="@drawable/ic_launcher_foreground" />
 
-<TextView
-	android:id="@+id/etLoginUsername"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="8dp"
-	android:background="@color/LightBlue"
-	android:hint="@string/username"
-	android:inputType="textPersonName"
-	android:padding="10dp" />
+	<TextView
+		android:id="@+id/etLoginUsername"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="@color/LightBlue"
+		android:hint="@string/username"
+		android:inputType="textPersonName"
+		android:padding="10dp" />
 
 
-<TextView
-	android:id="@+id/etLoginPassword"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="8dp"
-	android:background="@color/LightBlue"
-	android:hint="@string/password"
-	android:inputType="textPassword"
-	android:padding="10dp" />
+	<TextView
+		android:id="@+id/etLoginPassword"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="@color/LightBlue"
+		android:hint="@string/password"
+		android:inputType="textPassword"
+		android:padding="10dp" />
 
-<TextView
-	android:id="@+id/etFullName"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="8dp"
-	android:background="@color/LightBlue"
-	android:hint="@string/full_name"
-	android:inputType="textPersonName"
-	android:padding="10dp"
-	/>
+	<TextView
+		android:id="@+id/etFullName"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="@color/LightBlue"
+		android:hint="@string/full_name"
+		android:inputType="textPersonName"
+		android:padding="10dp"
+		/>
 
-<TextView
-	android:id="@+id/etPhone"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="8dp"
-	android:background="@color/LightBlue"
-	android:hint="@string/phone"
-	android:inputType="phone"
-	android:padding="10dp"/>
+	<TextView
+		android:id="@+id/etPhone"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="@color/LightBlue"
+		android:hint="@string/phone"
+		android:inputType="phone"
+		android:padding="10dp"/>
 
-<TextView
-	android:id="@+id/etAddress"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="8dp"
-	android:background="@color/LightBlue"
-	android:hint="@string/address"
-	android:inputType="text"
-	android:padding="10dp"/>
+	<TextView
+		android:id="@+id/etAddress"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		android:background="@color/LightBlue"
+		android:hint="@string/address"
+		android:inputType="text"
+		android:padding="10dp"/>
 
-<Button
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:layout_margin="10dp"
-	android:text="Edit Profil"
-	android:background="@color/CornBlue"
-	android:textSize="15sp"/>
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="10dp"
+		android:text="Edit Profil"
+		android:background="@color/CornBlue"
+		android:textSize="15sp"/>
 
 </LinearLayout>
+
+
+

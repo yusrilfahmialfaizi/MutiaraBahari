@@ -16,14 +16,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -72,6 +76,7 @@ public class ProfilActivity extends AppCompatActivity
 		name = (TextView) view.findViewById(R.id.nama_user);
 		no_telepon = (TextView)view.findViewById(R.id.etPhone);
 		alamat = (EditText)view.findViewById(R.id.etAddress);
+		password = (TextView)view.findViewById(R.id.etLoginPassword);
 		status = (TextView) view.findViewById(R.id.status_user);
 
 
@@ -85,27 +90,34 @@ public class ProfilActivity extends AppCompatActivity
 
 		requestQueue = Volley.newRequestQueue(this);
 		mProfil = new ArrayList<HashMap<String, String>>();
-//		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
-//			@Override
-//			public void onResponse(String response) {
-//				try {
-//					JSONObject jsonObject = new JSONObject(response);
-//					JSONArray jsonArray = jsonObject.getJSONArray("data");
-//					for (int i = 0; i < jsonArray.length(); i++) {
-//						JSONObject json = jsonArray.getJSONObject(i);
-//						HashMap<String, String> map = new HashMap<String, String>();
-//						map.put("imageView", json.getString("id_pesanan"));
-//						map.put("etLoginUsername", json.getString("id_user"));
-//						map.put("tanggal", json.getString("tanggal"));
-//						map.put("total_harga", json.getString("total_harga"));
-//						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
-//						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
-//						map.put("status_pesanan", json.getString("status_pesanan"));
-//					}
-//
-//			}
-//		}
-//	}
+		stringRequest = new StringRequest(Request.Method.POST, data_url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				try {
+					JSONObject jsonObject = new JSONObject(response);
+					JSONArray jsonArray = jsonObject.getJSONArray("data");
+					for (int i = 0; i < jsonArray.length(); i++) {
+						JSONObject json = jsonArray.getJSONObject(i);
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("imageView", json.getString("id_pesanan"));
+						map.put("etLoginUsername", json.getString("id_user"));
+						map.put("etLoginPassword", json.getString(""));
+						map.put("alamat", json.getString(""));
+						map.put("", json.getString("total_harga"));
+						map.put("jenis_pembayaran", json.getString("jenis_pembayaran"));
+						map.put("jenis_pengiriman", json.getString("jenis_pengiriman"));
+						map.put("status_pesanan", json.getString("status_pesanan"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		},  new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Toast.makeText(ProfilActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	@Override
