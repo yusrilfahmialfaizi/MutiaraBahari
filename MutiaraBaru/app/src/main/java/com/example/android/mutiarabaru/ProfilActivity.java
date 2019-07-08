@@ -177,10 +177,7 @@ public class ProfilActivity extends AppCompatActivity
 				startActivity(notif);
 				finish();
 				break;
-			case R.id.nav_message:
-				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
-				break;
-			case R.id.nav_bantuan:
+			case R.id.about:
 				Intent bantuan = new Intent(ProfilActivity.this, Bantuan.class);
 				startActivity(bantuan);
 				finish();

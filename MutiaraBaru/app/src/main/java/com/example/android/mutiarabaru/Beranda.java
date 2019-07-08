@@ -33,7 +33,7 @@ import java.util.HashMap;
  * A simple {@link Fragment} subclass.
  */
 public class Beranda extends Fragment {
-    private static final String data_url = "http://192.168.43.70/mutiarabahari/user/agen/DashboardAndroid/getMerek"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+    private static final String data_url = "http://192.168.43.37/mutiarabahari/user/agen/DashboardAndroid/getMerek"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
     private ArrayList<HashMap<String,String>> mData;
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
