@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private String username;
     private String password;
     private ProgressDialog pDialog;
-    private String login_url = "http://192.168.43.37/mutiarabahari/user/agen/loginandroid/login_agen";
+    private String login_url = "http://192.168.43.70/mutiarabahari/user/agen/loginandroid/login_agen";
     private SessionHandler session;
 
     @Override

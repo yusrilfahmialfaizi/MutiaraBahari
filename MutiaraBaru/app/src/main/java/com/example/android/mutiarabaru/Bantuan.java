@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Bantuan extends AppCompatActivity
-		implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+		implements NavigationView.OnNavigationItemSelectedListener{
 	private SessionHandler session;
 	private TextView txt_help1, deskripsi1, txt_help2, txt_help3, c1, c2;
 
@@ -38,13 +38,12 @@ public class Bantuan extends AppCompatActivity
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
+//
+//		txt_help1 = (TextView)findViewById(R.id.txt_help1);
+//		deskripsi1 = (TextView)findViewById(R.id.deskripsi1);
+//		txt_help2 = (TextView)findViewById(R.id.txt_help2);
+//		txt_help3 = (TextView)findViewById(R.id.txt_help3);
 
-		txt_help1 = (TextView)findViewById(R.id.txt_help1);
-		deskripsi1 = (TextView)findViewById(R.id.deskripsi1);
-		txt_help2 = (TextView)findViewById(R.id.txt_help2);
-		txt_help3 = (TextView)findViewById(R.id.txt_help3);
-
-		txt_help1.setOnClickListener(this);
 	}
 
 	@Override
@@ -57,27 +56,27 @@ public class Bantuan extends AppCompatActivity
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle action bar item clicks here. The action bar will
+//		// automatically handle clicks on the Home/Up button, so long
+//		// as you specify a parent activity in AndroidManifest.xml.
+//		int id = item.getItemId();
+//
+//		//noinspection SimplifiableIfStatement
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
+//
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
@@ -121,16 +120,5 @@ public class Bantuan extends AppCompatActivity
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()){
-			case R.id.txt_help1:
-				txt_help1.setText(deskripsi1.getText());
-				deskripsi1.setVisibility(View.VISIBLE);
-				txt_help1.setVisibility(View.GONE);
-				break;
-		}
 	}
 }

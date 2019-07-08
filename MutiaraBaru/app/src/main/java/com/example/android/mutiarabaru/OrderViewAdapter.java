@@ -28,6 +28,11 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.View
 		this.mContext = orderActivity.getActivity();
 		this.modelProductsArrayList = modelProductsArrayList;
 	}
+	private ArrayList<HashMap<String,String>> data;
+//	public OrderViewAdapter(Order_fragment orderActivity, ArrayList<HashMap<String,String>> data){
+//		this.mContext = orderActivity.getActivity();
+//		this.data = data;
+//	}
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_cart,null);

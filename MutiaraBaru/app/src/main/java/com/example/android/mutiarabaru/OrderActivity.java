@@ -66,11 +66,11 @@ public class OrderActivity extends AppCompatActivity
 		navigationView.setNavigationItemSelectedListener(this);
 
 
-		if  (savedInstanceState == null){
-			getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-					new Order_fragment()).commit();
-			navigationView.setCheckedItem(R.id.nav_order);
-		}
+		//if  (savedInstanceState == null){
+			//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+			//		new Order_fragment()).commit();
+			//navigationView.setCheckedItem(R.id.nav_order);
+		//}
 		
 //		Cart_detail cartDetail = new Cart_detail();
 //		cartDetail.setId_barang("L001");
@@ -95,27 +95,27 @@ public class OrderActivity extends AppCompatActivity
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle action bar item clicks here. The action bar will
+//		// automatically handle clicks on the Home/Up button, so long
+//		// as you specify a parent activity in AndroidManifest.xml.
+//		int id = item.getItemId();
+//
+//		//noinspection SimplifiableIfStatement
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
+//
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
@@ -136,6 +136,8 @@ public class OrderActivity extends AppCompatActivity
 				Intent order = new Intent(OrderActivity.this, OrderActivity.class);
 				startActivity(order);
 //				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Order_fragment()).commit();
+
+				//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OrderActivity()).commit();
 				break;
 			case R.id.nav_notifikasi:
 				Intent notif = new Intent(OrderActivity.this, Notifikasi.class);
@@ -149,7 +151,6 @@ public class OrderActivity extends AppCompatActivity
 				Intent bantuan = new Intent(OrderActivity.this, Bantuan.class);
 				startActivity(bantuan);
 				finish();
-//				getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
 				break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);

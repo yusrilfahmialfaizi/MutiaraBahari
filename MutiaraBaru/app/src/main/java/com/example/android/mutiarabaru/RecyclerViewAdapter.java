@@ -43,7 +43,7 @@ public class RecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(ViewHolder holder,final int position) {
 		Glide.with(mContext)
-				.load("http://192.168.43.37/mutiarabahari/upload/" + mData.get(position).get("gambar"))
+				.load("http://192.168.43.70/mutiarabahari/upload/" + mData.get(position).get("gambar"))
 				.transition(withCrossFade())
 				.placeholder(R.mipmap.no_image)
 				.into(holder.img_gambar_merek);

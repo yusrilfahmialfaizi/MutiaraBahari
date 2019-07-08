@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">Mutiara Baru</string>
+	<string name="app_name">Mutiara Bahari</string>
 	<string name="navigation_drawer_open">Open navigation drawer</string>
 	<string name="navigation_drawer_close">Close navigation drawer</string>
 	<string name="nav_header_title">Android Studio</string>
@@ -8,14 +8,6 @@
 	<string name="action_settings">Settings</string>
 	<string name="title"></string>
 
-	<!--Notifikasi-->
-	<string name="tab_label1">Konfirmasi</string>
-	<string name="tab_label2">Diproses</string>
-	<string name="tab_label3">Dikemas</string>
-	<string name="tab_label4">Dikirim</string>
-	<string name="tab_label5">Diterima</string>
-	<string name="tab_label6">Selesai</string>
-	<string name="tab_label7">Dibatalkan</string>
 
 	<string name="username">Masukkan Email</string>
 	<string name="password">Masukkan Password</string>
@@ -30,19 +22,26 @@
 	<string name="log_in">Login</string>
 	<string name="register">Register</string>
 	<string name="logout">Logout</string>
+
 	<string name="title_activity_login">Login</string>
+	<string name="title_activity_order">Order</string>
+	<string name="title_activity_profil">Profil</string>
+	<string name="title_activity_bantuan">Bantuan</string>
+	<string name="title_activity_edit">Edit Profil</string>
 
 
 	<!-- TODO: Remove or change this placeholder text -->
 	<string name="hello_blank_fragment">Hello blank fragment</string>
 	<string name="phone">Phone</string>
 	<string name="address">Address</string>
-	<string name="title_activity_order">OrderActivity</string>
 	<string name="nav_header_subtitle">android.studio@android.com</string>
-	<string name="title_activity_profil">ProfilActivity</string>
+
 
 	<string name="help1">Bagaimana cara belanja di Mutiara Bahari?</string>
 	<string name="help2">Bagaimana melihat riwayat pesanan yang sudah di pesan?</string>
 	<string name="help3">Bagaimana jika barang tidak sesuai dengan keinginan customer ?</string>
-	<string name="title_activity_bantuan">Bantuan</string>
+	<string name="desk1"></string>
+	<string name="desk2"></string>
+	<string name="desk3"></string>
+
 </resources>

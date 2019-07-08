@@ -37,7 +37,7 @@ import java.util.HashMap;
 
 public class Notifikasi extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-	private static final String data_url = "http://192.168.43.37/controller/user/agen/pemesanan/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
+	private static final String data_url = "http://192.168.43.70/controller/user/agen/pemesanan/"; // kasih link prosesnya contoh : http://domainname or ip/folderproses/namaproses
 	private ArrayList<HashMap<String,String>> mNotif;
 	private RecyclerView grid;
 
@@ -176,8 +176,10 @@ public class Notifikasi extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Chat()).commit();
                 break;
             case R.id.nav_bantuan:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Bantuan()).commit();
-                break;
+				Intent bantuan = new Intent(Notifikasi.this, Bantuan.class);
+				startActivity(bantuan);
+				finish();
+            	break;
 			case R.id.nav_logout:
 				session = new SessionHandler(this);
 				User user = session.getUserDetails();
