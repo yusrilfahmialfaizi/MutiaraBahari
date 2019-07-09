@@ -181,7 +181,7 @@
 			$id_barang = $this->input->post("id_barang");
 			$qty = $this->input->post("qty");
 			$harga = $this->input->post("harga");
-			print_r($id_user.$id_barang);
+			// print_r($id_user.$id_barang);
 			date_default_timezone_set('Asia/Jakarta');
 			$tanggal = date('Y-m-d H:i:s');
 			$id_pesanan = $this->Pesananmodel->id_pesanan();
@@ -200,18 +200,18 @@
 				'status_pesanan'	=> $status_pesanan);
 			$pesan = $this->Pesananmodel->tambah_pesanan($pesanan);
 
-			$detail_pesanan = array(
-                        				// 'id_transaksi' =>$no_invoice,
-                        	'id_pesanan'	=> $id_pesanan,
-                            'id_barang' 	=> $id_barang,
-                            'qty' 			=> $qty,
-                            'harga' 		=> $harga,
-                            'subtotal' 		=> $harga);
-             $detail = $this->Pesananmodel->tambah_detail_pesanan($detail_pesanan);
-			$helo = array('username' => $email);
-			$reg = $this->Usermodel->cek($helo);
-			if ($pesan && $detail) {
-			// if ($pesan) {
+			// $detail_pesanan = array(
+   //                      				// 'id_transaksi' =>$no_invoice,
+   //                      	'id_pesanan'	=> $id_pesanan,
+   //                          'id_barang' 	=> $id_barang,
+   //                          'qty' 			=> $qty,
+   //                          'harga' 		=> $harga,
+   //                          'subtotal' 		=> $harga);
+   //           $detail = $this->Pesananmodel->tambah_detail_pesanan($detail_pesanan);
+			// $helo = array('username' => $email);
+			// $reg = $this->Usermodel->cek($helo);
+			// if ($pesan && $detail) {
+			if ($pesan) {
 				# code...
 				$response = array('status' => "1", 'pesan'=> "berhasil");
 				echo json_encode($response);

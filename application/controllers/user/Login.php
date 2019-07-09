@@ -81,19 +81,25 @@
 	        // Subject email
 	        $this->email->subject('Link untuk memperbarui password');
 	        $data = $this->Usermodel->getget($email);
-	        foreach ($data as $key) {
-	    		$id =  $key->id_user;
-	    		# code...
-	        // Isi email
-	        $this->email->message("Klik '<a href='http://localhost/mutiarabahari/user/login/newpass/$id'>Disini</a> untuk reset password");
-	    	}
+	        if ($data != null) {
+		        foreach ($data as $key) {
+		    		$id =  $key->id_user;
+		    		# code...
+		        // Isi email
+		        $this->email->message("Klik '<a href='http://localhost/mutiarabahari/user/login/newpass/$id>Disini</a> untuk reset password");
+		    	}
 
-	        // Tampilkan pesan sukses atau error
-	        if ($this->email->send()) {
-	            // echo 'Sukses! email berhasil dikirim.';
-	            redirect("user/login/terkirim");
-	        } else {
-	            echo 'Error! email tidak dapat dikirim.';
+		        // Tampilkan pesan sukses atau error
+		        if ($this->email->send()) {
+		            // echo 'Sukses! email berhasil dikirim.';
+		            redirect("user/login/terkirim");
+		        } else {
+		            echo 'Error! email tidak dapat dikirim.';
+		        }
+	        	# code...
+	        }else{
+	        	$this->session->set_flashdata("gagal", "Email Tidak ditemukan");
+	        	redirect('user/login/lupapass');
 	        }
 		}
 		function daftar()

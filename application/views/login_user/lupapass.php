@@ -6,7 +6,12 @@
 						Lupa Password
 					</span>
 				</div>
-
+				
+				<?php if ($this->session->flashdata("gagal")): ?>	
+					<div class="alert alert-danger" role="alert">
+						<?php echo $this->session->flashdata("gagal") ?>
+				    </div>
+				<?php endif ?>
 				<form class="login100-form validate-form" method="post" action="<?php echo base_url() ?>user/login/sendEmail">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Email</span>

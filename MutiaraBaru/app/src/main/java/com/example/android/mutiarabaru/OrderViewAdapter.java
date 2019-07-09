@@ -58,9 +58,9 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.View
 //		holder.nama_barang.setText(hashMaps.get(position).get("nama_barang"));
 //		holder.harga.setText(hashMaps.get(position).get("harga"));
 //		holder.qty.setText(hashMaps.get(position).get("qty"));
-		holder.nama_barang.setText(modelProductsArrayList.get(position).getNama_barang());
 //		Toast.makeText(mContext,testList.keranjangBelanjaList.get(position).getId_barang(),Toast.LENGTH_SHORT).show();
 //		holder.qty.setText(String.valueOf(modelProductsArrayList.get(position).getQty()));
+		holder.nama_barang.setText(modelProductsArrayList.get(position).getNama_barang());
 		holder.harga.setText(String.valueOf(modelProductsArrayList.get(position).getHargasatuan()));
 		holder.qty.setText(String.valueOf(modelProductsArrayList.get(position).getQty()));
 //		holder.textView.setOnClickListener(new View.OnClickListener() {
